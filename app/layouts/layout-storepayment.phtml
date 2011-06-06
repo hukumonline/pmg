@@ -1,0 +1,80 @@
+<?=$this->doctype();?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>hukumonline.com</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="google-site-verification" content="MUDP2J4JyyfKSWJsjfuglidOXiHOU_vn5VLXY7S-G8w" />
+        <link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
+        <link href="<?=$this->cdn('styles')?>/typography.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/style.css" media="screen" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="<?=$this->cdn('scripts')?>/index.php?c=auto&amp;f=,hol/jquery/jquery-1.4.2.min.js,hol/jquery/dataTables/jquery.dataTables.min.js,hol/jquery/form/jquery.validate.pack.js,hol/jquery/datepicker/jquery.datepick.pack.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/newsticker/jquery.newsticker.pack.js" ></script>
+        
+        <!-- Internet Explorer Fixes -->
+        <!--[if IE]>
+
+        <link rel="stylesheet" type="text/css" media="all" href="<?=$this->cdn('styles')?>/ie.css"/>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/html5.js"></script>
+
+        <![endif]-->
+        <!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+        <!--[if lt IE 8]>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/IE8.js"></script>
+
+        <![endif]-->
+
+        <script type="text/javascript">
+            jQuery(document).ready(function()
+            {
+               Administry.setup();
+
+               jQuery("#news").newsTicker();
+
+               jQuery("#orderhistory").dataTable();
+               jQuery("#transactionhistory").dataTable();
+               jQuery("#confirm").dataTable();
+               jQuery("#sdocument").dataTable();
+
+               Administry.dateInput('#paymentDate');
+
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <?=$this->render('header-talks.phtml');?>
+        <!-- Page content -->
+        <div id="page">
+            <div class="wrapper">
+                <section class="column first">
+                    <div class="colgroup">
+                        <div class="kolom first" style="width: 245px;padding-right:5px;">
+                            <?=$this->action('miniprofile','index','hol-site');?>
+                            <?=$this->action('terbaru','widgets_sidebar','hol-site'); ?>
+                        </div>
+                        <div class="kolom widthcontent5" style="border-left: 1px solid #cecece; padding-left: 5px;">
+                            <div class="ta-right">
+                                <a href="<?=ROOT_URL;?>/store/payment/document" class="btn">Documents</a>&nbsp;
+                                <a href="<?=ROOT_URL;?>/store/payment/billing" class="btn">Billing Info</a>&nbsp;
+                                <a href="<?=ROOT_URL;?>/store/payment/confirm" class="btn">Confirmation</a>&nbsp;
+                                <a href="<?=ROOT_URL;?>/store/payment/transaction" class="btn">Transaction</a>&nbsp;
+                                <a href="<?=ROOT_URL;?>/store/payment/list" class="btn">Order</a>
+                            </div>
+                            <?=$this->layout()->content;?>
+                        </div>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                    <div class="clear">&nbsp;</div>
+                </section>
+            </div>
+        </div>
+        <!-- End of Page Content -->
+        <?=$this->render('footer.phtml');?>
+
+	<!-- Scroll to top link -->
+	<a style="display: none;" id="totop">^ scroll to top</a>
+        <script type="text/javascript" src="<?=$this->cdn('scripts');?>/hol/administry.js"></script>
+    </body>
+</html>

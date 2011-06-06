@@ -1,0 +1,49 @@
+<div class="align-left">
+    <div id="judul2">
+        Kolom
+    </div>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="" class="bb">index</a>
+</div>
+<div class="clear">&nbsp;</div>
+<div style="border-top:1px solid #87CEFA;padding-bottom:5px;"></div>
+    <?
+    $registry = Zend_Registry::getInstance();
+    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+    $cdn = $config->getOption('cdn');
+    $sDir = $cdn['static']['url']['images'];
+//    $sDir = 'uploads/images';
+    for($i=0; $i<$this->numberOfRows;$i++) {
+
+        $thumb = "";
+        $guid = $this->data[$i][4];
+
+        $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
+        $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+
+        if ($itemGuid) {
+        if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".jpg")) 	{ $thumb = $sDir ."/". $itemGuid . ".jpg"; 	}
+        if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".gif")) 	{ $thumb = $sDir ."/". $itemGuid . ".gif"; 	}
+        if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".png")) 	{ $thumb = $sDir ."/". $itemGuid . ".png"; 	}
+        }
+        
+        //if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
+        $screenshot = "<img src=\"".$thumb."\" width=\"40\" height=\"40\" />";
+
+    ?>
+            <header>
+                <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5]; ?>" class="aktual"><b><?=$this->data[$i][0]; ?></b></a>
+            </header>
+            <dl class="first">
+            	<? if (!empty($thumb)) : ?>
+                <dt style="float:left;padding:2px;margin: 3px 5px 5px 0px;"><?=$screenshot; ?></dt>
+                <? endif; ?>
+                <!--<dt class="author">[<?//=$this->data[$i][1]; ?>]</dt>-->
+                <dd class="last"><?=Pandamp_Lib_Formater::string_limit_words($this->data[$i][2],10);?></dd>
+            </dl>
+            <nav style="padding-bottom:5px;">
+                <img src="<?=$this->cdn('images'); ?>/comment.jpg" width="13" height="9" /><a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5]; ?>#comments" class="bb"> <?=$this->data[$i][3]; ?> tanggapan </a> |<a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5];?>" class="bb"> Selengkapnya </a>
+            </nav>
+    <? } ?>
+<div class="clean"></div>

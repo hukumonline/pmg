@@ -1,0 +1,20 @@
+<div id="tabs" style="width: 235px;">
+    <ul>
+        <li><a href="#tabs-1">Baru</a></li>
+        <li><a href="#tabs-2">Peraturan</a></li>
+        <li><a href="#tabs-3">Pilihan</a></li>
+    </ul>
+    <div id="tabs-1">
+    	<div class="box box-error closeable" id="msg" style="display:none;"></div>
+        <?=$this->ajaxActionRenderer(ROOT_URL.'/peraturan');?>
+    </div>
+    <div id="tabs-2">
+        <?=$this->action('peraturanpilihan','widgets_content','hol-site'); ?>
+    </div>
+    <div id="tabs-3">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>
+</div>
+<div class="psearch">
+<form id="searchForm" method="post" action="<?=$this->getRemoteSearchUrl();?>/id/dms/search/result">
+    <input class="" name="keyword" id="keyword" onblur="blur_text('masukkan kata kunci','keyword');" onfocus="focus_text('masukkan kata kunci','keyword');" value="masukkan kata kunci" type="text">
+</form>
+</div>

@@ -1,0 +1,26 @@
+<fieldset>
+    <legend>MITRA</legend>
+    <?
+        $sDir = $this->getRemoteImageUrl();
+        $thumb = "";
+
+        $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->catalogGuid,'RELATED_IMAGE');
+        $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+
+        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".jpg")) 	{ $thumb = $sDir."/".$itemGuid.".jpg"; 	}
+        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".gif")) 	{ $thumb = $sDir."/".$itemGuid.".gif"; 	}
+        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".png")) 	{ $thumb = $sDir."/".$itemGuid.".png"; 	}
+
+		if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
+        $screenshot = "<img src=\"".$thumb."\" width=\"90\" />";
+
+    ?>
+
+    <div class="mitraisi">
+        <div class="image"><?=$screenshot; ?></div>
+        <h5><?=$this->title;?></h5>
+        <?=$this->content; ?>
+        <div class="clean"></div>
+    </div>
+
+</fieldset>

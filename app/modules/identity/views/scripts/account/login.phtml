@@ -1,0 +1,68 @@
+<div id="judul"><a href="<?=ROOT_URL;?>"><img src="<?=$this->baseUrl();?>/resources/images/holid.jpg" alt="hukumonline" /></a></div>
+<div class="align-left">
+<small>Buat Akun HukumonlineID</small>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="<?=ROOT_URL;?>">Halaman Depan</a>
+</div>
+<div class="clear">&nbsp;</div>
+<hr>
+<section class="column first">
+    <div class="colgroup leading">
+        <div class="column width6 first">
+            <p><?=$this->content ?></p>
+        </div>
+        <div class="column width2"" style="padding-top:10px">
+            
+            <? if (isset($this->message)): ?>
+            <div class="box box-error">
+                <?= $this->message; ?>
+            </div>
+            <? endif; ?>
+
+            <div class="corner-tl corner-tr corner-bl corner-br" style="border:1px solid #cecece;">
+                <div class="ta-center" style="padding-top:5px">
+                    Masuk dengan Hukumonline <br/>
+                    <img src="<?=$this->baseUrl(); ?>/resources/images/holid2.jpg" height="25" border="0" align="middle"> Akun
+                </div>
+                <br/>
+                <form method="post" action="<?php $_SERVER['PHP_SELF'];?>">
+                    <div style="padding-left:5px">
+                    <dl>
+                        <dt><label for="identity">Pengguna</label></dt>
+                        <dd><input name="username" id="username" tabindex="1" value="<?=$my_access->user; ?>" type="text" style="width:202px;"></dd>
+                    </dl>
+                    <dl>
+                        <dt><label for="password">Sandi</label></dt>
+                        <dd><input id="password" name="password" tabindex="2" type="password" value="<?=$my_access->user_pw; ?>" style="width:202px;"></dd>
+                    </dl>
+                    <dl>
+                        <dt style="width:110px;"><input id="remember" name="remember" tabindex="3" type="checkbox" value="yes"<?=($my_access->is_cookie == true) ? " checked" : ""; ?>>&nbsp;&nbsp;<label for="remember">Tetap login</label></dt>
+                    </dl>
+                        <dl>
+                            <dt>
+                            <input tabindex="4" value="Masuk" type="submit" id="submit" class="btn" />
+                            <input name="broker" type="hidden" value="<?=$this->broker; ?>" />
+                            </dt>
+                        </dl>
+                    </div>
+                </form>
+                <div class="ta-left" style="padding: 5px;">
+                    <a href="<?=$this->baseUrl();?>/identity/lupasandi" title="Recover Account">Lupa ID or sandi ?</a>
+                    <h5>Tidak punya Hukumonline! ID?</h5>
+                    daftar nya mudah.
+                    <ul>
+                        <li><a href="<?=$this->baseUrl();?>/identity/account/register" title="Sign Up">Daftar</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="padding-top:5px"></div>
+            <div class="corner-tl corner-tr corner-bl corner-br" style="border:1px solid #cecece;">
+                <div class="ta-left" style="padding:10px;">
+                    <abbr>Satu Hukumonline!ID</abbr>
+                    Gunakan ID anda untuk Hukumonline Indonesia, Hukumonline English, Hukumpedia dan Forum.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

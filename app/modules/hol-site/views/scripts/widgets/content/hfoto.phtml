@@ -1,0 +1,70 @@
+<div class="align-left">
+    <div id="judul2">
+        Hukumonline Foto
+    </div>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="" class="bb">index</a>
+</div>
+<div class="clear">&nbsp;</div>
+<div style="border-top:1px solid #87CEFA"></div>
+<div style="padding-bottom:15px;"></div>
+
+<div class="hfoto corner-tl corner-tr corner-bl corner-br">
+    <ul id="mycarousel" class="jcarousel-skin-tango">
+<? for($i=0;$i<$this->numberOfRows;$i++) { 
+    $sDir = $this->getRemoteImageUrl();
+    $thumb = "";
+
+    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->data[$i][1],'RELATED_IMAGE');
+    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+    $relatedGuid = (isset($rowsetRelatedItem['relatedGuid']))? $rowsetRelatedItem['relatedGuid'] : '';
+
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $relatedGuid ."/". $itemGuid . ".jpg")) 	{ $thumb = $sDir ."/". $relatedGuid ."/". $itemGuid . ".jpg"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $relatedGuid ."/". $itemGuid . ".gif")) 	{ $thumb = $sDir ."/". $relatedGuid ."/". $itemGuid . ".gif"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $relatedGuid ."/". $itemGuid . ".png")) 	{ $thumb = $sDir ."/". $relatedGuid ."/". $itemGuid . ".png"; 	}
+
+    if ($thumb == "") { $thumb = $this->cdn('images')."/slider/image1.jpg"; }
+
+    $screenshot = "<img src=\"".$thumb."\"  vspace=\"0\" width=\"104\" height=\"79\" border=\"0\" hspace=\"0\" align=\"center\" />";
+
+
+?>
+	<li>
+		<a href="<?=ROOT_URL;?>/berita/foto/<?=$this->data[$i][1];?>" title="<?=$this->data[$i][0];?>"><?=$screenshot;?></a>
+	</li>
+<?
+
+} 
+?>
+    
+	</ul>
+</div>
+<div style="clear:both;padding-bottom:20px;"></div>
+<script type="text/javascript">
+function mycarousel_initCallback(carousel)
+{
+    // Disable autoscrolling if the user clicks the prev or next button.
+    carousel.buttonNext.bind('click', function() {
+        carousel.next(0);
+    });
+
+    carousel.buttonPrev.bind('click', function() {
+        carousel.prev(0);
+    });
+
+    // Pause autoscrolling if the user moves with the cursor over the clip.
+    carousel.clip.hover(function() {
+        carousel.stopAuto();
+    }, function() {
+        carousel.startAuto();
+    });
+};
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+         wrap: 'circular',
+		  scroll: 1 ,
+        initCallback: mycarousel_initCallback
+    });
+});
+</script>

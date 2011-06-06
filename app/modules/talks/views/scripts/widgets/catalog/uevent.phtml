@@ -1,0 +1,61 @@
+<? if ($this->numberOfRows == 0) { ?>
+<div style="font:11px verdana,arial,helvetica,sans-serif;font-weight:bold;line-height: 16px;color: #999999;">Tidak ada event</div>
+<? } ?>
+
+<form id="frmCatalogs" name="frmCatalogs">
+		<div style='display:none'>
+			<form method='post' class='jcart'>
+				<fieldset style='border:0;'>
+				</fieldset>
+			</form>
+		</div>
+
+<? for($i=0;$i<$this->numberOfRows;$i++) {
+
+    $sDir = $this->getRemoteImageUrl();
+    $thumb = "";
+
+    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->data[$i][1],'RELATED_IMAGE');
+    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+	
+    if ($itemGuid) {
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".jpg")) 	{ $thumb = $sDir ."/". $itemGuid . ".jpg"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".gif")) 	{ $thumb = $sDir ."/". $itemGuid . ".gif"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".png")) 	{ $thumb = $sDir ."/". $itemGuid . ".png"; 	}
+    }
+    
+    if ($thumb == "") { $thumb = $this->cdn('images')."/slider/image1.jpg"; }
+
+    $screenshot = "<img src=\"".$thumb."\"  vspace=\"0\" width=\"104\" border=\"0\" hspace=\"0\" align=\"left\" />";
+
+?>
+<h5><?=$this->data[$i][4];?></h5>
+<div class="colgroup leading">
+    <? if ($thumb=="") { $screenshot=""; } else { ?>
+    <div class="width1 column first ta-center">
+        <?=$screenshot;?>
+    </div>
+    <? } ?>
+    <div class="column" style="width:570px;">
+        <a href="" title=""><b class="big"><?=$this->data[$i][0];?></b></a><br/>
+        <p>
+            <q><?=$this->data[$i][3];?>
+            <cite>HARGA: Rp. <?=$this->data[$i][5];?></cite>
+            </q>
+        </p>
+        <form method='post' class='jcart' id='jcart-<?echo $this->data[$i][1];?>'>
+        <div style='display:none'>
+                <input type='hidden' name='my_item_id' value='<?echo $this->data[$i][1];?>' />
+                <input type='hidden' name='my_item_name' value='<?echo $this->data[$i][0];?>' />
+                <input type='hidden' name='my_item_price' value='<?=$this->data[$i][5];?>' />
+                <input type='text' name='my_item_qty' value='1' size='3' />
+        </div>
+        <p style="z-index:1;overflow:hidden;">
+        <input type='submit' name='my_add_button' value='add to cart' class='btn big' />
+        </p>
+        </form>
+    </div>
+</div>
+<div class="clean"></div>
+<? } ?>
+</form>

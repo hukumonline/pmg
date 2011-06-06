@@ -1,0 +1,49 @@
+<fieldset>
+    <legend>FORM KLINIK</legend>
+    <div class="box box-info closeable" id="msg" style="display:none;"></div>
+    <form id="clinicInputForm">
+        <p>
+            <label for="jp">Judul Pertanyaan:</label><br>
+            <input name="fixedCommentTitle" id="fixedCommentTitle" tabindex="1" type="text" class="half" />
+        </p>
+        <p>
+            <label for="question">Pertanyaan:</label><br/>
+            <textarea class="medium half" name="fixedCommentQuestion" tabindex="2"></textarea>
+        </p>
+        <?
+            $auth = Zend_Auth::getInstance();
+            if ($auth->hasIdentity())
+            {
+                $username = $auth->getIdentity()->username;
+            }
+        ?>
+        <p>
+            Dengan anda mengirimkan pertanyaan anda, anda sadar bahwa hubungan klien - penasehat hukum tidak terjadi , dan setuju untuk tidak bergantung pada informasi  yang disediakan tanpa berkonsultasi terlebih dahulu dengan penasehat hukum anda.
+        </p>
+        <p style="z-index:1;overflow:hidden;">
+            <input value="Kirim" type="submit" class="btn btn-green">&nbsp;<input type="reset" value="Reset" class="btn btn-green">
+        </p>
+	<input type='hidden' name='profileGuid' id='profileGuid' value='klinik'>
+	<input type='hidden' name='folderGuid' id='folderGuid' value='lt4a0a533e31979'>
+	<input type='hidden' name='username' id='username' value='<?=$username; ?>'>
+	<input type='hidden' name='status' id='status' value='0'>
+
+    </form>
+</fieldset>
+<script type="text/javascript">
+setTimeout(function()
+{
+    $('#clinicInputForm').submit(function() {
+        $.ajax({
+            type: 'POST',
+            url: '../api/clinic/save',
+            data: $(this).serialize(),
+            success: function(data) {
+                $('#msg').show('slow').html(data);
+            }
+        })
+        return false;
+    });
+
+});
+</script>

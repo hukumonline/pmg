@@ -1,0 +1,44 @@
+<div class="align-left">
+    <div id="judul2">
+        Suara Pembaca
+    </div>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="" class="bb">index</a>
+</div>
+<div class="clear">&nbsp;</div>
+<div style="border-top:1px solid #87CEFA"></div>
+<?
+    $registry = Zend_Registry::getInstance();
+    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+    $cdn = $config->getOption('cdn');
+    $sDir = $cdn['static']['url']['images'];
+//$sDir = 'uploads/images';
+for($i=0; $i<$this->numberOfRows;$i++) {
+
+    $thumb = "";
+    $guid = $this->data[$i][2];
+
+    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
+    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+
+    if ($itemGuid) {
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".jpg")) 	{ $thumb = $sDir ."/". $itemGuid . ".jpg"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".gif")) 	{ $thumb = $sDir ."/". $itemGuid . ".gif"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".png")) 	{ $thumb = $sDir ."/". $itemGuid . ".png"; 	}
+}
+
+    //if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
+    $screenshot = "<img src=\"".$thumb."\" width=\"40\" height=\"40\" />";
+
+?>
+<dl class="first">
+	<? if (!empty($thumb)) : ?>
+    <dt style="float:left;padding:2px;margin: 3px 5px 5px 0px;"><?=$screenshot; ?></dt>
+    <? endif; ?>
+    <dd>
+        <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][2]; ?>/<?=$this->data[$i][3]; ?>" title="<?=$this->data[$i][1]; ?>" class="aktual"><b><?=$this->data[$i][0]; ?></b></a>
+    </dd>
+</dl>
+<? } ?>
+<div class="clean"></div>

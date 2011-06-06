@@ -1,0 +1,17 @@
+<h5>::Polling Lainnya</h5>
+<table class="display stylized" id="polling">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Judul</th>
+        </tr>
+    </thead>
+    <tbody>
+        <? $i=1;foreach($this->rowPoll as $row) { ?>
+        <tr>
+            <td><?=$i?></td>
+            <td><a href="<?=$this->baseUrl(); ?>/polling/<?=$row->guid; ?>"><?=$row->title; ?></a></td>
+        </tr>
+        <? $i++; } ?>
+    </tbody>
+</table>

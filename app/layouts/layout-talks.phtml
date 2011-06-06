@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+    <head>
+        <title>hukumonline.com : Talks</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="google-site-verification" content="MUDP2J4JyyfKSWJsjfuglidOXiHOU_vn5VLXY7S-G8w" />
+        <link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
+        <link href="<?=$this->cdn('styles')?>/typography.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/style.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/jcart.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/calender.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/phocagallery.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/prettyPhoto.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/pagination.css" media="screen" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="<?=$this->cdn('scripts')?>/index.php?c=auto&amp;f=,hol/jquery/jquery-1.4.2.min.js,hol/jquery/prettyphoto/js/jquery.prettyPhoto.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/form/jquery.validate.pack.js,hol/jquery/paging/jquery.pagination.js,hol/jquery/newsticker/jquery.newsticker.pack.js,hol/smooth.scroller.js" ></script>
+        
+        <!-- Internet Explorer Fixes -->
+        <!--[if IE]>
+
+        <link rel="stylesheet" type="text/css" media="all" href="<?=$this->cdn('styles')?>/ie.css"/>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/html5.js"></script>
+
+        <![endif]-->
+        <!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+        <!--[if lt IE 8]>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/IE8.js"></script>
+
+        <![endif]-->
+        
+        <style type="text/css">
+
+ #phocagallery .phocaname {color: #b36b00 ;}
+ .phocagallery-box-file {background: #fcfcfc ; border:1px solid #e8e8e8;margin: 5px;padding: 5px;}
+ .phocagallery-box-file-first { background: url('../images/shadow1.gif') 0 0 no-repeat; }
+ .phocagallery-box-file:hover, .phocagallery-box-file.hover {border:1px solid #b36b00 ; background: #f5f5f5 ;}
+        #galleryLoading {
+            width: 100%;
+            position: absolute;
+        }
+        #pagination
+        {
+            text-align:center;
+            margin-left:105px;
+        }
+        #pagination li
+        {
+            list-style: none;
+            float: left;
+            margin-right: 16px;
+            padding:5px;
+            border:solid 1px #dddddd;
+            color:#0063DC;
+        }
+        #pagination li:hover
+        {
+            color:#FF0084;
+            cursor: pointer;
+        }
+        
+        /*** set the width and height to match your images **/
+
+        #nGallery {
+            position:relative;
+            height:210px;
+        }
+
+        #nGallery DIV {
+            position:absolute;
+            top:0;
+            left:0;
+            z-index:8;
+            opacity:0.0;
+            height: 210px;
+            background-color: #FFF;
+        }
+
+        #nGallery DIV.active {
+            z-index:10;
+            opacity:1.0;
+        }
+
+        #nGallery DIV.last-active {
+            z-index:9;
+        }
+
+        #nGallery DIV IMG {
+            height: 200px;
+            display: block;
+            border: 0;
+            margin-bottom: 10px;
+        }
+
+        </style>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function()
+            {
+                Administry.setup();
+
+                jQuery("#news").newsTicker();
+
+
+            });
+
+            function slideGallery() {
+                var $active = $('#nGallery DIV.active');
+
+                if ( $active.length == 0 ) $active = $('#nGallery DIV:last');
+
+                // use this to pull the divs in the order they appear in the markup
+                var $next =  $active.next().length ? $active.next()
+                    : $('#nGallery DIV:first');
+
+                // uncomment below to pull the divs randomly
+                // var $sibs  = $active.siblings();
+                // var rndNum = Math.floor(Math.random() * $sibs.length );
+                // var $next  = $( $sibs[ rndNum ] );
+
+
+                $active.addClass('last-active');
+
+                $next.css({opacity: 0.0})
+                    .addClass('active')
+                    .animate({opacity: 1.0}, 1000, function() {
+                        $active.removeClass('active last-active');
+                    });
+            }
+
+            $(function() {
+                setInterval( "slideGallery()", 5000 );
+            });
+
+
+        </script>
+
+    </head>
+    <body>
+        <?=$this->render('header-talks.phtml');?>
+        <?=$this->layout()->content;?>
+        <?=$this->render('footer.phtml');?>
+
+	<!-- Scroll to top link -->
+	<a style="display: none;" id="totop">^ scroll to top</a>
+        <script type="text/javascript" src="<?=$this->cdn('scripts');?>/hol/administry.js"></script>
+    </body>
+</html>

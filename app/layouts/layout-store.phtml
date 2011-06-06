@@ -1,0 +1,103 @@
+<?=$this->doctype();?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>hukumonline.com : Talks</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="google-site-verification" content="MUDP2J4JyyfKSWJsjfuglidOXiHOU_vn5VLXY7S-G8w" />
+        <link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
+        <link href="<?=$this->cdn('styles')?>/typography.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/style.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/jcart.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/store.css" media="screen" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="<?=$this->cdn('scripts')?>/index.php?c=auto&amp;f=,hol/jquery/jquery-1.4.2.min.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/form/jquery.validate.pack.js,hol/jquery/newsticker/jquery.newsticker.pack.js,hol/jquery/nyroModal/jquery.nyroModal.pack.js" ></script>
+        
+        <!-- Internet Explorer Fixes -->
+        <!--[if IE]>
+
+        <link rel="stylesheet" type="text/css" media="all" href="<?=$this->cdn('styles')?>/ie.css"/>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/html5.js"></script>
+
+        <![endif]-->
+        <!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+        <!--[if lt IE 8]>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/IE8.js"></script>
+
+        <![endif]-->
+
+        <script type="text/javascript">
+            jQuery(document).ready(function()
+            {
+               Administry.setup();
+
+               jQuery("#news").newsTicker();
+
+               var validator = jQuery("#form-validate").validate({
+                    rules:{
+                        fullName:"required"
+                        ,company:"required"
+                        ,phone:"required"
+                        ,address:"required"
+                        ,province:"required"
+                        ,postalcode:{
+                            required:true,
+                            digits:true
+                        }
+                    }
+                    ,messages:{
+                        fullName:"Masukkan Nama Lengkap"
+                        ,company:"Masukkan Nama Perusahaan"
+                        ,phone:"Masukkan Nomer Telepon"
+                        ,address:"Masukkan Alamat Lengkap"
+                        ,province:"Pilih propinsi"
+                        ,postalcode:{
+                            required:"Masukkan KodePos"
+                            ,digits:"Masukkan Hanya Angka"
+                        }
+                    }
+                    ,errorPlacement: function(error, element) {
+                        error.insertAfter(element.parent().find('label:first'));
+                    }
+                    ,success: function(label){
+                        label.html("&nbsp;").addClass("ok");
+                    }
+               });
+
+               jQuery(".radio").click(function(){
+                   if ($(this).val() === "nsiapay")
+                       {
+                           jQuery("#payment_form_nsiapay").show("fast");
+                           jQuery("#payment_form_bankpayment").hide("fast");
+                           jQuery("#payment_form_postpaid").hide("fast");
+                       }
+                       else if ($(this).val() === "bank")
+                           {
+                               jQuery("#payment_form_nsiapay").hide("fast");
+                               jQuery("#payment_form_postpaid").hide("fast");
+                               jQuery("#payment_form_bankpayment").show("fast");
+                           }
+                           else if ($(this).val() === "postpaid")
+                               {
+                                   jQuery("#payment_form_nsiapay").hide("fast");
+                                   jQuery("#payment_form_postpaid").show("fast");
+                                   jQuery("#payment_form_bankpayment").hide("fast");
+                               }
+               }
+               );
+               
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <?=$this->render('header-talks.phtml');?>
+        <?=$this->layout()->content;?>
+        <?=$this->render('footer.phtml');?>
+
+	<!-- Scroll to top link -->
+	<a style="display: none;" id="totop">^ scroll to top</a>
+        <script type="text/javascript" src="<?=$this->cdn('scripts');?>/hol/administry.js"></script>
+    </body>
+</html>

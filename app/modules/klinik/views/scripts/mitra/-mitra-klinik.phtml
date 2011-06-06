@@ -1,0 +1,33 @@
+<?=$this->action('pokrol','mitra','klinik'); ?>
+<fieldset>
+    <legend>MITRA KLINIK</legend>
+    <? for ($i=0;$i<$this->numberOfRows;$i++) {
+    	if ($this->aData[$i][2]=="lt4b457ff0c3e1b") continue;
+        $sDir = $this->getRemoteImageUrl();
+        $thumb = "";
+
+        $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->aData[$i][2],'RELATED_IMAGE');
+        $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+
+        if (!empty($itemGuid))
+        {
+	        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".jpg")) 	{ $thumb = $sDir."/".$itemGuid.".jpg"; 	}
+	        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".gif")) 	{ $thumb = $sDir."/".$itemGuid.".gif"; 	}
+	        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".png")) 	{ $thumb = $sDir."/".$itemGuid.".png"; 	}
+        }
+        
+        if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
+        
+        $screenshot = "<img src=\"".$thumb."\" width=\"90\" />";
+
+    ?>
+        <div class="mitraisi">
+            <div class="image"><?=$screenshot; ?></div>
+            <a href="<?=$this->baseUrl(); ?>/klinik/mitra/<?=$this->aData[$i][2]; ?>" class="klinikbrowse"><b><?=$this->aData[$i][0]; ?></b></a>
+            <?=$this->aData[$i][1]; ?>
+            <div class="clean"></div>
+            <div class="bor"></div>
+        </div>
+    <? } ?>
+
+</fieldset>

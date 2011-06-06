@@ -1,0 +1,38 @@
+<?=$this->action('pokrol','mitra','klinik',array('ko'=>$this->aData[0][1])); ?>
+<fieldset>
+	<legend>MITRA KLINIK</legend>
+	<? for($i=0; $i<count($this->aData);$i++) : 
+		if (($this->aData[$i][0]=="_empty_") || ($this->aData[$i][0]=="lt4b457ff0c3e1b")) continue;
+        $sDir = $this->getRemoteImageUrl();
+        $thumb = "";
+
+        $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->aData[$i][0],'RELATED_IMAGE');
+        $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+
+        if (!empty($itemGuid))
+        {
+	        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".jpg")) 	{ $thumb = $sDir."/".$itemGuid.".jpg"; 	}
+	        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".gif")) 	{ $thumb = $sDir."/".$itemGuid.".gif"; 	}
+	        if (Pandamp_Lib_Formater::thumb_exists($sDir."/".$itemGuid.".png")) 	{ $thumb = $sDir."/".$itemGuid.".png"; 	}
+        }
+        
+        
+        $screenshot = "<img src=\"".$thumb."\" width=\"90\" />";
+	
+	?>
+        <div class="mitraisi">
+            <div class="align-left" style="width:550px;">
+        	<? if (!empty($thumb)) : ?>
+            <div class="image"><?=$screenshot; ?></div>
+            <? endif; ?>
+            <a href="<?=$this->baseUrl(); ?>/klinik/mitra/<?=$this->aData[$i][0]; ?>" class="klinikbrowse"><b><?=$this->getCatalogAttribute($this->aData[$i][0],'fixedTitle'); ?></b></a>
+            <?=$this->getCatalogAttribute($this->aData[$i][0],'fixedContent'); ?>
+            
+            </div>
+            <div class="align-right"><a href="<?=$this->baseUrl(); ?>/klinik/kontributor/<?=$this->aData[$i][0];?>" class="klinikbrowse">Kontribusi:<?=$this->aData[$i][1];?> pertanyaan</a></div>
+            <div style="clear:both"></div>
+            <div class="bor"></div>
+        </div>
+	
+	<? endfor; ?>
+</fieldset>

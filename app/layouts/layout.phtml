@@ -1,0 +1,39 @@
+<?=$this->doctype();?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <?=$this->headTitle();?>
+        <?=$this->headMeta();?>
+        <?=$this->headLink();?>
+        <?=$this->headScript();?>
+        <!-- Internet Explorer Fixes -->
+        <!--[if IE]>
+
+        <link rel="stylesheet" type="text/css" media="all" href="<?=$this->cdn('styles')?>/ie.css"/>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/html5.js"></script>
+
+        <![endif]-->
+        <!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+        <!--[if lt IE 8]>
+
+        <script src="<?=$this->cdn('scripts')?>/hol/IE8.js"></script>
+
+        <![endif]-->
+        
+        <!--[if lte IE 7]>
+        <style type="text/css">
+        html .jquerycssmenu{height: 1%;} /*Holly Hack for IE7 and below*/
+        </style>
+        <![endif]-->
+        
+    </head>
+    <body>
+        <?=$this->render('header.phtml');?>
+        <?=$this->layout()->content;?>
+        <?=$this->render('footer.phtml');?>
+
+	<!-- Scroll to top link -->
+	<a style="display: none;" id="totop">^ scroll to top</a>
+        <script type="text/javascript" src="<?=$this->cdn('scripts');?>/hol/administry.js"></script>
+    </body>
+</html>

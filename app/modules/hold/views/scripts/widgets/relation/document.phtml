@@ -1,0 +1,14 @@
+<? if (count($this->rowsetRelatedItem) > 0) { ?>
+<fieldset>
+	<legend>DOKUMEN</legend>
+	<ul id="docline">
+	<? foreach ($this->rowsetRelatedItem as $row){?>
+	<li>
+		<?=$this->GetCatalogDocType($row->itemGuid); ?>&nbsp;
+		<a href="<?=$this->baseUrl();?>/pusatdata/download/<?=$row->itemGuid;?>/parent/<?=$row->relatedGuid;?>"><?=$this->getCatalogTitle($row->itemGuid,'fixedTitle'); ?></a>&nbsp;
+		<?=$this->GetCatalogDocSize($row->itemGuid); ?>
+	</li>
+	<? } ?>
+	</ul>
+</fieldset>
+<? } ?>

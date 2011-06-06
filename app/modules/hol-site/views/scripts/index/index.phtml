@@ -1,0 +1,80 @@
+<!-- Page content -->
+
+<div id="page">
+    <div class="wrapper">
+        <section class="column first">
+            <div class="colgroup">
+
+                <div class="kolom widthcontent4 first">
+                    <div class="colgroup">
+                        <div class="kolom widthcontent1 first">
+                            <?=$this->action('miniprofile','index','hol-site');?>
+                            <?=$this->action('pusatdata','widgets_content','hol-site');?>
+                        
+                        </div>
+                        <div class="kolom" style="width: 220px;padding-right:10px;padding-top:42px;">
+                            <?=$this->action('klinik','widgets_content','hol-site');?>
+                        </div>
+                    </div>
+                    <div class="colgroup ta-center" style="padding-top:5px;">
+                        <img src="<?=$this->cdn('images');?>/banner/469x90.gif" alt="469x90" width="469px" />
+                    </div>
+                    <div class="colgroup">
+                        <div class="kolom widthcontent1 first" style="padding-right:10px;width: 240px">
+                        	<div style="padding-top:15px;"></div>
+                            <?=$this->action('kolom','widgets_content','hol-site');?>
+                            <div style="padding-top:15px;"></div>
+                            <?=$this->action('talk','widgets_content','hol-site');?>
+                            <div style="padding-top:15px;"></div>
+                            <?=$this->action('view','manager','polling');?>
+                        </div>
+                        <div class="kolom" style="width: 220px;padding-right:10px;padding-top:15px;">
+                            <?=$this->action('ijt','widgets_content','hol-site',array('folderGuid'=>'fb18','title'=>'Tajuk'));?>
+                            <div style="padding-top:15px;"></div>
+                            <?=$this->action('ijt','widgets_content','hol-site',array('folderGuid'=>'fb9','title'=>'Info'));?>
+                            <div style="padding-top:15px;"></div>
+                            <?=$this->action('suarapembaca','widgets_content','hol-site');?>
+                            <div style="padding-top:15px;"></div>
+                            <?=$this->action('komunitas','widgets_content','hol-site');?>
+                            <div style="padding-top:15px;"></div>
+                            <div id="showDiv1" style="width:100%;text-align:center;">
+                            <?=$this->action('browse','manager','agenda');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kolom widthcontent3" style="border-left: 1px solid #cecece;padding-left: 10px;padding-top:42px;">
+                    <?=$this->action('utama','widgets_content','hol-site');?>
+                    <div style="padding-top: 10px;"></div>
+                    <?=$this->action('terbaru','widgets_content','hol-site',array('node'=>'lt4c5a39d28cac9'));?>
+                    <?=$this->action('hfoto','widgets_content','hol-site');?>
+                    <div class="align-left first" style="width:230px;">
+                        <?=$this->action('fokus','widgets_content','hol-site');?>
+                    </div>
+                    <div class="align-right" style="width:240px;text-align: left;">
+                        <?=$this->action('isuhangat','widgets_content','hol-site');?>
+                    </div>
+                    <div class="clear">&nbsp;</div>
+
+                    <div class="align-left first" style="width:235px;padding-top:15px;">
+                        <?=$this->action('ijt','widgets_content','hol-site',array('folderGuid'=>'fb12','title'=>'Tokoh'));?>
+                    </div>
+                    <div class="align-right" style="width:240px;text-align: left;padding-top:15px;">
+                        <?=$this->action('ijt','widgets_content','hol-site',array('folderGuid'=>'fb14','title'=>'Jeda'));?>
+                    </div>
+                    <div class="clear">&nbsp;</div>
+					<div style="clear:both;"></div>
+                    <?=$this->action('resensi','widgets_content','hol-site');?>
+                    <div class="clear">&nbsp;</div>
+					<div style="clear:both;"></div>
+                    <?//=$this->action('column','widgets_content','hol-site');?>
+
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </section>
+    </div>
+</div>
+<!-- End of Page content -->

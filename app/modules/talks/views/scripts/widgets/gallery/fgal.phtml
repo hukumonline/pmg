@@ -1,0 +1,46 @@
+<h5>Galeri Foto</h5>
+<hr>
+<div class="colgroup leading">
+    <div id="nGallery" class="td_peraturan1">
+<? for($i=0;$i<$this->numberOfRows;$i++) { 
+    $registry = Zend_Registry::getInstance();
+    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+    $cdn = $config->getOption('cdn');
+    $sDir = $cdn['static']['url']['images'];
+//    $sDir = ROOT_URL.'/uploads/images';
+    $thumb = "";
+
+    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->data[$i][1],'RELATED_IMAGE');
+    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+    $relatedGuid = (isset($rowsetRelatedItem['relatedGuid']))? $rowsetRelatedItem['relatedGuid'] : '';
+
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $relatedGuid ."/". $itemGuid . ".jpg")) 	{ $thumb = $sDir ."/". $relatedGuid ."/". $itemGuid . ".jpg"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $relatedGuid ."/". $itemGuid . ".gif")) 	{ $thumb = $sDir ."/". $relatedGuid ."/". $itemGuid . ".gif"; 	}
+    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $relatedGuid ."/". $itemGuid . ".png")) 	{ $thumb = $sDir ."/". $relatedGuid ."/". $itemGuid . ".png"; 	}
+
+    if ($thumb == "") { $thumb = $this->cdn('images')."/slider/image1.jpg"; }
+
+    $screenshot = "<img src=\"".$thumb."\"  vspace=\"0\" width=\"245\" border=\"0\" hspace=\"0\" align=\"center\" />";
+
+
+
+
+    if ($i==0) { ?>
+        
+        <div class="active">
+            <a href="<?=$this->baseUrl();?>/talks/gallery/id/<?=$this->data[$i][1];?>"><?=$screenshot;?></a>
+        </div>
+        
+    <? } else { ?>
+
+        <div>
+            <a href="<?=$this->baseUrl();?>/talks/gallery/id/<?=$this->data[$i][1];?>"><?=$screenshot;?></a>
+        </div>
+
+    <? }
+
+} ?>
+    </div>
+</div>
+
+<div class="clearfix"></div>

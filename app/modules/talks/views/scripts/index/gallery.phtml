@@ -1,0 +1,89 @@
+<!-- Page content -->
+<div id="page">
+    <div class="wrapper">
+        <section class="column first">
+            <div class="colgroup">
+                <div class="kolom first" style="width: 245px;padding-right:5px;">
+                    <?=$this->action('miniprofile','index','hol-site');?>
+                    <?=$this->action('viewcart','index','talks'); ?>
+                    <div style="padding-top:5px;"></div>
+                    <?=$this->action('fgal','widgets_gallery','talks'); ?>
+                    <?=$this->action('browse','manager','agenda');?>
+                    <?=$this->action('testimonial','widgets_catalog','talks');?>
+                </div>
+                <div class="kolom widthcontent5" style="border-left: 1px solid #cecece; padding-left: 5px;">
+                    <?//=$this->action('holgallery','widgets_gallery','talks',array('id'=>$this->id)); ?>
+                    <?//=$this->ajaxActionRenderer(ROOT_URL.'/talks/holgallery/id/'.$this->id);?>
+                    <h4>Hukumonline Events: <?=$this->getCatalogTitle($this->id,"fixedTitle");?></h4>
+                    <hr>
+                    <div class="ta-center">
+                        <div id="galleryLoading"></div>
+                        <div id="content"></div>
+                    </div>
+                    <?
+                    $configGallery = new Zend_Session_Namespace("cfg");
+                    if (sizeof($configGallery->allThumbs) > $configGallery->perPage) {
+                    ?>
+
+                    <table width="800px;">
+                        <tr>
+                            <td>
+                                <ul id="pagination">
+                                    <? for ($j = 1; $j <= ceil(sizeof($configGallery->allThumbs) / $configGallery->perPage); $j++) { ?>
+                                    <li id="<?=$j;?>"><?=$j;?></li>
+                                    <? } ?>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <? } ?>
+
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </section>
+    </div>
+</div>
+<!-- End of Page Content -->
+<script type="text/javascript">
+$(document).ready(function(){
+    function displayLoad()
+    {
+        $("#galleryLoading").fadeIn(900,0);
+        $("#galleryLoading").html("<img src='<?=ROOT_URL;?>/resources/images/bigLoader.gif' />");
+    }
+    function hideLoad()
+    {
+        $("#galleryLoading").fadeOut('slow');
+    }
+
+    //Default Starting Page Results
+    $("#pagination li:first").css({'color' : '#FF0084'}).css({'border' : 'none'});
+
+    displayLoad();
+    $("#content").load("<?=ROOT_URL;?>/talks/holgallery/id/<?=$this->id;?>",hideLoad());
+
+    //Pagination Click
+    $("#pagination li").click(function(){
+
+            displayLoad();
+
+            //CSS Styles
+            $("#pagination li")
+            .css({'border' : 'solid #dddddd 1px'})
+            .css({'color' : '#0063DC'});
+
+            $(this)
+            .css({'color' : '#FF0084'})
+            .css({'border' : 'none'});
+
+            //Loading Data
+            var pageNum = this.id;
+
+            $("#content").load("<?=ROOT_URL;?>/talks/holgallery/id/<?=$this->id;?>/page/" + pageNum,hideLoad());
+    });
+    
+});
+</script>

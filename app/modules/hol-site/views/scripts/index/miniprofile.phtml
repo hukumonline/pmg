@@ -1,0 +1,13 @@
+<div class="ta-left">
+    <?
+        //$sso = new Pandamp_Session_Remote();
+        //$user = $sso->getInfo();
+
+    $auth = Zend_Auth::getInstance();
+    if ($auth->hasIdentity()) :
+    ?>
+    <h6><?=$this->username; ?> &nbsp;|&nbsp; <a href="#" onclick="window.location='<?=$this->profile;?>';return false;">Profile</a> &nbsp;|&nbsp; <a href="#" onclick="window.location='<?=$this->logoutUrl;?>';return false;">logout</a></h6>
+    <?  else : ?>
+    <h6><a href="#" onclick="window.location='<?=$this->signUp;?>';return false;">Daftar</a> &nbsp;|&nbsp; <a href="#" onclick="window.location='<?=$this->loginUrl;?>';return false;">Masuk</a></h6>
+    <? endif; ?>
+</div>

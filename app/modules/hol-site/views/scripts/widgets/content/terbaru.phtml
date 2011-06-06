@@ -1,0 +1,47 @@
+<div class="align-left">
+    <div id="judul2">
+        Berita Terbaru
+    </div>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="" class="bb">index</a>
+</div>
+<div class="clear">&nbsp;</div>
+<div style="border-top:1px solid #87CEFA"></div>
+<div style="padding-bottom:15px;"></div>
+<div id="holrubrik" class="rubrikasi">
+<? if ($this->menuFolder) : ?>
+<ul>
+
+    <?
+    for ($i=0;$i<count($this->menuFolder);$i++)
+    {
+    $json = new Zend_Json();
+    $aData = $json->decode($this->menuFolder[$i]['cmsParams']);
+    ?>
+    <li>
+    <a href="<?=$this->baseUrl(); ?>/page/<?=$aData['st']?>"><?=$this->menuFolder[$i]['title']?></a>
+    <?=$this->action('getmenuchild','widgets_content','hol-site',array('node'=>$this->menuFolder[$i]['guid']))?>
+    </li>
+    <? } ?>
+
+</ul>
+<? endif; ?>
+<br style="clear: left" />
+</div>
+
+
+<table class="no-style full">
+    <tbody>
+        <? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+        <tr>
+            <td class="ta-left">&raquo;
+                <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][3]; ?>/<?=$this->data[$i][1]; ?>" title="<?=$this->data[$i][4]; ?>" class="aktual">
+                    <b><?=$this->data[$i][0];?></b>
+                </a>
+            </td>
+        </tr>
+        <? } ?>
+    </tbody>
+</table>
+<div class="clear">&nbsp;</div>

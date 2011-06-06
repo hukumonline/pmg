@@ -1,0 +1,27 @@
+<div class="align-left">
+    <div id="judul2">
+        <?=$this->title;?>
+    </div>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="" class="bb">index</a>
+</div>
+<div class="clear">&nbsp;</div>
+<div style="border-top:1px solid #87CEFA"></div>
+<div style="padding-bottom:5px;"></div>
+    <? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+            <header>
+                <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5]; ?>" class="aktual"><b><?=$this->data[$i][0]; ?></b></a>
+            </header>
+            <dl class="first">
+                <dt class="author">[<?=$this->data[$i][1]; ?>]</dt>
+                <dd>
+            <?=Pandamp_Lib_Formater::string_limit_words($this->data[$i][2],10);?>
+                </dd>
+            </dl>
+            <nav>
+                <img src="<?=$this->cdn('images'); ?>/comment.jpg" width="13" height="9" /><a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5]; ?>#comments" class="bb"> <?=$this->data[$i][3]; ?> tanggapan </a> |<a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5];?>" class="bb"> Selengkapnya </a>
+            </nav>
+    <? } ?>
+<div class="clear">&nbsp;</div>
+<div style="padding-top: 5px;"></div>

@@ -1,0 +1,39 @@
+<!-- Page content -->
+<div id="page">
+    <div class="wrapper">
+        <section class="column first">
+            <div class="colgroup">
+                <div class="kolom widthcontent1 first">
+                    <?=$this->action('miniprofile','index','hol-site');?>
+                    <form id="searchForm" method="post" action="<?=$this->baseUrl();?>/cari">
+                        <input size="20" name="keyword" id="keyword" type="text">
+                        <input name="submit" value="Cari" class="btn-blue" type="submit">
+                    </form>
+                    <?=$this->action('terbaru','widgets_sidebar','hol-site'); ?>
+
+                </div>
+                <div class="kolom" style="width: 723px;border-left: 1px solid #cecece; padding-left:10px;">
+
+                    <br/>
+                    <?
+                        if ($this->node) {
+                            echo $this->action('view-folder-navigation', 'widgets_folder', 'hold', array('node' => $this->node));
+                        }
+                        elseif ($this->nprt) {
+                            echo $this->action('view-folder-navigation-peraturan', 'widgets_folder', 'hold', array('nprt' => $this->nprt));
+                        }
+                        elseif ($this->npts) {
+                            echo $this->action('view-folder-navigation-putusan', 'widgets_folder', 'hold', array('npts' => $this->npts));
+                        }
+                    ?>
+
+                    <?=$this->action('browse','browser','hold'); ?>
+
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </section>
+    </div>
+</div>
+<!-- End of Page Content -->

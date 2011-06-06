@@ -1,0 +1,81 @@
+<?=$this->doctype();?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>hukumonline.com : <?=$this->identity;?></title>
+        <link href="<?=$this->baseUrl();?>/resources/images/hole_small.ico" rel="shortcut icon" type="image/ico" />
+        <link href="<?=$this->baseUrl();?>/resources/css/typography.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->baseUrl();?>/resources/css/identity.css" media="screen" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="<?=$this->baseUrl();?>/js/jquery/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="<?=$this->baseUrl();?>/js/jquery/datepicker/jquery.datepick.pack.js"></script>
+        <script type="text/javascript" src="<?=$this->baseUrl();?>/js/jquery/dataTables/jquery.dataTables.min.js"></script>
+
+        <!-- Internet Explorer Fixes -->
+        <!--[if IE]>
+
+        <link rel="stylesheet" type="text/css" media="all" href="<?=$this->baseUrl();?>/resources/css/ie.css"/>
+
+        <script src="<?=$this->baseUrl();?>/js/html5.js"></script>
+
+        <![endif]-->
+        <!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+        <!--[if lt IE 8]>
+
+        <script src="<?=$this->baseUrl();?>/js/IE8.js"></script>
+
+        <![endif]-->
+
+    </head>
+    <body>
+        <div id="page">
+            <div class="wrapper">
+                <div id="judul"><a href="<?=$this->baseUrl();?>"><img src="<?=$this->baseUrl();?>/resources/images/holid.jpg" alt="hukumonline" /></a></div>
+                <small>Profile HukumonlineID</small>
+                <hr>
+                <section class="column first">
+                    <div class="colgroup leading">
+                        <div class="column width6 first">
+                            <?=$this->layout()->content;?>
+                        </div>
+                        <div class="column width2">
+                            <ul id="psetting">
+                                <li>
+                                    <h6>My <i>Dashboard</i></h6>
+                                    <a href="">Dashboard</a>
+                                </li>
+                                <li>
+                                    <h6>Manage <i>Profile</i></h6>
+                                    <a href="">Edit Profile</a><br>
+                                    <a href="">Foto</a><br>
+                                    <a href="">Ubah Password</a><br>
+                                    <a href="">Ubah Email</a><br>
+                                </li>
+                                <li>
+                                    <h6>Laporan</h6>
+                                    <a href="<?=ROOT_URL;?>/store/payment/list">Order History</a><br>
+                                    <a href="<?=ROOT_URL;?>/store/payment/transaction">Transaction History</a><br>
+                                    <a href="<?=ROOT_URL;?>/store/payment/confirm">Payment Confirmation</a><br>
+                                    <a href="<?=ROOT_URL;?>/store/payment/billing">Edit Billing Info</a>
+                                </li>
+                                <li>
+                                    <h6>My <i>Documents</i></h6>
+                                    <a href="<?=ROOT_URL;?>/store/payment/document">View All</a>
+                                </li>
+                                <li>
+                                    <h6>Subscription</h6>
+                                    <a href="">Newsletter</a><br>
+                                    <a href="">Blackberry Notification</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        
+	<!-- Scroll to top link -->
+	<a style="display: none;" id="totop">^ scroll to top</a>
+        <script type="text/javascript" src="<?=$this->baseUrl();?>/js/administry.js"></script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<? if ($this->numberOfRows == 0) { ?>
+<span style="font:12px verdana,arial,helvetica,sans-serif;">Tidak ada klinik</span>
+<? } ?>
+<div class="klinikterbaruisi">
+<? for ($i=0;$i<$this->numberOfRows;$i++) { 
+    $arraypictureformat = array("jpg", "jpeg", "gif");
+    $txt_allowedformat = implode('; ', $arraypictureformat);
+    $registry = Zend_Registry::getInstance();
+    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+    $cdn = $config->getOption('cdn');
+    
+    $sDir = $cdn['static']['dir']['photo'];
+    $sDir2 = $cdn['static']['url']['photo'].'/';
+    
+    $modelUser = App_Model_Show_User::show()->getUserByName($this->data[$i][4]);
+    
+    $x = 0;
+    foreach ($arraypictureformat as $key => $val) {
+        if (is_file($sDir."/".$modelUser['kopel'].".".$val)) {
+            $myphoto = $sDir."/".$modelUser['kopel'].".".$val;
+            $myext = $val;
+            $x = 1;
+            break;
+        }
+    }
+    if ($x == 1) {
+        $myphotosize = getimagesize($myphoto);
+        $dis = "";
+        if (isset($myext) && is_file($sDir."/".$modelUser['kopel'].".".$myext))
+            $txt_existence = "<img src=\"".$sDir2.$modelUser['kopel'].".".$myext."\" class=\"avatar\" width=\"38\" height=\"38\" />";
+
+    }
+    else
+    {
+        $txt_existence = "<img src=\"".$this->cdn('images')."/gravatar-140.png\" width=\"38\" height=\"38\" class=\"avatar\" border=\"0\" />";
+    }
+    ?>
+	
+	<div style="float:left;padding:2px;margin: 1px 10px 10px 0px;">
+	<a href=""><?=$txt_existence;?></a>
+	</div>
+	<div style="float:right;width:661px;">
+		<div id="kcss">
+		<a href="<?=$this->baseUrl(); ?>/klinik/detail/<?=$this->data[$i][3];?>"><b><?=$this->data[$i][0];?></b></a>
+		</div>
+	</div><br>
+	<small>Di <a href="<?=ROOT_URL;?>/klinik/kategori/<?=$this->data[$i][2];?>" class="subtitle"><?=$this->getCatalogAttribute($this->data[$i][2],'fixedTitle');?></a> - Ditanyakan oleh <?=$this->data[$i][4];?> - Jawaban Oleh <a href="<?=ROOT_URL;?>/klinik/penjawab/<?=$this->data[$i][5];?>/mitra/<?=$this->data[$i][6];?>" class="subtitle"><?=$this->getCatalogAttribute($this->data[$i][5],'fixedTitle'); ?></a> - Sumber dari <a href="<?=ROOT_URL;?>/klinik/mitra/<?=$this->data[$i][6];?>" class="subtitle"><?=$this->getCatalogAttribute($this->data[$i][6],'fixedTitle'); ?></a> - <?=$this->data[$i][7];?></small>
+	<div style="clear:both;"></div>
+	
+<? } ?>
+</div>

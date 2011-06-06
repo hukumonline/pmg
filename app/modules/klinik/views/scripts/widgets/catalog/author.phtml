@@ -1,0 +1,9 @@
+<? if ($this->numberOfRows == 0) { ?>
+<span style="font:12px verdana,arial,helvetica,sans-serif;">Tidak ada penjawab</span>
+<? } ?>
+<div class="klinikterbaruisi">
+<? for ($i=0;$i<$this->numberOfRows;$i++) { ?>
+<a href="<?=ROOT_URL ?>/klinik/penjawab/<?=$this->data[$i][2];?>/mitra/<?=$this->catalogGuid ?>" class="klinikbrowse"><?=$this->data[$i][0];?></a>
+<div class="author"><?=$this->data[$i][1];?></div>
+<? } ?>
+</div>

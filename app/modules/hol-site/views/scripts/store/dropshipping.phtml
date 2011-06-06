@@ -1,0 +1,85 @@
+<?
+    // INITIALIZE JCART AFTER SESSION START
+    $cart =& $_SESSION['jCart']; if(!is_object($cart)) $cart = new jCart();
+    // INCLUDE CONFIG SO THIS SCRIPT HAS ACCESS USER FIELD NAMES
+    include(ROOT_DIR.'/js/jcart/jcart-config.php');
+    // INCLUDE DEFAULT VALUES SINCE WE NEED TO PASS THE VALUE OF THE UPDATE BUTTON BACK TO jcart.php IF UPDATING AN ITEM QTY
+    // IF NO VALUE IS SET IN CONFIG, THERE HAS TO BE A DEFAULT VALUE SINCE SIMPLY CHECKING FOR THE VAR ITSELF FAILS
+    include(ROOT_DIR.'/js/jcart/jcart-defaults.php');
+?>
+
+<script type="text/javascript" src="<?=ROOT_URL;?>/js/jcart/jcart-javascript.php"></script>
+
+<!-- Page content -->
+<div id="page">
+    <div class="wrapper">
+        <section class="column first">
+            <div class="colgroup">
+                <div class="kolom first" style="width: 245px;padding-right:5px;">
+                    <?=$this->action('miniprofile','index','hol-site');?>
+                    <?=$this->action('terbaru','widgets_sidebar','hol-site'); ?>
+                </div>
+                <div class="kolom" style="width: 723px;border-left: 1px solid #cecece; padding-left:10px;">
+                	<div style="padding-top:30px;"></div>
+                    <table class="checkout-progress">
+                        <tbody>
+                        <tr>
+                            <td class="shipping_active">-</td>
+                            <td class="steps_arrow"></td>
+                            <td class="payment_inactive">-</td>
+                            <td class="steps_arrow"></td>
+                            <td class="receipt_inactive">-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <fieldset>
+                        <legend>MEMBUAT ALAMAT PENGIRIMAN</legend>
+                        <div class="ta-right"><label class="required">Field Diperlukan</label></div>
+                        <form id="form-validate" method="post" action="<?=ROOT_URL;?>/store/confirmorder">
+                            <p>
+                                <label class="required" for="fullName">Nama Lengkap</label><br/>
+                                <input type="text" id="fullName" class="half" name="fullName" value="<?=$this->userDetailInfo->fullName;?>"/>
+                            </p>
+                            <p>
+                                <label class="required" for="company">Perusahaan</label><br/>
+                                <input type="text" id="company" class="half" name="company" value="<?=$this->userDetailInfo->company;?>"/>
+                            </p>
+                            <p>
+                                <label class="required" for="phone">Telp</label><br/>
+                                <input type="text" id="phone" class="small" name="phone" value="<?=$this->userDetailInfo->phone;?>"/>
+                            </p>
+                            <p>
+                                <label for="fax">Fax</label><br/>
+                                <input type="text" id="fax" class="small" name="fax" value="<?=$this->userDetailInfo->fax;?>"/>
+                            </p>
+                            <p>
+                                <label class="required" for="address">Alamat</label><br/>
+                                <textarea id="address" class="small" name="address"><?=$this->userDetailInfo->address;?></textarea>
+                            </p>
+                            <? $formater = new Pandamp_Lib_Form(); ?>
+                            <p>
+                                <label class="required" for="province">Propinsi</label>
+                                <span style="padding-left:167px;">
+                                    <label for="postalcode">Kota</label>
+                                </span>
+                                <br/>
+                                <?=$formater->chooseProvince($this->userDetailInfo->state);?>
+                                <span style="padding-left:20px;">
+                                    <input type="text" id="city" class="small" name="city" value="<?=$this->userDetailInfo->city;?>"/>
+                                </span>
+                            </p>
+                            <p>
+                                <label class="required" for="postalcode">Kode Pos</label><br/>
+                                <input type="text" id="postalcode" class="small" name="postalcode" value="<?=$this->userDetailInfo->zip;?>"/>
+                            </p>
+                            <p class="box"><input type="button" onclick="window.location.href='<?=ROOT_URL;?>/checkout/cart'" class="btn" value="&laquo;&nbsp;Kembali"/> or <input type="submit" class="btn btn-green big" value="Simpan Alamat"/></p>
+                        </form>
+                    </fieldset>
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </section>
+    </div>
+</div>
+<!-- End of Page Content -->

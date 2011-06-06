@@ -1,0 +1,33 @@
+<div id="container-1">
+    <ul>
+        <li><a class="corner-tl" href="#tabs-1">Peraturan</a></li>
+        <li><a class="" href="#tabs-2">Putusan</a></li>
+    </ul>
+    <div id="tabs-1">
+   	<?
+            echo $this->action('kategori', 'widgets_folder', 'hold', array('node' => $this->node)).'<br>';
+            echo $this->action('peraturan', 'widgets_folder', 'hold', array('node' => $this->nprt));
+   	?>
+        <br>
+        <?
+        if ($this->node) {
+            echo $this->ajaxActionRenderer(ROOT_URL.'/pusatdata/vc/'.$this->node);
+        }
+   	if ($this->nprt) {
+            echo $this->ajaxActionRenderer(ROOT_URL.'/pusatdata/vcp/'.$this->nprt);
+   	}
+   	?>
+    </div>
+    <div id="tabs-2">
+   	<?
+            echo $this->action('putusan', 'widgets_folder', 'hold', array('node' => $this->npts));
+   	?>
+        <br>
+        <?
+   	if ($this->npts) {
+            echo $this->ajaxActionRenderer(ROOT_URL.'/pusatdata/vcpu/'.$this->npts);
+   	}
+   	?>
+
+    </div>
+</div>

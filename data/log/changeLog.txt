@@ -1,0 +1,17 @@
+November 15, 2010
+- Add PhpIds, Resource Mail, attackAction, sidebarAction
+  Fix ErrorController.php
+  +- Folder still accessable, eg:http://hukumonline.n1/hol-site/index/attack, http://hukumonline.n1/library, etc
+  xx sample URL attack, http://hukumonline.n1/?test="><script>eval(window.name)</script>
+
+November 18, 2010
+- Integrated Single Sign On Yii>sample4 [hukumonline English]
+  - Add function getCatalogAttribute in Class HoleCmsHelper > extension hole
+  - Change function actionLogin in Class DefaultController > module hole
+  - Add View login in Class DefaultController > module hole
+  - Add couple of Auth Extension for hole
+  - Change function getIsGuest and getName in Class CHoleWebUser > module hole
+  - Change subheader.php at folder theme>layout
+
+November 19, 2010
+- Add cache for Zend Application Configuration

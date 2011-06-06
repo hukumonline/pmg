@@ -1,0 +1,13 @@
+<? if (count($this->rowsetRelatedItem) > 0) { ?>
+<fieldset>
+	<legend>PERATURAN PELAKSANA</legend>
+	<ul id="ppline">
+	<? foreach ($this->rowsetRelatedItem as $row){?>
+	<li>
+		<a href="<?=$this->baseUrl();?>/pusatdata/detail/<?=$row->relatedGuid;?>/node/<?=$this->node;?>"><?=$this->getCatalogTitle($row->relatedGuid,'fixedTitle'); ?></a><br>
+		<?=$this->getCatalogTitle($row->relatedGuid,'fixedSubTitle'); ?>
+	</li>
+	<? } ?>
+	</ul>
+</fieldset>
+<? } ?>

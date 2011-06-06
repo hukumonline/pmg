@@ -1,0 +1,51 @@
+<table class="no-style full">
+    <tbody>
+        <tr style="border-bottom:1px solid #87CEFA">
+            <td>
+                <div id="judul2">Kolom</div>
+            </td>
+            <td class="ta-right"><a href="">index</a></td>
+        </tr>
+	<? if ($this->numberOfRows == 0) { ?>
+	<tr>
+            <td colspan="2">Resensi kosong</td>
+	</tr>
+	<? } for ($i = 0; $i < $this->rows; $i++) { ?>
+	<tr>
+	<? for ($j = 0; $j < $this->columns; $j++) { ?>
+	   	<td>
+                    <header id="linkhref">
+                    <h6><a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i + ($j * $this->rows)][4]; ?>/<?=$this->data[$i + ($j * $this->rows)][5]; ?>"><?=$this->data[$i + ($j * $this->rows)][0]; ?></a></h6>
+                    </header>
+	   	<dl class="first">
+		<?
+		$sDir = 'uploads/images';
+		$thumb = "";
+
+                $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->data[$i + ($j * $this->rows)][4],'RELATED_IMAGE');
+		$itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+
+		if (Pandamp_Lib_Formater::thumb_exists($sDir ."/tn_". $itemGuid . ".jpg")) 	{ $thumb = $sDir ."/tn_". $itemGuid . ".jpg"; 	}
+		if (Pandamp_Lib_Formater::thumb_exists($sDir ."/tn_". $itemGuid . ".gif")) 	{ $thumb = $sDir ."/tn_". $itemGuid . ".gif"; 	}
+		if (Pandamp_Lib_Formater::thumb_exists($sDir ."/tn_". $itemGuid . ".png")) 	{ $thumb = $sDir ."/tn_". $itemGuid . ".png"; 	}
+
+			$screenshot = "<img src=\"".$thumb."\" vspace=\"0\" width=\"40\" border=\"0\" height=\"40\" hspace=\"0\" align=\"left\" />";
+
+		?>
+
+		<? if ($thumb == "") { $screenshot = ""; } else { ?>
+	    <dt style="float:left;padding:2px;margin:2px;"><?=$screenshot; ?></dt>
+	    <? } ?>
+		<dt class="author"><?=$this->data[$i + ($j * $this->rows)][1]; ?></dt>
+	   	<dd class="last"><?=Pandamp_Lib_Formater::string_limit_words($this->data[$i + ($j * $this->rows)][2],10); ?></dd>
+	   	</dl>
+	   	<nav>
+                    <img src="<?=$this->cdn('images');?>/comment.jpg" width="13" height="9" /><a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i + ($j * $this->rows)][4]; ?>/<?=$this->data[$i + ($j * $this->rows)][5]; ?>#comments"> <?=$this->data[$i + ($j * $this->rows)][3]; ?> tanggapan </a> |<a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i + ($j * $this->rows)][4]; ?>/<?=$this->data[$i + ($j * $this->rows)][5]; ?>"> Selengkapnya </a>
+                </nav>
+	   	</td>
+	<? } ?>
+	</tr>
+	<? } ?>
+    </tbody>
+</table>
+<div class="clear">&nbsp;</div>

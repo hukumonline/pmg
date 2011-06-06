@@ -1,0 +1,25 @@
+<!-- Page content -->
+<div id="page">
+    <div class="wrapper">
+        <section class="column first">
+            <div class="colgroup">
+                <div class="kolom widthcontent1 first">
+                    <?=$this->action('miniprofile','index','hol-site');?>
+                    <?=$this->action('kategori','widgets_content','klinik'); ?>
+                </div>
+                <div class="kolom" style="width: 723px;border-left: 1px solid #cecece; padding-left:10px;">
+					<div style="padding-top:20px"></div>
+                    <?=$this->action('rubrik','index','klinik'); ?><br>
+                    <?=$this->action('view-result','widgets_search','klinik',array('query'=>$this->query,'category'=>$this->category)); ?>
+                    <hr>
+                    <?=$this->action('disclaimer','index','klinik'); ?><br>
+                    <?=$this->action('mitra-klinik','mitra','klinik'); ?>
+
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </section>
+    </div>
+</div>
+<!-- End of Page Content -->

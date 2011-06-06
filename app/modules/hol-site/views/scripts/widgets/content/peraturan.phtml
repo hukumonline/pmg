@@ -1,0 +1,7 @@
+<dl class="first">
+<? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+    <dt><a href="<?=$this->baseUrl(); ?>/pusatdata/detail/<?=$this->data[$i][2]; ?>/node/<?=$this->getNode($this->data[$i][2]);?>" class="aktual"><?=$this->data[$i][1]; ?></a></dt>
+    <dd class="last" style="padding-bottom: 10px;"><?=$this->data[$i][0]; ?></dd>
+<? } ?>
+</dl>
+

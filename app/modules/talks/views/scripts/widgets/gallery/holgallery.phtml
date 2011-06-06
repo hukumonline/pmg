@@ -1,0 +1,60 @@
+<table cellspacing="2" cellpadding="0" class="full" id="gal">
+    <tbody>
+        <tr>
+            <?
+            $n=1;
+            $end = min(($this->page * $this->perPage), sizeof($this->allThumbs));
+            for ($i = (($this->page - 1) * $this->perPage);  $i < $end; $i++) :
+            ?>
+            <td class="ta-center">
+                <table border="0" cellspacing="1" cellpadding="0">
+                    <tr>
+                        <td align="center">
+                            <div class="phocagallery-box-file" id="gvID<?=$i;?>" style="height:158px; width:120px">
+                                <?
+                                $ext = explode(".",$this->allThumbs[$i]);
+                                $ext = strtolower(array_pop($ext));
+                                $th = str_replace(array('tn_','.'.$ext), "", $this->allThumbs[$i])
+                                ?>
+                                <center>
+                                    <div class="phocagallery-box-file-first" style="height:118px;width:118px;">
+                                        <div class="phocagallery-box-file-second">
+                                            <div class="phocagallery-box-file-third">
+                                                <center class="detail clearfix">
+                                                    <img src="<?=$this->cdn('rim');?>/<?=$this->catalogGuid;?>/<?=$this->allThumbs[$i];?>" width="100px" height="100px" alt="<?=$this->allThumbs[$i];?>" />
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </center>
+                                <div class="phocaname" style="font-size:12px"><?=$this->getCatalogTitle($th,'fixedTitle');?></div>
+                                <div class="detail ta-right clearfix" style="margin-top:2px">
+                                    <a title="<?=$this->getCatalogTitle($th,'fixedTitle');?>" href="<?=$this->cdn('rim');?>/<?=$this->catalogGuid;?>/<?=str_replace("tn_", "", $this->allThumbs[$i]);?>" rel="prettyPhoto[gallery2]"><img src="<?=$this->baseUrl();?>/resources/images/icon-view.gif" alt="<?=$this->allThumbs[$i];?>" /></a>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+            <?
+            if (($n % 4) == 0 && ($n != $this->perPage)) {
+            ?>
+                </tr>
+                <tr align='center'>
+            <?
+            }
+            $n++;
+            endfor;
+            ?>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".detail:first a[rel^='prettyPhoto']").prettyPhoto({animationSpeed:'slow',theme:'light_square',slideshow:2000, autoplay_slideshow: true});
+    $(".detail:gt(0) a[rel^='prettyPhoto']").prettyPhoto({animationSpeed:'fast',slideshow:10000});
+
+});
+</script>

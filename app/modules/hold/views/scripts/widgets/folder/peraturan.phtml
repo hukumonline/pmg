@@ -1,0 +1,31 @@
+<h5>.:Hierarki:.</h5>
+	<div id="peraturan">
+<table style="margin-bottom:1.4em;width:100%;">
+<? if($this->numberOfFolders == 0){?>
+<tr>
+	<td style="font-size:12px;padding:4px 10px 4px 5px;">No Sub-Folder(s)</td>
+</tr>
+<? }?>
+    <?
+    for($i = 0; $i < $this->rows; $i++)
+		{
+    ?>
+	  <tr valign="top">
+	  <?
+	  for($j = 0; $j < $this->columns; $j++) {
+	  	if(isset($this->data[$i + ($j * $this->rows)][2]))
+	  	{
+	  ?>
+	  		<?
+	  			//$countCatinFol = $tblCatalog->countCatalogsInFolderAndChildren($this->data[$i + ($j * $this->rows)][2]);
+	  		?>
+		    <td width="20" valign="top" style="padding:4px 10px 4px 5px;"><a href="<?=$this->baseUrl().'/pusatdata/view/nprt/'.$this->data[$i + ($j * $this->rows)][2];?>"><img src="<?=$this->cdn('images').'/folder.png' ?>" border="0" /></a></td>
+		    <td colspan="3" valign="top" style="padding:4px 10px 4px 5px;">
+		    	<a class="link" href="<?=$this->baseUrl().'/pusatdata/view/nprt/'.$this->data[$i + ($j * $this->rows)][2];?>"><?=$this->data[$i + ($j * $this->rows)][0];?></a>
+		    </td>
+		<? }} ?>
+	  </tr>
+	<? } ?>
+</table>
+
+	</div>

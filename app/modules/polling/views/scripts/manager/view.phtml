@@ -1,0 +1,31 @@
+<div class="align-left">
+    <div id="judul2">Polling</div>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="" class="bb">index</a>
+</div>
+<div class="clear">&nbsp;</div>
+<div style="border-top:1px solid #87CEFA;"></div>
+<form action="<?=$this->baseUrl();?>/polling" method="post" name="polling">
+    <table class="no-style" id="poll-container">
+        <tbody>
+            <tr>
+                <td><?=$this->rowPoll['title']; ?></td>
+            </tr>
+            <? foreach ($this->rowOpt as $row) { ?>
+            <tr>
+                <td>
+                    <input id='<?=$row['guid']; ?>' name="poll" value='<?=$row['guid']; ?>' type=radio>&nbsp;<?=$row['text']; ?>
+                </td>
+            </tr>
+            <? } ?>
+            <tr>
+                <td>
+                    <input type="hidden" name="id" id="id" value="<?=$this->rowPoll['guid']; ?>">
+                    <input type="submit" value="Pilih &rarr;" class="btn btn-green big" />&nbsp;<a href="<?=$this->baseUrl();?>/polling/<?=$this->rowPoll['guid']; ?>" style="font-size:12px;" class="bb">Hasil Polling</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<div class="clear">&nbsp;</div>

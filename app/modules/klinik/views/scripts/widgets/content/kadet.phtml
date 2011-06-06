@@ -1,0 +1,10 @@
+<div class="td_peraturan1">
+	<div style="height:auto;">
+		<ul id="navlistnoline">
+			<? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+			<li><a href="<?=$this->baseUrl(); ?>/klinik/detail/<?=$this->data[$i][0];?>"><?=$this->data[$i][1];?></a></li>
+		<? } ?>
+		</ul>
+	</div>
+</div>
+
