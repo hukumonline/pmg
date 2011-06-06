@@ -3,6 +3,14 @@ data/
 js+/
 resources+/
 uploads+/
+library/Apache/
+library/FCKeditor/
+library/PdfTool/
+library/Phpids/
+library/Tera-WURFL/
+library/adodb/
+library/phpgacl/
+library/mobile_device_detect.php
 .settings/
 .buildpath
 .project
