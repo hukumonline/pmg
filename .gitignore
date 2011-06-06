@@ -3,5 +3,6 @@ data/
 js+/
 resources+/
 uploads+/
+.settings/
 .buildpath
 .project
