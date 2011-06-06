@@ -1,3 +1,7 @@
 app/configs/
 data/
 js+/
+resources+/
+uploads+/
+.buildpath
+.project

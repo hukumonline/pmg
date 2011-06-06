@@ -1,6 +1,0 @@
-February 10, 2011
-- Pada facet search perlu dirubah tipe datanya jadi string lalu lakukan index ulang dalam schema.xml solr, kenapa?
-  karena jika tidak maka hasil akan terpecah jadi dua,contoh: Bisnis & Investasi -> Bisnis
-  lalu dibaris baru Investasi
-- Pada highlight solr tipe datanya harus text, jika tidak maka fungsi ini tidak berjalan.
--- Pada kasus ini memang dilema.
