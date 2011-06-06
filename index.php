@@ -1,15 +1,26 @@
 <?php
-require_once './library/mobile_device_detect.php';
-if (mobile_device_detect()) {
-	$uri = $_SERVER['REQUEST_URI'];
-	header("Location:http://m.hukumonline.com".$uri);	
-}
-else
-{
 
 include_once("baseinit.php");
 
-$application->bootstrap()
-        ->run();
+error_reporting(E_ALL);
 
+$application->bootstrap();
+
+try {
+    if (@strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false) {
+        ob_start();
+        $application->run();
+        $output = gzencode(ob_get_contents(), 9);
+        ob_end_clean();
+        header('Content-Encoding: gzip');
+        echo $output;
+    } else {
+        $application->run();
+    }
+} catch (Exeption $e) {
+    if (Zend_Registry::isRegistered('Zend_Log')) {
+        Zend_Registry::get('Zend_Log')->err($e->getMessage());
+    }
+    $message = $e->getMessage() . "\n\n" . $e->getTraceAsString();
+    /* trigger event */
 }
