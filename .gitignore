@@ -11,6 +11,7 @@ library/Tera-WURFL/
 library/adodb/
 library/phpgacl/
 library/mobile_device_detect.php
+library/Pandamp/Controller/Action/Helper/Cdn.php
 .settings/
 .buildpath
 .project
