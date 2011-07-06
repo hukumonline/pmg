@@ -13,7 +13,6 @@
     $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
     $cdn = $config->getOption('cdn');
     $sDir = $cdn['static']['url']['images'];
-//    $sDir = 'uploads/images';
     for($i=0; $i<$this->numberOfRows;$i++) {
 
         $thumb = "";
@@ -36,7 +35,6 @@
 		if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
 		if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
         
-        //if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
         $screenshot = "<img src=\"".$thumb."\" width=\"40\" height=\"40\" />";
 
     ?>
