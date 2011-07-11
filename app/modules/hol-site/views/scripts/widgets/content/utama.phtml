@@ -28,11 +28,11 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 		$pict = $sDir ."/". $guid ."/". $itemGuid;
 	}
 	else 
-	{die('2');
+	{
 		$pict = $sDir ."/". $itemGuid;
 	}
 	
-
+echo $pict;die();
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
