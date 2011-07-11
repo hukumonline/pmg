@@ -10,19 +10,19 @@
     <table class="no-style" id="poll-container">
         <tbody>
             <tr>
-                <td><?=$this->rowPoll['title']; ?></td>
+                <td><?=$this->rowPoll->title; ?></td>
             </tr>
             <? foreach ($this->rowOpt as $row) { ?>
             <tr>
                 <td>
-                    <input id='<?=$row['guid']; ?>' name="poll" value='<?=$row['guid']; ?>' type=radio>&nbsp;<?=$row['text']; ?>
+                    <input id='<?=$row->guid; ?>' name="poll" value='<?=$row->guid; ?>' type=radio>&nbsp;<?=$row->text; ?>
                 </td>
             </tr>
             <? } ?>
             <tr>
                 <td>
-                    <input type="hidden" name="id" id="id" value="<?=$this->rowPoll['guid']; ?>">
-                    <input type="submit" value="Pilih &rarr;" class="btn btn-green big" />&nbsp;<a href="<?=$this->baseUrl();?>/polling/<?=$this->rowPoll['guid']; ?>" style="font-size:12px;" class="bb">Hasil Polling</a>
+                    <input type="hidden" name="id" id="id" value="<?=$this->rowPoll->guid; ?>">
+                    <input type="submit" value="Pilih &rarr;" class="btn btn-green big" />&nbsp;<a href="<?=$this->baseUrl();?>/polling/<?=$this->rowPoll->guid; ?>" style="font-size:12px;" class="bb">Hasil Polling</a>
                 </td>
             </tr>
         </tbody>
