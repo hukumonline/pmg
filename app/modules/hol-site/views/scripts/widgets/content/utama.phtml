@@ -24,11 +24,11 @@ for($i=0; $i<$this->numberOfRows;$i++) {
     $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
 	$chkDir = $sDir."/".$guid;
 	if (@fopen($chkDir,"r"))
-	{
+	{die('1');
 		$pict = $sDir ."/". $guid ."/". $itemGuid;
 	}
 	else 
-	{
+	{die('2');
 		$pict = $sDir ."/". $itemGuid;
 	}
 	
