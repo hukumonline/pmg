@@ -14,25 +14,39 @@
     $registry = Zend_Registry::getInstance();
     $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
     $cdn = $config->getOption('cdn');
-    $sDir = $cdn['static']['url']['images'];
+    $sDir = $cdn['static']['dir']['images'];
 for($i=0; $i<$this->numberOfRows;$i++) {
 
     $thumb = "";
     $guid = $this->data[$i][2];
 
+    $registry = Zend_Registry::getInstance();
+    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+    $ftp = $config->getOption('ftp');
+    
+	$strServer = $ftp['remote']['server'];
+	$strServerPort = $ftp['remote']['port'];
+	$strServerUsername = $ftp['remote']['username'];
+	$strServerPassword = $ftp['remote']['passwd'];
+	
+	//connect to server
+	$resConnection = ssh2_connect($strServer, $strServerPort);
+	
     $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
     $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
 	$chkDir = $sDir."/".$guid;
-	if (@fopen($chkDir,"r"))
-	{
-		$pict = $sDir ."/". $guid ."/". $itemGuid;
-	}
-	else 
-	{
-		$pict = $sDir ."/". $itemGuid;
+	if(ssh2_auth_password($resConnection, $strServerUsername, $strServerPassword)){
+		$resSFTP = ssh2_sftp($resConnection);
+		if(is_dir("ssh2.sftp://{$resSFTP}".$chkDir))
+		{
+			$pict = "ssh2.sftp://{$resSFTP}".$sDir."/".$guid."/".$itemGuid;
+		}
+		else 
+		{
+			$pict = "ssh2.sftp://{$resSFTP}".$sDir."/".$itemGuid;
+		}
 	}
 	
-
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
