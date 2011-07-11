@@ -22,21 +22,25 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 
     $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
     $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
-	$chkDir = $sDir."/".$guid;
-	if (fopen($chkDir,"r"))
-	{
-		$pict = $sDir ."/". $guid ."/". $itemGuid;
-	}
-	else 
-	{
-		$pict = $sDir ."/". $itemGuid;
-	}
+    
+    if ($itemGuid)
+    {
+		$chkDir = $sDir."/".$guid;
+		if (@fopen($chkDir,"r"))
+		{
+			$pict = $sDir ."/". $guid ."/". $itemGuid;
+		}
+		else 
+		{
+			$pict = $sDir ."/". $itemGuid;
+		}
+		
 	
-echo $pict;die();
-	if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
-	if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
-	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
-	
+		if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
+		if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
+		if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
+    }
+    
     if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
 
     $rel = "<div id='judul1'>".$this->data[$i][0]."</div>".$this->data[$i][5];
