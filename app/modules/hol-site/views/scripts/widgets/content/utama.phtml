@@ -26,7 +26,7 @@ for($i=0; $i<$this->numberOfRows;$i++) {
     if ($itemGuid)
     {
 		$chkDir = $sDir."/".$guid;
-		if (@fopen($chkDir,"r"))
+		if (@fclose(@fopen($chkDir,"r")))
 		{
 			$pict = $sDir ."/". $guid ."/". $itemGuid;
 		}
