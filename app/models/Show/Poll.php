@@ -39,11 +39,14 @@ class App_Model_Show_Poll extends App_Model_Db_DefaultAdapter
      */
     function getPollByDate($date)
     {
+    	$configDb = Zend_Registry::get('db1');
+    	
         $db = parent::_dbSelect();
+        
         $select = $db->from('polls')
                     ->where("checkedTime < '$date'","checkedTime DESC");
 
-        $result = parent::_getDefaultAdapter()->fetchRow($select);
+        $result = $configDb->fetchRow($select);
 
         return $result;
     }
