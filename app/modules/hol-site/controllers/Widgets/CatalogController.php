@@ -159,6 +159,20 @@ class HolSite_Widgets_CatalogController extends Zend_Controller_Action
     }
 	function detailfotoAction()
 	{
+		$catalogGuid = ($this->_getParam('guid'))? $this->_getParam('guid') : '';
 		
+		$rowset = App_Model_Show_Catalog::show()->getCatalogByGuid($catalogGuid);
+		
+        $array_hari = array(1=>"Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu");
+        $hari = $array_hari[date("N",strtotime($rowset['publishedDate']))];
+
+        $this->view->date = $hari . ', '. date("d/m/y H:i",strtotime($rowset['publishedDate']));
+        
+        $title = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedTitle');
+        $this->view->title = $title;
+        $subtitle = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedSubTitle');
+        $this->view->subtitle = $subtitle;
+        $author = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedAuthor');
+        $this->view->author = $author;
 	}
 }

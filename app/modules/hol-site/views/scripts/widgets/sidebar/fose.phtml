@@ -1,0 +1,44 @@
+<h5>FOTO SEBELUMNYA</h5>
+<hr>
+<? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+<dl class="first">	
+<?
+
+    $sDir = $this->getRemoteImageUrl();
+    $thumb = "";
+
+    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->data[$i][1],'RELATED_IMAGE');
+    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+	
+	$chkDir = $sDir."/".$this->data[$i][1]."/".$itemGuid;
+	if (@getimagesize($chkDir))
+	{
+		$pict = $sDir ."/". $this->data[$i][1] ."/". $itemGuid;
+	}
+	else 
+	{
+		$pict = $sDir ."/". $itemGuid;
+	}
+	
+
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
+	
+    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"100\" height=\"78\" />";
+	
+?>
+
+	<? if (!empty($thumb)) : ?>
+    <dt style="float:left;padding:2px;margin: 3px 5px 5px 0px;"><?=$screenshot; ?></dt>
+    <? endif; ?>
+    <dd class="subtitle"><?=$this->data[$i][3]; ?></dd>
+    <dd class="beritaFotoJudul">beritaFoto</dd>
+    <dd >
+        <a href="<?=$this->data[$i][1]; ?>" title="<?=$this->data[$i][0]; ?>" class="beritaFotoLink"><b><?=$this->data[$i][0]; ?></b></a>
+    </dd>
+
+
+</dl>
+<? } ?>
+<div class="clean"></div>

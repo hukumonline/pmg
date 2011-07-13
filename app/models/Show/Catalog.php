@@ -55,6 +55,24 @@ class App_Model_Show_Catalog extends App_Model_Db_DefaultAdapter
 
         return $result;
     }
+    public function fetchFromFolderException($folderGuid, $notGuid, $start = 0 , $end = 0)
+    {
+        $now = date('Y-m-d H:i:s');
+        $db = parent::_dbSelect();
+        $statement = $db->from('KutuCatalog')
+                        ->join('KutuCatalogFolder','KutuCatalog.guid=KutuCatalogFolder.catalogGuid',array())
+                        ->where("KutuCatalog.guid NOT IN ('$notGuid')")
+                        ->where('KutuCatalog.status=?',99)
+                        ->where('KutuCatalogFolder.folderGuid=?',$folderGuid)
+                        ->where("KutuCatalog.publishedDate = '0000-00-00 00:00:00' OR KutuCatalog.publishedDate <= '$now'")
+                        ->where("KutuCatalog.expiredDate = '0000-00-00 00:00:00' OR KutuCatalog.expiredDate >= '$now'")
+                        ->order('KutuCatalog.publishedDate DESC')
+                        ->limit($end,$start);
+
+        $result = parent::_getDefaultAdapter()->fetchAll($statement);
+
+        return $result;
+    }
     public function getCatalogByGuid($guid)
     {
         $db = parent::_dbSelect();
