@@ -2,7 +2,7 @@
 <div class="beritaFotoJD">beritaFoto</div>
 <? if ($this->subtitle) { ?><span class="subjudul"><?=$this->subtitle; ?></span><? } ?>
 <div id="judul2"><?=$this->title; ?></div>
-<div class="author">
+<div style="font-family: arial,helvetica,sans-serif;font-size: 14px;line-height: 1.5em;">
 Juru Gambar : <?=$this->author; ?>
 </div>
 <div id="products_example">
@@ -34,12 +34,17 @@ Juru Gambar : <?=$this->author; ?>
 			$screenshot = "<img src=\"".$thumb."\" alt=\"".$rri['itemGuid']."\" width=\"606\" height=\"424\" />";
 	?>
 	
-		<a href="http://www.zappos.com/pro-keds-royal-plus-lo-grey" target="_blank"><?=$screenshot;?></a>
+		<div>
+		<?=$screenshot;?>
+		<div class="caption"><?=$this->getFotoAttributeName($rri['itemGuid']);?></div>
+		</div>
 		
 	<?	} ?>
 
 	</div>
-	<div style="clear:both;"></div>
+	<div style="clear:both;padding-top:20px;"></div>
+	<div class="fl">
+	<div class="fo">Foto Lain :</div>
 	<ul class="pagination">
 	<?
 		foreach ($rowsetRelatedItem as $rri)
@@ -67,6 +72,7 @@ Juru Gambar : <?=$this->author; ?>
 	<?	} ?>
 
 	</ul>
+	</div>
 	
 	<?
 	} 
