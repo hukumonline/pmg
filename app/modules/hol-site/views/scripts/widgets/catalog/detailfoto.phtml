@@ -5,3 +5,71 @@
 <div class="author">
 Juru Gambar : <?=$this->author; ?>
 </div>
+<div id="products_example">
+<div id="products">
+	<div class="slides_container">
+	<?php
+    $sDir = $this->getRemoteImageUrl();
+    $thumb = "";
+
+	$rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getAllDocumentById($this->catalogGuid,'RELATED_IMAGE');
+	if ($rowsetRelatedItem) {
+		foreach ($rowsetRelatedItem as $rri)
+		{
+			$chkDir = $sDir."/".$rri['relatedGuid']."/".$rri['itemGuid'];
+			if (@getimagesize($chkDir))
+			{
+				$pict = $sDir."/".$rri['relatedGuid']."/".$rri['itemGuid'];
+			}
+			else 
+			{
+				$pict = $sDir ."/". $rri['itemGuid'];
+			}
+			
+		
+			if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
+			if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
+			if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
+			
+			$screenshot = "<img src=\"".$thumb."\" alt=\"".$rri['itemGuid']."\" width=\"606\" height=\"424\" />";
+	?>
+	
+		<a href="http://www.zappos.com/pro-keds-royal-plus-lo-grey" target="_blank"><?=$screenshot;?></a>
+		
+	<?	} ?>
+
+	</div>
+	<div style="clear:both;"></div>
+	<ul class="pagination">
+	<?
+		foreach ($rowsetRelatedItem as $rri)
+		{
+			$chkDir = $sDir."/".$rri['relatedGuid']."/".$rri['itemGuid'];
+			if (@getimagesize($chkDir))
+			{
+				$pict = $sDir."/".$rri['relatedGuid']."/".$rri['itemGuid'];
+			}
+			else 
+			{
+				$pict = $sDir ."/". $rri['itemGuid'];
+			}
+			
+		
+			if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
+			if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
+			if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
+			
+			$screenshot = "<img src=\"".$thumb."\" alt=\"".$rri['itemGuid']."\" width=\"99px\" height=\"71px\" />";
+	?>
+	
+		<li><a href="#"><?=$screenshot;?></a></li>
+		
+	<?	} ?>
+
+	</ul>
+	
+	<?
+	} 
+	?>
+</div>
+</div>

@@ -8,7 +8,8 @@
         <link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
         <link href="<?=$this->cdn('styles')?>/typography.css" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?=$this->cdn('styles')?>/style.css" media="screen" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="<?=$this->cdn('scripts')?>/index.php?c=auto&amp;f=,hol/jquery/jquery-1.4.2.min.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/form/jquery.validate.pack.js,hol/jquery/newsticker/jquery.newsticker.pack.js,hol/BBCode.js,hol/misc.js" ></script>
+        <link href="<?=$this->cdn('styles')?>/hfoto.css" media="screen" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="<?=$this->cdn('scripts')?>/index.php?c=auto&amp;f=,hol/jquery/jquery-1.5.1.min.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/form/jquery.validate.pack.js,hol/jquery/newsticker/jquery.newsticker.pack.js,hol/BBCode.js,hol/misc.js,hol/jquery/slides/slides.min.jquery.js" ></script>
         
         
         <!-- Internet Explorer Fixes -->
@@ -33,6 +34,16 @@
 
                jQuery("#news").newsTicker();
 
+				jQuery('#products').slides({
+					preload: true,
+					preloadImage: '<?=$this->cdn('images')?>/bigLoader.gif',
+					effect: 'slide, fade',
+					crossfade: true,
+					slideSpeed: 350,
+					fadeSpeed: 500,
+					generateNextPrev: true,
+					generatePagination: false
+				});
             });
             
         </script>

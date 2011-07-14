@@ -174,5 +174,7 @@ class HolSite_Widgets_CatalogController extends Zend_Controller_Action
         $this->view->subtitle = $subtitle;
         $author = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedAuthor');
         $this->view->author = $author;
+        
+        $this->view->catalogGuid = $catalogGuid;
 	}
 }

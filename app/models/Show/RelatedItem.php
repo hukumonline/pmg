@@ -45,4 +45,12 @@ class App_Model_Show_RelatedItem extends App_Model_Db_DefaultAdapter
 
         return $row;
     }
+    public function getAllDocumentById($catalogGuid, $relateAs)
+    {
+        $db = parent::_dbSelect();
+        $statement = $db->from('KutuRelatedItem')->where('relatedGuid=?', $catalogGuid)->where('relateAs=?', $relateAs);
+        $row = parent::_getDefaultAdapter()->fetchAll($statement);
+
+        return $row;
+    }
 }
