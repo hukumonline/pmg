@@ -9,6 +9,11 @@
 <div class="clear">&nbsp;</div>
 <div style="border-top:1px solid #87CEFA"></div>
 <div style="padding-bottom:15px;"></div>
+    <div id="home-banner-background">
+        <img alt="" src="<?=$this->cdn('images');?>/home-hl-bg.png"></img>
+    </div>
+    <div id="home-banner-image">
+
 <div id="gallery">
 <?php
     $registry = Zend_Registry::getInstance();
@@ -42,7 +47,7 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 
     $rel = "<div id='judul1'>".$this->data[$i][0]."</div>".$this->data[$i][5];
 
-    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"494\" height=\"265\" title=\"\" rel=\"".$rel."\" />";
+    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"455\" height=\"191\" title=\"\" rel=\"".$rel."\" />";
 
     if ($i==0) {
 ?>
@@ -65,6 +70,7 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 
     <div class="caption"><div class="content"></div></div>
 
+</div>
 </div>
 <div class="clear"></div>
 
