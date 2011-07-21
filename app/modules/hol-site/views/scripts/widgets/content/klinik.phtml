@@ -1,6 +1,6 @@
 <div class="align-left">
     <div id="judul2">
-        <a href="<?=ROOT_URL;?>/klinik">Klinik Hukum</a>
+        <a href="<?=ROOT_URL;?>/klinik" class="akt">Klinik Hukum</a>
     </div>
 </div>
 <div class="align-right">
@@ -9,10 +9,10 @@
 </div>
 <div class="clear">&nbsp;</div>
 <div style="border-top:1px solid #87CEFA"></div>
-<div style="padding-bottom:15px;"></div>
+<div style="padding-bottom:8px;"></div>
 <? for($i=0; $i<$this->numberOfRows;$i++) { ?>
         <header>
-            <a href="<?=$this->baseUrl(); ?>/klinik/detail/<?=$this->data[$i][3];?>" class="aktual"><b><?=$this->data[$i][0];?></b></a>
+            <a href="<?=$this->baseUrl(); ?>/klinik/detail/<?=$this->data[$i][3];?>" class="aktual" style="font-size:14px;"><b><?=$this->data[$i][0];?></b></a>
         </header>
         <dl class="first">
             <dt class="author">[<?=$this->data[$i][4]; ?>]</dt>

@@ -239,7 +239,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         // Add Stylesheet's
         $view->headLink()
-            ->appendStylesheet($cdn['static']['css'].'/typography.css')
+            ->appendStylesheet($cdn['static']['css'].'/typography-1.css')
             ->appendStylesheet($cdn['static']['css'].'/jcarousel.css')
             ->appendStylesheet($cdn['static']['css'].'/jquery-ui-1.8.5.custom.css')
             ->appendStylesheet($cdn['static']['css'].'/calender.css')
