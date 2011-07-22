@@ -1,8 +1,17 @@
 <?=$this->doctype();?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>hukumonline.com : Klinik</title>
+    	<? $title = ($this->catalogGuid)? ' : '.$this->getCatalogAttribute($this->catalogGuid,'fixedCommentTitle') : ''; ?>
+        <title>hukumonline.com - Klinik <?=$title;?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<?
+		if($this->catalogGuid!="")
+		{
+		?>
+		<meta property="og:title" content="<?=$title2;?>" />
+		<?
+		}
+		?>
         <meta name="google-site-verification" content="MUDP2J4JyyfKSWJsjfuglidOXiHOU_vn5VLXY7S-G8w" />
         <link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
         <link href="<?=$this->cdn('styles')?>/typography.css" media="screen" rel="stylesheet" type="text/css" />
