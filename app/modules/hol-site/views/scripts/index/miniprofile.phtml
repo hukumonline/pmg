@@ -1,10 +1,10 @@
+<div class="ta-right" style="padding-top:8px;">
     <?
     $auth = Zend_Auth::getInstance();
     if ($auth->hasIdentity()) :
     ?>
     <h6><a href="#" onclick="window.location='<?=$this->profile;?>';return false;"><?=$this->username; ?></a><a href="#" onclick="window.location='<?=$this->logoutUrl;?>';return false;">logout</a></h6>
     <?  else : ?>
-    <div class="ta-right" style="padding-top:8px;">
     <h6><a href="#" onclick="window.location='<?=$this->signUp;?>';return false;">Daftar</a><a href="#" onclick="window.location='<?=$this->loginUrl;?>';return false;">Masuk</a></h6>
-    </div>
     <? endif; ?>
+</div>
