@@ -1,3 +1,14 @@
+<div class="align-left">
+    <div id="judul2">
+        Utama
+    </div>
+</div>
+<div class="align-right">
+    &raquo;&nbsp;<a href="" class="bb">index</a>
+</div>
+<div class="clear">&nbsp;</div>
+<div style="border-top:1px solid #87CEFA"></div>
+<div style="padding-bottom:15px;"></div>
 <div id="gallery">
 <?php
     $registry = Zend_Registry::getInstance();
@@ -31,7 +42,7 @@ if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) { $thumb = $pict . ".png
 
     $rel = "<div id='judul1'>".$this->data[$i][0]."</div>".$this->data[$i][5];
 
-    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"415\" height=\"265\" title=\"\" rel=\"".$rel."\" style=\"padding:1px;border: 1px solid #000;\" />";
+    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"488\" height=\"265\" title=\"\" rel=\"".$rel."\" style=\"padding:1px;border: 1px solid #000;\" />";
 
     if ($i==0) {
 ?>
@@ -50,9 +61,7 @@ if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) { $thumb = $pict . ".png
         <?=$screenshot; ?>
         </a>
         
-<? } ?>
-<div class="clean"></div>
-<? } ?>
+<?php }} ?>
 
     <div class="caption"><div class="content"></div></div>
 
