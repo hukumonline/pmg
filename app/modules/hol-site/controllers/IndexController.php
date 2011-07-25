@@ -40,6 +40,10 @@ class HolSite_IndexController extends Zend_Controller_Action
     {
         
     }
+    function header80Action()
+    {
+        
+    }
     function footerAction()
     {
         

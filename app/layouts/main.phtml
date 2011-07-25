@@ -1,0 +1,42 @@
+<?=$this->doctype();?>
+<!--[if lt IE 7 ]> <html lang="en-us" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en-us" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en-us" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en-us" class="no-js ie9"> <![endif]-->   
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en-us" class="no-js"> <!--<![endif]-->
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
+	<meta charset="utf-8">
+	<?=$this->headTitle();?>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
+	<link rel="stylesheet" href="<?=$this->cdn('columnal')?>/columnal.css" type="text/css" media="screen" />
+<!-- Fixes for IE -->
+	<!--[if lt IE 9]>
+    	<link rel="stylesheet" href="<?=$this->cdn('columnal')?>/ie.css" type="text/css" media="screen" />
+	<![endif]-->
+
+<!-- use "fixed-984px-ie.css" or "fixed-960px-ie.css for a 984px or 960px fixed width for IE6 and 7 -->
+	<!--[if lte IE 7]>
+		<link rel="stylesheet" href="<?=$this->cdn('columnal')?>/fixed-984px-ie.css" type="text/css" media="screen" />
+	<![endif]-->
+
+<!-- Fixes for IE6, only needed if IE 6 will be supported - width must match 984px or 960px of css file used above -->
+<!-- Use .imagescale to fix IE6 issues with full-column width images (class must be added to any image wider than the column it is placed into) -->
+	<!--[if lte IE 6]>
+		<link rel="stylesheet" href="<?=$this->cdn('columnal')?>/ie6-984px.css" type="text/css" media="screen" />
+	<![endif]-->
+<!-- End fixes for IE -->
+
+    <link rel="stylesheet" href="<?=$this->cdn('columnal')?>/custom.css" type="text/css" media="screen" />
+
+<!-- Page build tools - only needed while creating a site, remove when launching - Gray box colors and page debugging tools -->
+    <link rel="stylesheet" href="<?=$this->cdn('columnal')?>/build.css" type="text/css" media="screen" />
+    
+    <script type="text/javascript" src="<?=$this->cdn('scripts');?>/index.php?c=auto&amp;f=,hol/gb.js" ></script>
+	
+</head>
+<body>
+	<?=$this->render('header80.phtml');?>
+</body>
+</html>
