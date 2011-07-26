@@ -5,7 +5,7 @@ class HolSite_IndexController extends Zend_Controller_Action
 	{
         $this->_helper->cache(array('index'), array('entries'));
 	}	
-	//function indexOldAction()
+	//function index_Action()
 	function indexAction()
 	{
 	}
