@@ -1,0 +1,19 @@
+<div class="col_2">
+	<h4 class="dot"><span><a href="<?=ROOT_URL;?>/klinik">Klinik Hukum</a></span></h4>
+</div>
+<div class="col_1 margin_top_15 last">
+    <a href="http://www.facebook.com/profile.php?id=100000049397040&ref=mf" target="_blank"><img src="<?=$this->cdn('images');?>/facebook.png" alt="Facebook" name="Facebook" width="15" height="15" border="0" id="Facebook" /></a>
+    <a href="http://www.twitter.com/klinikhukum" target="_blank"><img src="<?=$this->cdn('images');?>/twitterhol.png" alt="Twitter" name="Twitter" width="15" height="15" border="0" id="Twitter" /></a>
+</div>
+<ul class="list_berita_1">
+<? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+	<li>
+        <h5 class="l_blue_hol"><a href="<?=$this->baseUrl(); ?>/klinik/detail/<?=$this->data[$i][3];?>"><?=$this->data[$i][0];?></a></h5>
+        <span class="date">[<?=$this->data[$i][4]; ?>]</span>
+        <?=Pandamp_Lib_Formater::string_limit_words($this->data[$i][1],20);?>
+	</li>      
+<? } ?>
+</ul>
+&ndash;&nbsp;<a href="<?=$this->baseUrl(); ?>/klinik/terbaru">index</a>&nbsp;&ndash;
+<div class="clear"></div>
+
