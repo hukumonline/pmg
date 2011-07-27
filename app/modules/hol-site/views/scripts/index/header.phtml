@@ -1,18 +1,22 @@
-<div class="top-bar">
-	<div class="wrapper">
-		<div class="align-left">
-			<div class="top-search">
-				<form id="searchForm" method="post" action="<?=$this->getRemoteSearchUrl();?>/id/dms/search/result">
-				    <input class="" name="keyword" id="keyword" onblur="blur_text('masukkan kata kunci','keyword');" onfocus="focus_text('masukkan kata kunci','keyword');" value="masukkan kata kunci" type="text">
-				</form>
-			</div>
-		</div>
-		<div class="align-right">
-			<?=$this->action('miniprofile','index','hol-site');?>		
-		</div>
+<!-- S:TOP BAR -->
+<div id="topholid" align="center"> 
+    <div id="topcontent"> 
+    <?=$this->action('miniprofile','index','hol-site');?>		
+	<div class="search_hol"> 
+    	<form action="http://search.detik.com/search" method="get"  class="search-holsearch"> 
+	        <input class="input" name="keyword" id="keyword" onblur="blur_text('masukkan kata kunci','keyword');" onfocus="focus_text('masukkan kata kunci','keyword');" value="masukkan kata kunci" type="text">
+			<input type="submit" class="btun" value="" /> 
+ 	    </form> 
+	</div> 
+	<div class="social_icon">
+		<span>Find us on:</span> 
+		<a href="http://rss.hukumonline.com" target="_blank"><img src="<?=$this->cdn('images');?>/feed.png" alt="feed rss" /></a>
+		<a href="http://www.facebook.com/pages/Hukumonlinecom/101301323243289" target="_blank"><img src="<?=$this->cdn('images');?>/facebook.png" alt="facebook" /></a>
+		<a href="http://twitter.com/#!/hukumonline" target="_blank"><img src="<?=$this->cdn('images');?>/twitterhol.png" alt="twitter" /></a>
 	</div>
-</div>
-<div style="clear:both;"></div>
+    </div> 
+</div> 
+<!-- E:TOP BANNER -->
 <header id="up">
     <div class="wrapper">
         <section class="column width8 first">

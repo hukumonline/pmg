@@ -1,0 +1,53 @@
+<div class="top-bar">
+	<div class="wrapper">
+		<div class="align-left">
+			<div class="top-search">
+				<form id="searchForm" method="post" action="<?=$this->getRemoteSearchUrl();?>/id/dms/search/result">
+				    <input class="" name="keyword" id="keyword" onblur="blur_text('masukkan kata kunci','keyword');" onfocus="focus_text('masukkan kata kunci','keyword');" value="masukkan kata kunci" type="text">
+				</form>
+			</div>
+		</div>
+		<div class="align-right">
+			<?=$this->action('miniprofile','index','hol-site');?>		
+		</div>
+	</div>
+</div>
+<div style="clear:both;"></div>
+<header id="up">
+    <div class="wrapper">
+        <section class="column width8 first">
+            <div class="colgroup leading">
+                <div class="kolom widthcontent1 first">
+                    <div id="judul"><a href="<?=ROOT_URL;?>"><img src="<?=$this->cdn('images');?>/logo_hukumonline.jpg" alt="hukumonline" /></a></div>
+                </div>
+                <div class="kolom widthcontent2 pembatas1" style="width:235px;">
+                    <div class="ta-right" style="padding-right:22px;padding-top: 5px;">[ <a href="" class="bb">index</a> ]</div>
+                    <?=$this->action('aktual','widgets_content','hol-site');?>
+                </div>
+                <div class="kolom widthcontent3" style="border-left: 1px solid #cecece;">
+                    <div class="st1" style="width: 503px;">
+                            <ul id="topnav">
+                                <li><a href="http://en1.hukumonline.com" target="_blank">en.hukumonline.com</a></li>
+                                <li>|</li>
+                                <li><a href="http://hukumpedia.com" target="_blank">hukumpedia.com</a></li>
+                                <li>|</li>
+                                <li><a href="http://direktori.hukumonline.com" target="_blank">direktori.hukumonline.com</a></li>
+                            </ul>
+                    </div>
+                    <div class="st2" style="width: 503px;">
+                        <ul id="headerMenu_b">
+                            <li><a href="<?=ROOT_URL;?>">Awal</a></li>
+                            <li><a href="<?=$this->baseUrl();?>/warta">Berita</a></li>
+                            <li><a href="<?=$this->baseUrl();?>/pusatdata">Pusat Data</a></li>
+                            <li><a href="<?=$this->baseUrl();?>/klinik">Klinik</a></li>
+                            <li><a href="<?=$this->baseUrl();?>/talks">Talks</a></li>
+                            <li><a href="<?=$this->baseUrl();?>/faqs">Karir</a></li>
+                            <li><a href="<?=$this->baseUrl();?>/faqs">FAQs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="clear">&nbsp;</div>
+</header>
