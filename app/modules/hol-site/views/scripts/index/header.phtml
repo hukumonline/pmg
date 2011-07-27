@@ -3,7 +3,7 @@
     <div id="topcontent"> 
     <?=$this->action('miniprofile','index','hol-site');?>		
 	<div class="search_hol"> 
-    	<form action="http://search.detik.com/search" method="get"  class="search-holsearch"> 
+    	<form action="<?=$this->getRemoteSearchUrl();?>/id/dms/search/result" method="get"  class="search-holsearch"> 
 	        <input class="input" name="keyword" id="keyword" onblur="blur_text('masukkan kata kunci','keyword');" onfocus="focus_text('masukkan kata kunci','keyword');" value="masukkan kata kunci" type="text">
 			<input type="submit" class="btun" value="" /> 
  	    </form> 
