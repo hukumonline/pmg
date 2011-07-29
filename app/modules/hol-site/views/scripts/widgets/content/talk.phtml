@@ -35,7 +35,7 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
 
     //if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
-    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"40\" height=\"40\" />";
+    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"40\" height=\"40\" class=\"img1\" />";
 
 ?>
 <li>
