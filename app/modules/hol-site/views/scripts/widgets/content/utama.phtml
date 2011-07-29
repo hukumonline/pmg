@@ -1,20 +1,15 @@
 <div class="align-left">
-    <div id="judul2">
-        Utama
-    </div>
+    <div id="judul2">Utama</div>
 </div>
-<div class="align-right">
-    &raquo;&nbsp;<a href="" class="bb">index</a>
-</div>
+<div class="align-right">&raquo;&nbsp;<a href="" class="bb">index</a></div>
 <div class="clear">&nbsp;</div>
-<div style="border-top:1px solid #87CEFA"></div>
-<div style="padding-bottom:15px;"></div>
+<div class="bt_blue padding_top_5"></div>
 <div id="gallery">
 <?php
-    $registry = Zend_Registry::getInstance();
-    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
-    $cdn = $config->getOption('cdn');
-    $sDir = $cdn['static']['url']['images'];
+$registry = Zend_Registry::getInstance();
+$config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+$cdn = $config->getOption('cdn');
+$sDir = $cdn['static']['url']['images'];
 for($i=0; $i<$this->numberOfRows;$i++) {
 
     $thumb = "";
