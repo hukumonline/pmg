@@ -1,13 +1,9 @@
 <div class="align-left">
-    <div id="judul2">
-        Kolom
-    </div>
+    <div id="judul2">Kolom</div>
 </div>
-<div class="align-right">
-    &raquo;&nbsp;<a href="" class="bb">index</a>
-</div>
-<div class="clear">&nbsp;</div>
-<div style="border-top:1px solid #87CEFA;padding-bottom:5px;"></div>
+<div class="align-right">&raquo;&nbsp;<a href="" class="bb">index</a></div>
+<div class="clean"></div>
+<ul class="hol_berita_1">
     <?
     $registry = Zend_Registry::getInstance();
     $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
@@ -20,8 +16,8 @@
 
         $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
         $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
-		$chkDir = $sDir."/".$guid;
-		if (@fopen($chkDir,"r"))
+		$chkDir = $sDir."/".$guid."/".$itemGuid;
+		if (@getimagesize($chkDir))
 		{
 			$pict = $sDir ."/". $guid ."/". $itemGuid;
 		}
@@ -38,19 +34,21 @@
         $screenshot = "<img src=\"".$thumb."\" width=\"40\" height=\"40\" />";
 
     ?>
-            <header>
-                <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5]; ?>" class="aktual"><b><?=$this->data[$i][0]; ?></b></a>
-            </header>
-            <dl class="first">
-            	<? if (!empty($thumb)) : ?>
-                <dt style="float:left;padding:2px;margin: 3px 5px 5px 0px;"><?=$screenshot; ?></dt>
-                <? endif; ?>
-                <!--<dt class="author">[<?//=$this->data[$i][1]; ?>]</dt>-->
-                <dd class="last"><?=Pandamp_Lib_Formater::string_limit_words($this->data[$i][2],10);?></dd>
-            </dl>
-            <nav style="padding-bottom:5px;">
+    	<li>
+            <h5 class="l_blue_hol">
+                <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5]; ?>"><?=$this->data[$i][0]; ?></a>
+            </h5>
+        	<? if (!empty($thumb)) : ?>
+            <?=$screenshot; ?>
+            <? endif; ?>
+            <!--<dt class="author">[<?//=$this->data[$i][1]; ?>]</dt>-->
+            <?=Pandamp_Lib_Formater::string_limit_words($this->data[$i][2],10);?>
+            <div class="clean"></div>
+            <nav class="padding_top_5">
                 <img src="<?=$this->cdn('images'); ?>/comment.jpg" width="13" height="9" /><a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5]; ?>#comments" class="bb"> <?=$this->data[$i][3]; ?> tanggapan </a> |<a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][4]; ?>/<?=$this->data[$i][5];?>" class="bb"> Selengkapnya </a>
             </nav>
-            <div style="clear:both;"></div>
+   		</li>
+        <div class="clean"></div>
     <? } ?>
+</ul>    
 <div class="clean"></div>
