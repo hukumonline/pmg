@@ -4,7 +4,7 @@
 <div class="align-right">&raquo;&nbsp;<a href="" class="bb">index</a></div>
 <div class="clear">&nbsp;</div>
 <div class="bt_blue"></div>
-<ul class="hol_berita_1">
+<ul class="hol_berita_2">
 <?
 $registry = Zend_Registry::getInstance();
 $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
@@ -34,13 +34,15 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
 
     //if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
-    $screenshot = "<img src=\"".$thumb."\" width=\"40\" height=\"40\" class=\"img1\" />";
+    $screenshot = "<img src=\"".$thumb."\" width=\"60\" height=\"60\" />";
 
 ?>
 <li>
-	<? if (!empty($thumb)) : ?>
+	<? if (!empty($thumb)) { ?>
     <?=$screenshot; ?>
-    <? endif; ?>
+    <? } else { ?>
+    <h6></h6>
+    <? } ?>
     <h5 class="l_blue_hol">
         <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][2]; ?>/<?=$this->data[$i][3]; ?>" title="<?=$this->data[$i][1]; ?>"><?=$this->data[$i][0]; ?></a>
     </h5>
