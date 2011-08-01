@@ -29,130 +29,70 @@
         <script type="text/javascript">
             jQuery(document).ready(function()
             {
-               Administry.setup();
+				Administry.setup();
 
-               jQuery("#news").newsTicker();
+				jQuery("#news").newsTicker();
 
-                var ot = $('dd p');
-                var currFontSize = ot.css('font-size');
+				var ot = $('dd p');
+				var currFontSize = ot.css('font-size');
 
-  $(".increaseFont").click(function(){
-      var currentFontSize = ot.css('font-size');
- 	var currentFontSizeNum = parseFloat(currentFontSize, 10);
-    var newFontSize = currentFontSizeNum*1.2;
-	ot.css('font-size', newFontSize);
-	return false;
-  });
-  $(".decreaseFont").click(function(){
-  	var currentFontSize = ot.css('font-size');
- 	var currentFontSizeNum = parseFloat(currentFontSize, 10);
-    var newFontSize = currentFontSizeNum*0.8;
-	ot.css('font-size', newFontSize);
-	return false;
-  });
-  $(".resetFont").click(function(){
-  ot.css('font-size', currFontSize);
-  return false;
-  });
-
-                jQuery('.formkomentar').eq(0).show();
-                $komentar = jQuery('#komentar');
-                jQuery('.togglereply').each(function(index) {
-                        jQuery(this).click(function() {
-                                if(jQuery('.togglereply').eq(index).text()=='Batalkan'){
-                                        jQuery('.disclaimer').after($komentar);
-                                        jQuery('.togglereply').eq(index).text('Balas Tanggapan');
-                                        jQuery('.commentID').val(0);
-                                } else {
-                                        jQuery('.togglereplychild').eq(index).after($komentar);
-                                        jQuery('.togglereply').text('Balas Tanggapan').eq(index).text('Batalkan');
-                                                $theId = jQuery('.togglereply').eq(index).attr('id').split('-');
-                                        jQuery('.commentID').val($theId[1]);
-                                }
-                        });
-                });
-                jQuery('.togglechild').each(function(index) {
-                        jQuery(this).click(function() {
-                                if(jQuery(this).hasClass('childclose')) {
-                                        jQuery('.childcomments').hide();
-                                        jQuery('.togglechild').removeClass('childclose');
-                                } else {
-                                        jQuery('.childcomments').hide().eq(index).show();
-                                        jQuery('.togglechild').removeClass('childclose');
-                                        jQuery(this).addClass('childclose');
-                                }
-                                return false;
-                        });
-                });
-
-                $guid = '<?=$this->catalogGuid; ?>';
-                getRating($guid);
-                function getRating(guid)
-                {
-                    jQuery.ajax({
-                        type:"GET",
-                        dataType:'json',
-                        url:"<?=$this->baseUrl(); ?>/getrate",
-                        data:"guid="+guid,
-                        cache:false,
-                        async:false,
-                        success: function(result) {
-                            if (result.error == -1) {
-                                    jQuery('#ratelinks').remove();
-                                    jQuery("#current-rating-"+guid+"").css({ width: "" + result.data + "%" });
-                            }
-                            else
-                            {
-                                    jQuery("#current-rating-"+guid+"").css({ width: "" + result.data + "%" });
-                            }
-                        },
-                        error: function(result) {
-                            $("#grate").show("slow").html("some error occured with the rating system, please try again later.");
+				$(".increaseFont").click(function(){
+					var currentFontSize = ot.css('font-size');
+					var currentFontSizeNum = parseFloat(currentFontSize, 10);
+					var newFontSize = currentFontSizeNum*1.2;
+					ot.css('font-size', newFontSize);
+					return false;
+				});
+				$(".decreaseFont").click(function(){
+					var currentFontSize = ot.css('font-size');
+					var currentFontSizeNum = parseFloat(currentFontSize, 10);
+					var newFontSize = currentFontSizeNum*0.8;
+					ot.css('font-size', newFontSize);
+					return false;
+				});
+				$(".resetFont").click(function(){
+					ot.css('font-size', currFontSize);
+					return false;
+				});
+				
+	            jQuery('.formkomentar').eq(0).show();
+	            $komentar = jQuery('#komentar');
+	            jQuery('.togglereply').each(function(index) {
+                    jQuery(this).click(function() {
+                        if(jQuery('.togglereply').eq(index).text()=='Batalkan'){
+                            jQuery('.disclaimer').after($komentar);
+                            jQuery('.togglereply').eq(index).text('Balas Tanggapan');
+                            jQuery('.commentID').val(0);
+                        } else {
+                            jQuery('.togglereplychild').eq(index).after($komentar);
+                            jQuery('.togglereply').text('Balas Tanggapan').eq(index).text('Batalkan');
+                                    $theId = jQuery('.togglereply').eq(index).attr('id').split('-');
+                            jQuery('.commentID').val($theId[1]);
                         }
                     });
-                }
-                // link handler
-                jQuery('#ratelinks li a').click(function(){
-                    jQuery.ajax({
-                        type: "GET",
-                        dataType: 'json',
-                        url: "<?=$this->baseUrl(); ?>/rate",
-                        data: "rating="+jQuery(this).text()+"&guid="+$guid,
-                        cache: false,
-                        async: false,
-                        success: function(result) {
-                            if (result.error == -1) {
-                                jQuery("#ratelinks").remove();
-                                jQuery('.votitaly-box').append(result.message);
-                            }
-                            else
-                            {
-                                // remove #ratelinks element to prevent another rate
-                                jQuery("#ratelinks").remove();
-                                // get rating after click
-                                getRating($guid);
-                                // then update it
-                                jQuery('.votitaly-box').empty();
-                                jQuery('.votitaly-box').html(result.message);
-                            }
-                        },
-                        error: function(result) {
-                            $("#grate").show("slow").html('Error!  Status = ' + result.status);
+	            });
+	            jQuery('.togglechild').each(function(index) {
+                    jQuery(this).click(function() {
+                        if(jQuery(this).hasClass('childclose')) {
+                            jQuery('.childcomments').hide();
+                            jQuery('.togglechild').removeClass('childclose');
+                        } else {
+                            jQuery('.childcomments').hide().eq(index).show();
+                            jQuery('.togglechild').removeClass('childclose');
+                            jQuery(this).addClass('childclose');
                         }
+                        return false;
                     });
-                });
-
-            Recaptcha.create("6LcKob8SAAAAAEjckzTnELVv6fMs9EdqVaLAVjhp",
-                "div_recaptcha",
-                {
-                    theme:"white"
-                }
-            );
+	            });
+	            Recaptcha.create("<?=$this->getCaptcha('public');?>",
+	                "div_recaptcha",
+	                {
+	                    theme:"white"
+	                }
+	            );
 
             });
-            
         </script>
-
     </head>
     <body>
         <?=$this->render('header.phtml');?>
@@ -163,6 +103,5 @@
 	<a style="display: none;" id="totop">^ scroll to top</a>
         <script type="text/javascript" src="<?=$this->cdn('scripts');?>/hol/administry.js"></script>
         <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-        <script type="text/javascript" src="http://widgets.digg.com/buttons.js"></script>
     </body>
 </html>

@@ -1,109 +1,58 @@
-<div class="box box-error closeable" id="grate" style="display:none;"></div>
-<? if ($this->subtitle) { ?><span class="subjudul"><?=$this->subtitle; ?></span><? } ?>
-<h4><?=$this->title; ?></h4>
+<div id="isiberita">
 <span class="subtitle"><?=$this->date; ?></span>
+<? if ($this->subtitle) { ?><span class="subjudul"><?=$this->subtitle; ?></span><? } ?>
+<div id="judul3"><?=$this->title; ?></div>
 <? if ($this->description) { ?>
-   <q><?=$this->description; ?></q>
+<q><?=$this->description; ?></q>
 <? } ?>
-
-<div class="padding_top_20"></div>
-<div class="t_utility_socialshare">
+<div class="socialshare">
 <ul>
-	<li class="share"><iframe src="http://www.facebook.com/plugins/like.php?href=<?= urlencode('http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']) ?>&layout=standard&show_faces=false&width=450&action=like&colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height:30px"></iframe></li>
+	<li class="share">Share:</li>
+	<li class="share"><iframe src="http://www.facebook.com/plugins/like.php?href=<?= urlencode('http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']) ?>&layout=standard&show_faces=false&width=450&action=like&colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:440px; height:30px"></iframe></li>
 	<li class="share"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a></li>
-	<li class="share"><a class="DiggThisButton DiggCompact"></a></li>
 </ul>
 </div>
-
-<div class="clear"></div>
-<div class="votitaly-inline-rating" id="votitaly-inline-rating-1">
-    <span class="votitaly-get-id" style="display:none;">1</span>
-
-    <span class="votitaly-inline-rating">
-    <ul class="votitaly-star-rating">
-            <li class="current-rating" id="current-rating-<?=$this->catalogGuid; ?>"><!-- will show current rating --></li>
-            <span id="ratelinks">
-            <li><a href="javascript:void(0)" title="1 star out of 5" class="one-star">1</a></li>
-            <li><a href="javascript:void(0)" title="2 stars out of 5" class="two-stars">2</a></li>
-            <li><a href="javascript:void(0)" title="3 stars out of 5" class="three-stars">3</a></li>
-            <li><a href="javascript:void(0)" title="4 stars out of 5" class="four-stars">4</a></li>
-            <li><a href="javascript:void(0)" title="5 stars out of 5" class="five-stars">5</a></li>
-            </span>
-    </ul>
-    </span>
-
-    <div class="votitaly-box">
-    <?=$this->drawrating; ?>
-    </div>
-
-</div>
+<div class="clean"></div>
 <div class="busear">
         <a href="javascript:;" title="PDF" onclick="javascript:printPdf('<?=$this->catalogGuid?>')" rel="nofollow"><img src="<?=$this->cdn('images'); ?>/pdf_button.png" alt="PDF"></a>&nbsp;
         <a href="javascript:;" title="Print" onclick="javascript:printEDoc('<?=$this->catalogGuid?>')" rel="nofollow"><img src="<?=$this->cdn('images'); ?>/printButton.png" alt="Print"></a>&nbsp;
         <a href="javascript:;" title="E-mail" onclick="javascript:sendEMail('<?=$this->catalogGuid?>')"><img src="<?=$this->cdn('images'); ?>/emailButton.png" alt="E-mail"></a>
 </div>
-
 <div class="clean"></div>
 <section>
-    <?
-    $sDir = $this->getRemoteImageUrl();
-    $thumb = "";
+<?
+$sDir = $this->getRemoteImageUrl();
+$thumb = "";
 
-    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->catalogGuid,'RELATED_IMAGE');
-    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
-	//$chkDir = $sDir."/".$this->catalogGuid;
-	$chkDir = $sDir."/".$this->catalogGuid."/".$itemGuid;
-	if (@getimagesize($chkDir))
-	{
-		$pict = $sDir ."/". $this->catalogGuid ."/". $itemGuid;
-	}
-	else 
-	{
-		$pict = $sDir ."/". $itemGuid;
-	}
-	
-	if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
-	if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
-	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
+$rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($this->catalogGuid,'RELATED_IMAGE');
+$itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+$chkDir = $sDir."/".$this->catalogGuid."/".$itemGuid;
+if (@getimagesize($chkDir))
+{
+	$pict = $sDir ."/". $this->catalogGuid ."/". $itemGuid;
+}
+else 
+{
+	$pict = $sDir ."/". $itemGuid;
+}
+
+if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
+if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
+if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
 
 
-    $screenshot = "<img src=\"".$thumb."\" />";
+$screenshot = "<img src=\"".$thumb."\" />";
 
-    ?>
-    <dl class="first">
-        <? if (!empty($thumb)) : ?>
-        <dt style="float:left;padding:2px;margin:2px;"><?=$screenshot; ?><br>
-            <small>
-                <?=$this->getFotoAttributeName($rowsetRelatedItem['itemGuid']); ?>
-            </small>
-        </dt>
-        <? endif; ?>
-        <dd class="last">
-            <p><?=$this->content;?></p>
-        </dd>
-    </dl>
-    <div class="clean"></div>
-    <hr>
-    <div id="author" style="padding-top:5px;">
-    <div class="align-left">
-        Penulis : <?=$this->author; ?>
-    </div>
-    <div class="align-right">
-        Dibaca : <?=$this->numOfClick; ?>
-    </div>
-        </div>
-    <div class="clean" style="padding-top:5px;"></div>
-    <hr>
-    <div id="fsizer" style="padding-top:5px;">
-        <div class="align-left" id="share">
-            <?=$this->ajaxActionRenderer(ROOT_URL."/share/guid/$this->catalogGuid");?>
-        </div>
-        <div class="align-right">
-        <div class="fsizer">
-            <a id="fs_sml" class="decreaseFont">A</a><a id="fs_med" class="fsactive resetFont">A</a><a id="fs_lrg" class="increaseFont">A</a>
-        </div>
-            </div>
-        </div>
-    <div class="clean" style="padding-top:5px;"></div>
-    <hr>
+?>
+
+<? if (!empty($thumb)) : ?>
+<div class="sketsa"><?=$screenshot; ?><br>
+    <small>
+        <?=$this->getFotoAttributeName($rowsetRelatedItem['itemGuid']); ?>
+    </small>
+</div>
+<? endif; ?>
+<?=$this->content;?>
+
 </section>
+</div>
