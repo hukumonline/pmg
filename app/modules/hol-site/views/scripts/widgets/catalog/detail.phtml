@@ -1,25 +1,26 @@
 <div id="isiberita">
 <span class="subtitle"><?=$this->date; ?></span>
-<? if ($this->subtitle) { ?><span class="subjudul"><?=$this->subtitle; ?></span><? } ?>
+<? if ($this->subtitle) { ?><div class="subjudul"><?=$this->subtitle; ?></div><? } ?>
 <div id="judul3"><?=$this->title; ?></div>
 <? if ($this->description) { ?>
 <q><?=$this->description; ?></q>
 <? } ?>
+<span class="reporter"><abbr><?=$this->author;?></abbr></span>
 <div class="socialshare">
 <ul>
 	<li class="share">Share:</li>
-	<li class="share"><iframe src="http://www.facebook.com/plugins/like.php?href=<?= urlencode('http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']) ?>&layout=standard&show_faces=false&width=450&action=like&colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:440px; height:30px"></iframe></li>
+	<li class="share"><iframe src="http://www.facebook.com/plugins/like.php?href=<?= urlencode('http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']) ?>&layout=standard&show_faces=false&width=450&action=like&colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:320px; height:30px"></iframe></li>
 	<li class="share"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a></li>
+	<li class="share"><g:plusone></g:plusone></li>
 </ul>
 </div>
 <div class="clean"></div>
 <div class="busear">
-        <a href="javascript:;" title="PDF" onclick="javascript:printPdf('<?=$this->catalogGuid?>')" rel="nofollow"><img src="<?=$this->cdn('images'); ?>/pdf_button.png" alt="PDF"></a>&nbsp;
-        <a href="javascript:;" title="Print" onclick="javascript:printEDoc('<?=$this->catalogGuid?>')" rel="nofollow"><img src="<?=$this->cdn('images'); ?>/printButton.png" alt="Print"></a>&nbsp;
-        <a href="javascript:;" title="E-mail" onclick="javascript:sendEMail('<?=$this->catalogGuid?>')"><img src="<?=$this->cdn('images'); ?>/emailButton.png" alt="E-mail"></a>
+    <a href="javascript:;" title="PDF" onclick="javascript:printPdf('<?=$this->catalogGuid?>')" rel="nofollow"><img src="<?=$this->cdn('images'); ?>/pdf_button.png" alt="PDF"></a>&nbsp;
+    <a href="javascript:;" title="Print" onclick="javascript:printEDoc('<?=$this->catalogGuid?>')" rel="nofollow"><img src="<?=$this->cdn('images'); ?>/printButton.png" alt="Print"></a>&nbsp;
+    <a href="javascript:;" title="E-mail" onclick="javascript:sendEMail('<?=$this->catalogGuid?>')"><img src="<?=$this->cdn('images'); ?>/emailButton.png" alt="E-mail"></a>
 </div>
 <div class="clean"></div>
-<section>
 <?
 $sDir = $this->getRemoteImageUrl();
 $thumb = "";
@@ -47,12 +48,12 @@ $screenshot = "<img src=\"".$thumb."\" />";
 
 <? if (!empty($thumb)) : ?>
 <div class="sketsa"><?=$screenshot; ?><br>
-    <small>
-        <?=$this->getFotoAttributeName($rowsetRelatedItem['itemGuid']); ?>
-    </small>
+    <caption>
+        <strong><?=$this->getFotoAttributeName($rowsetRelatedItem['itemGuid']); ?></strong>
+    </caption>
 </div>
 <? endif; ?>
-<?=$this->content;?>
+<?=$this->content;?><br>
+<span class="code">Dibaca : <?=$this->numOfClick; ?></span>
 
-</section>
 </div>
