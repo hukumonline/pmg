@@ -3,21 +3,16 @@
 <h4><?=$this->title; ?></h4>
 <span class="subtitle"><?=$this->date; ?></span>
 <? if ($this->description) { ?>
-    <p>
-        <q><?=$this->description; ?></q>
-    </p>
+   <q><?=$this->description; ?></q>
 <? } ?>
 
-<div style="padding-top:20px"></div>
-<!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_default_style ">
-<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-<a class="addthis_button_tweet"></a>
-<!-- <a class="addthis_counter addthis_pill_style"></a> -->
+<div class="padding_top_20"></div>
+<div class="t_utility_socialshare">
+<ul>
+	<li class="share"><iframe src="http://www.facebook.com/plugins/like.php?href=<?= urlencode('http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']) ?>&layout=standard&show_faces=false&width=450&action=like&colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height:30px"></iframe></li>
+	<li class="share"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a></li>
+</ul>
 </div>
-<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
-<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=hukumonline"></script>
-<!-- AddThis Button END -->
 
 <div class="clear"></div>
 <div class="votitaly-inline-rating" id="votitaly-inline-rating-1">
