@@ -5,7 +5,14 @@
 <? if ($this->description) { ?>
 <q><?=$this->description; ?></q>
 <? } ?>
-<span class="reporter"><abbr><?=$this->author;?></abbr></span>
+<div class="align-left">
+	<span class="reporter"><abbr><?=$this->author;?></abbr></span>
+</div>
+<div class="align-right">
+	<span class="baca">Dibaca: <strong><?=$this->numOfClick; ?></strong></span>
+	<span class="comment"><a href="<?=ROOT_URL;?>/berita/baca/<?=$this->catalogGuid;?>/<?=$this->getCatalogShortTitle($this->catalogGuid);?>#blokIsi">Tanggapan</a>: <strong><?=$this->getParentComment($this->catalogGuid);?></strong></span>
+</div>
+<div class="clean"></div>
 <div class="socialshare">
 <ul>
 	<li class="share">Share:</li>
@@ -44,10 +51,9 @@ if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".pn
 
 $screenshot = "<img src=\"".$thumb."\" />";
 
-list($width) = getimagesize($thumb); 
+if (!empty($thumb)) { 
+list($width) = getimagesize($thumb); 	
 ?>
-
-<? if (!empty($thumb)) : ?>
 <div class="sketsa"><?=$screenshot; ?><br>
 	<div style="width:<?=$width;?>px;overflow:auto;">
     <caption>
@@ -55,8 +61,6 @@ list($width) = getimagesize($thumb);
     </caption>
     </div>
 </div>
-<? endif; ?>
-<?=$this->content;?><br>
-<span class="code">Dibaca : <?=$this->numOfClick; ?></span>
-
+<? } ?>
+<?=$this->content;?>
 </div>

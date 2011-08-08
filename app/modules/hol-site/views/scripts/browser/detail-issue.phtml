@@ -4,11 +4,9 @@
         <section class="column first">
             <div class="colgroup">
                 <div class="kolom widthcontent1 first">
-                    <?=$this->action('miniprofile','index','hol-site');?>
                     <?=$this->action('terbaru','widgets_sidebar','hol-site'); ?>
                 </div>
-                <div class="kolom" style="width: 723px;border-left: 1px solid #cecece; padding-left:10px;">
-                	<div style="padding-top:20px;"></div>
+                <div class="kolom widthcontent6 bl_grey padding_left_10 padding_top_20">
                     <?=$this->action('detail.issue','widgets_catalog','hol-site',array('guid'=>$this->catalogGuid)); ?>
                     <?=$this->action('beritaterkait','widgets_relation','hol-site',array('guid'=>$this->catalogGuid)); ?>
                 </div>

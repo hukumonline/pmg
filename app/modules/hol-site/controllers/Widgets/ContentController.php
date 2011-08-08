@@ -273,7 +273,7 @@ class HolSite_Widgets_ContentController extends Zend_Controller_Action
     }
     function resensiAction()
     {
-        $rowset = App_Model_Show_Catalog::show()->fetchFromFolder('fb17',0,4);
+        $rowset = App_Model_Show_Catalog::show()->fetchFromFolder('fb17',0,2);
 
         $columns = 2;
         $content = 0;

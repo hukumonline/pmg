@@ -1,8 +1,6 @@
-<? if ($this->subtitle) { ?><span class="subjudul"><?=$this->subtitle; ?></span><? } ?>
-<h4><?=$this->title; ?></h4>
 <span class="subtitle"><?=$this->date; ?></span>
+<? if ($this->subtitle) { ?><span class="subjudul"><?=$this->subtitle; ?></span><? } ?>
+<div id="judul3"><?=$this->title; ?></div>
 <? if ($this->description) { ?>
-    <p>
-        <q><?=$this->description; ?></q>
-    </p>
+<q><?=$this->description; ?></q>
 <? } ?>

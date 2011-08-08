@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="google-site-verification" content="MUDP2J4JyyfKSWJsjfuglidOXiHOU_vn5VLXY7S-G8w" />
         <link href="<?=$this->cdn('styles')?>/favicon.ico" rel="shortcut icon" type="image/ico" />
-        <link href="<?=$this->cdn('styles')?>/typography.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->cdn('styles')?>/typography-1.css" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?=$this->cdn('styles')?>/style.css" media="screen" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<?=$this->cdn('scripts')?>/index.php?c=auto&amp;f=,hol/jquery/jquery-1.4.2.min.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/newsticker/jquery.newsticker.pack.js" ></script>
         
@@ -34,6 +34,18 @@
 
             });
             
+			var gid = function(x) { return document.getElementById(x); };
+			function focus_text(msg, id){
+			    if(gid(id).value == msg){
+			        gid(id).value="";
+			    }
+			}
+			function blur_text(msg, id){
+			    if(gid(id).value.length < 1){
+			        gid(id).value=msg;
+			    }
+			}
+            
         </script>
 
     </head>
@@ -45,7 +57,7 @@
 	<!-- Scroll to top link -->
 	<a style="display: none;" id="totop">^ scroll to top</a>
 	
-        <script type="text/javascript" src="<?=$this->baseUrl();?>/js/administry.js"></script>
+        <script type="text/javascript" src="<?=$this->cdn('scripts');?>/hol/administry.js"></script>
 		<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

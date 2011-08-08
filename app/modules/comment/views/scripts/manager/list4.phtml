@@ -26,7 +26,7 @@
 				}
 			}
 			if ($x == 1) {
-				$myphotosize = getimagesize($myphoto);
+				$myphotosize = @getimagesize($myphoto);
 				$dis = "";
 				if (isset($myext) && is_file($sDir."/".$comment['userid'].".".$myext))
 					$txt_existence = "<img src=\"".$sDir2.$comment['userid'].".".$myext."\" width=\"52\" height=\"52\" />";
@@ -72,7 +72,7 @@
 							}
 						}
 						if ($x == 1) {
-							$myphotosize = getimagesize($myphoto);
+							$myphotosize = @getimagesize($myphoto);
 							$dis = "";
 							if (isset($myext) && is_file($sDir."/".$child['userid'].".".$myext))
 								$txt_existence = "<img src=\"".$sDir2.$child['userid'].".".$myext."\" width=\"52\" height=\"52\" />";
