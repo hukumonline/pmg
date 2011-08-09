@@ -105,7 +105,7 @@ class Berita_Widgets_ContentController extends Zend_Controller_Action
             $rowset = App_Model_Show_Catalog::show()->fetchFromFolderByDate('lt4a6f7d5377193',$givenDate);
         }
         else {
-            $rowset = App_Model_Show_Catalog::show()->fetchFromFolder('lt4a6f7d5377193',0,5);
+            $rowset = App_Model_Show_Catalog::show()->fetchFromFolder('lt4a6f7d5377193',0,13);
         }
 
         $content = 0;
@@ -133,7 +133,7 @@ class Berita_Widgets_ContentController extends Zend_Controller_Action
             $rowset = App_Model_Show_Catalog::show()->fetchFromFolderByDate('fb18',$givenDate);
         }
         else {
-            $rowset = App_Model_Show_Catalog::show()->fetchFromFolder('fb18',0,5);
+            $rowset = App_Model_Show_Catalog::show()->fetchFromFolder('fb18',0,10);
         }
 
         $content = 0;

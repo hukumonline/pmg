@@ -1,14 +1,14 @@
 <?php if (!$this->rows) { ?>
-<div id="blokIsiKomen">
+<div id="wartaKomen">
 	Belum ada tanggapan untuk ditampilkan pada artikel ini.
 </div>
 <?php } else { ?>
 <div id="comments">
-<div id="blokIsiKomen">
+<div id="wartaKomen">
 	<b>Komentar terkini (<?php echo $this->numrows; ?> Komentar)</b>
 </div>
 <?php foreach ($this->paginator as $comment) : ?>
-	<div id="blokIsiKomen">
+	<div id="wartaKomen">
 		<div class="comment-avatar">
 		<?php
 			$arraypictureformat = array("jpg", "jpeg", "gif");

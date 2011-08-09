@@ -10,7 +10,7 @@
 </div>
 <div class="align-right">
 	<span class="baca">Dibaca: <strong><?=$this->numOfClick; ?></strong></span>
-	<span class="comment"><a href="<?=ROOT_URL;?>/berita/baca/<?=$this->catalogGuid;?>/<?=$this->getCatalogShortTitle($this->catalogGuid);?>#blokIsi">Tanggapan</a>: <strong><?=$this->getParentComment($this->catalogGuid);?></strong></span>
+	<span class="comment"><a href="<?=ROOT_URL;?>/berita/baca/<?=$this->catalogGuid;?>/<?=$this->getCatalogShortTitle($this->catalogGuid);?>#wartaKomen" class="bb">Tanggapan</a>: <strong><?=$this->getParentComment($this->catalogGuid);?></strong></span>
 </div>
 <div class="clean"></div>
 <div class="socialshare">
@@ -57,7 +57,7 @@ list($width) = getimagesize($thumb);
 <div class="sketsa"><?=$screenshot; ?><br>
 	<div style="width:<?=$width;?>px;overflow:auto;">
     <caption>
-        <strong><?=$this->getFotoAttributeName($rowsetRelatedItem['itemGuid']); ?></strong>
+        <strong><?=str_replace("<br>","",$this->getFotoAttributeName($rowsetRelatedItem['itemGuid']));?></strong>
     </caption>
     </div>
 </div>
