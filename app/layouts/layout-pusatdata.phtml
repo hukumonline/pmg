@@ -42,6 +42,18 @@
                 <? } ?>
             });
 
+			var gid = function(x) { return document.getElementById(x); };
+			function focus_text(msg, id){
+			    if(gid(id).value == msg){
+			        gid(id).value="";
+			    }
+			}
+			function blur_text(msg, id){
+			    if(gid(id).value.length < 1){
+			        gid(id).value=msg;
+			    }
+			}
+			
         </script>
 
     </head>

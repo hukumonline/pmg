@@ -16,6 +16,10 @@ class Klinik_BrowserController extends Zend_Controller_Action
         $catalogGuid = ($this->_getParam('guid'))? $this->_getParam('guid') : '';
         $this->view->catalogGuid = $catalogGuid;
     }
+    function direktoriAction()
+    {
+    	
+    }
     function authorAction()
     {
         $catalogGuid = ($this->_getParam('guid'))? $this->_getParam('guid') : '';

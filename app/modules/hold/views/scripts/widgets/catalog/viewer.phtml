@@ -1,28 +1,26 @@
 <fieldset>
 	<legend>PUSAT DATA</legend>
-	<div class="hold">
-		<h4><strong><? echo $this->rowsetCatalogAttribute->findByAttributeGuid('fixedTitle')->value;?></strong></h4>
+		<div id="judul2" class="padding_top_5 padding_bottom_10"><?=$this->rowsetCatalogAttribute->findByAttributeGuid('fixedTitle')->value;?></div>
 		<?
 		foreach ($this->aAttribute as $row) {
 			if ((!in_array($row['value'],array('no-info','-','in','','00:00:00'))) && (!in_array($row['name'],array('Comments','Billing')))) {
 		?>
-		<div class="p1">
+		<div class="colgroup" style="padding:10px;">
 			<?
 			if ($this->profileGuid == "kutu_putusan") {
 				if (($row['name'] == "Title") || ($row['name'] == "Sub Title"))	{
 			?>
-			<div class="p2"></div>
+			<div class="column width2 first"></div>
 			<? } else { ?>
-			<div class="p2"><h6><?=$row['name'];?></h6></div>
+			<div class="column width2 first"><h5><?=$row['name'];?></h5></div>
 			<? }} else { ?>
-			<div class="p2"><h6><?=$row['name'];?></h6></div>
+			<div class="column width2 first"><h5><?=$row['name'];?></h5></div>
 			<? } ?>
 			<? if (in_array($row['name'],array('Date','Tanggal Dibacakan','Tanggal berlaku'))) { ?>
-			<div class="p3"><?=strftime("%d %B %Y",strtotime($row['value']));?></div>
+			<div class="column width3"><?=strftime("%d %B %Y",strtotime($row['value']));?></div>
 			<? } else { ?>
-			<div class="p3"><?=$row['value'];?></div>
+			<div class="column width3"><?=$row['value'];?></div>
 			<? } ?>
 		</div>
 		<? }} ?>
-	</div>
 </fieldset>
