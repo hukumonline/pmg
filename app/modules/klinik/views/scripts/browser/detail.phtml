@@ -4,20 +4,17 @@
         <section class="column first">
             <div class="colgroup">
                 <div class="kolom widthcontent1 first">
-                    <?=$this->action('miniprofile','index','hol-site');?>
                     <?=$this->action('kategori','widgets_content','klinik'); ?>
-                    <h5>Kategori:<?=$this->getClinicCategory($this->catalogGuid);?></h5>
+                    <div id="judul2" class="padding_top_10">Kategori: <?=$this->getClinicCategory($this->catalogGuid);?></div>
                     <hr/>
                     <?=$this->ajaxActionRenderer(ROOT_URL.'/klinik/mkategori/'.$this->catalogGuid);?>
                 </div>
-                <div class="kolom" style="width: 723px;border-left: 1px solid #cecece; padding-left:10px;">
-					<div style="padding-top:20px"></div>
+                <div class="kolom widthcontent6 bl_grey padding_left_10">
 					<?=$this->action('rubrik','index','klinik'); ?><hr/>
                     <?=$this->action('klide','widgets_catalog','klinik',array('guid'=>$this->catalogGuid)); ?>
                     <hr>
                     <?=$this->action('disclaimer','index','klinik'); ?><br>
                     <?=$this->action('mitra-klinik','mitra','klinik'); ?>
-
                 </div>
                 <div class="clear">&nbsp;</div>
             </div>

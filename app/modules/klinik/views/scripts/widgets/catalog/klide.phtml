@@ -21,7 +21,7 @@
 
 </div>
 
-<div style="float:right">
+<div style="float:right;z-index:1;overflow:hidden;">
     
     <!-- AddThis Button BEGIN -->
     <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
@@ -38,8 +38,8 @@
     <!-- AddThis Button END -->
 
 </div>
-<div style="padding-top:10px;clear:both;"></div>
-
+<div class="padding_top_10"></div>
+<div class="clean"></div>
 <?
     $arraypictureformat = array("jpg", "jpeg", "gif");
     $txt_allowedformat = implode('; ', $arraypictureformat);
@@ -83,12 +83,12 @@
 	<b><?=$this->title;?></b>
 	</div>
 	<div class="cliniccontent"><?=$this->question;?></div>
-	<small>Di <a href="<?=ROOT_URL;?>/klinik/kategori/<?=$this->category;?>" class="subtitle"><?=$this->getCatalogAttribute($this->category,'fixedTitle');?></a> - <?=$this->createdDate;?></small>
+	<small>Di <a href="<?=ROOT_URL;?>/klinik/kategori/<?=$this->category;?>" class="subtitle"><?=$this->getCatalogAttribute($this->category,'fixedTitle');?></a></small>
 </div>
-<div style="clear:both"></div>
-<div style="padding-top:20px;"></div>
+<div class="clean"></div>
+<div class="padding_top_20"></div>
 <div class="bor"></div>
-<div style="padding-top:20px;"></div>
+<div class="padding_top_20"></div>
 
 <?
     $modelUser = App_Model_Show_User::show()->getUserByName($this->getCatalogAttribute($this->author,'fixedTitle'));
@@ -117,19 +117,24 @@
 <div id="judul2">
 <b>Jawaban</b>
 </div>
-<div class="ta-left"><a href="" title="<?=$this->getCatalogAttribute($this->author,'fixedTitle');?>" class="klinikbrowse"><?=$this->getCatalogAttribute($this->author,'fixedTitle');?></a></div>
+<div class="ta-left"><a href="<?=ROOT_URL;?>/klinik/mitra/<?=$this->source;?>" title="<?=$this->getCatalogAttribute($this->source,'fixedTitle');?>" target="_blank" class="klinikbrowse"><?=$this->getCatalogAttribute($this->source,'fixedTitle');?></a></div>
 <div style="float:left;padding:2px;margin:15px 10px 10px 0;">
 	<a href=""><?=$txt_existence;?></a>
 </div>
 <div style="float:right;width:651px;">
 	<div class="cliniccontent"><?=$this->answer;?></div>
-	<small><?=$this->publishedDate;?></small>
+	<small>
+	<a href="<?=ROOT_URL;?>/klinik/penjawab/<?=$this->author;?>/mitra/<?=$this->source;?>" title="<?=$this->getCatalogAttribute($this->author,'fixedTitle');?>" target="_blank" class="klinikbrowse"><?=$this->getCatalogAttribute($this->author,'fixedTitle');?></a><br>
+	<?=$this->publishedDate;?>
+	</small>
 </div>
-<div style="clear:both"></div>
-<div style="padding-top:20px;"></div>
+<div class="clean"></div>
+<div class="padding_top_20"></div>
 <div class="bor"></div>
 
-<div style="padding-top:5px;"></div>
+<div class="padding_top_5"></div>
 <?=$this->action('beritaterkait','widgets_relation','klinik',array('guid'=>$this->catalogGuid)); ?>
-<div style="clear:both;"></div>
+<div class="padding_top_5"></div>
+<?=$this->action('dasarhukum','widgets_relation','klinik',array('guid'=>$this->catalogGuid)); ?>
+<div class="clean"></div>
 

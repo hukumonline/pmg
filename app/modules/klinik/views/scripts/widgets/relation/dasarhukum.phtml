@@ -1,10 +1,10 @@
 <? if ($this->numberOfRows <> 0) { ?>
 <div id="related">
 	<div id="relatednews">
-		<div id="judul2">KLINIK TERKAIT</div>
+		<div id="judul2">DASAR HUKUM</div>
 		<ul class="padding_top_5">
 		<? foreach ($this->rowsetRelatedItem as $row) { ?>
-		<li><a href="<?=$this->baseUrl(); ?>/klinik/detail/<?=$row->itemGuid ?>"><?=$this->getCatalogTitle($row->itemGuid,'fixedCommentTitle'); ?></a></li>
+		<li><a href=""><?=$this->getCatalogTitle($row->itemGuid,'fixedTitle'); ?></a></li>
 		<? } ?>
 		</ul>
 	</div>

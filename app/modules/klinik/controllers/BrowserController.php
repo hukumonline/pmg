@@ -18,7 +18,7 @@ class Klinik_BrowserController extends Zend_Controller_Action
     }
     function direktoriAction()
     {
-    	
+    	$this->_helper->layout->setLayout('layout-direktori-klinik');
     }
     function authorAction()
     {

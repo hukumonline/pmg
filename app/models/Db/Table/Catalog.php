@@ -11,5 +11,15 @@ class App_Model_Db_Table_Catalog extends Zend_Db_Table_Abstract
     protected $_rowClass = 'App_Model_Db_Table_Row_Catalog';
     protected $_rowsetClass = 'App_Model_Db_Table_Rowset_CatalogAttribute';
     protected $_dependentTables = array('App_Model_Db_Table_CatalogAttribute','App_Model_Db_Table_CatalogFolder');
+	function implode_with_keys($glue, $array, $valwrap='')
+    {
+    	if ($array) {
+	        foreach($array AS $key => $value) {
+	            $ret[] = $valwrap.$value.$valwrap;
+	        }
+	        return implode($glue, $ret);
+    	}
+    }    
+    
 }
 ?>

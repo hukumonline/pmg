@@ -4,16 +4,15 @@
         <section class="column first">
             <div class="colgroup">
                 <div class="kolom widthcontent1 first">
-                    <?=$this->action('miniprofile','index','hol-site');?>
                     <?=$this->action('kategori','widgets_content','klinik'); ?>
                 </div>
-                <div class="kolom" style="width: 723px;border-left: 1px solid #cecece; padding-left:10px;">
-					<div style="padding-top:20px"></div>
+                <div class="kolom widthcontent6 bl_grey padding_left_10">
                     <?=$this->action('detailmitra','widgets_catalog','klinik',array('guid'=>$this->partnerGuid)); ?>
                     <div style="padding-top:15px;"></div>
                     <?=$this->action('pengasuh','widgets_catalog','klinik',array('guid'=>$this->catalogGuid)); ?>
                     <div style="padding-top:15px;"></div>
-                    <?=$this->ajaxActionRenderer(ROOT_URL.'/klinik/mviewerklinikauthor/'.$this->catalogGuid);?>
+                    <?//=$this->ajaxActionRenderer(ROOT_URL.'/klinik/mviewerklinikauthor/'.$this->catalogGuid);?>
+                    <?=$this->action('vc','widgets_content','klinik',array('guid'=>$this->catalogGuid)); ?>
 
                 </div>
                 <div class="clear">&nbsp;</div>
