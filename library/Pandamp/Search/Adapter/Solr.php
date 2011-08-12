@@ -1421,9 +1421,9 @@ class Pandamp_Search_Adapter_Solr extends Pandamp_Search_Adapter_Abstract
 	{
             $solr = &$this->_solr;
             $querySolr = $query;
-            //$aParams = array('qt'=>'spellCheckCompRH', 'spellcheck.q'=>$querySolr, 'spellcheck'=>'true','spellcheck.collate'=>'true');
             $s = $sortField;
-            $aParams = array('sort'=>$s, 'q.op'=>'OR');
+            $aParams = array('sort'=>$s, 'q.op'=>'OR','qt'=>'spellCheckCompRH', 'spellcheck.q'=>$querySolr, 'spellcheck'=>'true','spellcheck.collate'=>'true');
+//            $aParams = array('sort'=>$s, 'q.op'=>'OR');
             //array('qt'=>'spellCheckCompRH', 'spellcheck'=>'true','spellcheck.collate'=>'true', 'sort'=>$s);
             //echo $querySolr;
             //die;

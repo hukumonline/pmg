@@ -11,7 +11,7 @@
         <td align="center"><div id='catalogPagination' class="pagination"></div></td>
     </tr>
 </table>
-
+<div class="clear">&nbsp;</div>
 
 <script>
 
@@ -58,7 +58,7 @@ $(document).ready(function(){
                                 +"<div id='kcss'>"
                                 +"<a href='<?=ROOT_URL;?>/klinik/detail/"+res.index[i].guid+"'>"+res.index[i].title+"</a>"
                                 +"</div>"
-                                +"<small>Di <a href='<?=ROOT_URL;?>/klinik/kategori/"+res.index[i].secat+"' class='subtitle'>"+res.index[i].category+"</a> - Ditanyakan oleh "+res.index[i].createdBy+" - Jawaban Oleh <a href='<?=ROOT_URL;?>/klinik/penjawab/"+res.index[i].author+"/mitra/"+res.index[i].sid+"' class='subtitle'>"+res.index[i].source+"</a> - "+res.index[i].publishedDate+"</small>"
+                                +"<small>Di <a href='<?=ROOT_URL;?>/klinik/kategori/"+res.index[i].secat+"' class='subtitle'>"+res.index[i].category+"</a> - Ditanyakan oleh "+res.index[i].createdBy+" - "+res.index[i].publishedDate+"</small>"
                                 +"</div>"
                                 +"<div class='clean'></div>"
                                 +"</div>"

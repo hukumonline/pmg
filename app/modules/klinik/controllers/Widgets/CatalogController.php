@@ -186,6 +186,128 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(TRUE);
 		
+        $a = array();
+
+        $dateDiff = new Pandamp_Lib_DateDiff();
+        
+        $r = $this->getRequest();
+        
+        $author = ($r->getParam('folderGuid'))? $r->getParam('folderGuid') : '';
+        $start	= ($r->getParam('start'))? $r->getParam('start') : 0;
+        $limit	= ($r->getParam('limit'))? $r->getParam('limit') : 10;
+        $sort 	= ($r->getParam('sort'))? $r->getParam('sort') : "publishedDate";
+        $sortBy = ($r->getParam('by'))? $r->getParam('by') : "desc";
+        
+        
+        $db = Zend_Db_Table::getDefaultAdapter()->query
+        ("SELECT catalogGuid as guid from KutuCatalogAttribute where value='$author'");
+
+        $rowset = $db->fetchAll(Zend_Db::FETCH_OBJ);
+        
+        $solrAdapter = Pandamp_Search::manager();
+
+        $numi = count($rowset);
+        $sSolr = "id:(";
+        for($i=0;$i<$numi;$i++)
+        {
+            $row = $rowset[$i];
+            $sSolr .= $row->guid .' ';
+        }
+        $sSolr .= ')';
+
+        if(!$numi)
+                $sSolr="id:(hfgjhfdfka)";
+
+    	
+		$solrResult = $solrAdapter->findAndSort($sSolr,$start,$limit, array($sort.' '.$sortBy));
+		$solrNumFound = $solrResult->response->numFound;
+
+        $a['folderGuid'] = $author;
+        $a['totalCount'] = $numi;
+
+        $ii=0;
+        if($solrNumFound==0)
+        {
+            $a['index'][0]['title']= 'XXX';
+            $a['index'][0]['question']= "No Data";
+            $a['index'][0]['secat']= "";
+            $a['index'][0]['category']= '';
+            $a['index'][0]['guid']= '';
+            $a['index'][0]['createdBy']= '';
+            $a['index'][0]['author']= '';
+            $a['index'][0]['sid']= '';
+            $a['index'][0]['source']= '';
+            $a['index'][0]['publishedDate']= '';
+            $a['index'][0]['existence']= '';
+        }
+        else
+        {
+            if($solrNumFound>$limit)
+                $numRowset = $limit ;
+            else
+                $numRowset = $solrNumFound;
+
+            for($ii=0;$ii<$numRowset;$ii++)
+            {
+                $row = $solrResult->response->docs[$ii];
+                if(!empty($row))
+                {
+				    $arraypictureformat = array("jpg", "jpeg", "gif");
+				    $txt_allowedformat = implode('; ', $arraypictureformat);
+				    $registry = Zend_Registry::getInstance();
+				    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+				    $cdn = $config->getOption('cdn');
+				    
+				    $sDir = $cdn['static']['dir']['photo'];
+				    $sDir2 = $cdn['static']['url']['photo'].'/';
+				    $smg = $cdn['static']['images'];
+				    
+				    $modelUser = App_Model_Show_User::show()->getUserByName($row->createdBy);
+				    
+				    $x = 0;
+				    foreach ($arraypictureformat as $key => $val) {
+				        if (is_file($sDir."/".$modelUser['kopel'].".".$val)) {
+				            $myphoto = $sDir."/".$modelUser['kopel'].".".$val;
+				            $myext = $val;
+				            $x = 1;
+				            break;
+				        }
+				    }
+				    if ($x == 1) {
+				        $myphotosize = getimagesize($myphoto);
+				        $dis = "";
+				        if (isset($myext) && is_file($sDir."/".$modelUser['kopel'].".".$myext))
+				            $txt_existence = "<img src=\"".$sDir2.$modelUser['kopel'].".".$myext."\" class=\"avatar\" width=\"38\" height=\"38\" />";
+				
+				    }
+				    else
+				    {
+				        $txt_existence = "<img src=\"".$smg."/gravatar-140.png\" width=\"38\" height=\"38\" class=\"avatar\" border=\"0\" />";
+				    }
+				    
+					$a['index'][$ii]['title'] = $row->title;
+					$a['index'][$ii]['question'] = $row->commentQuestion;
+					$a['index'][$ii]['secat'] = $row->kategoriklinik;
+					$a['index'][$ii]['category'] = $row->kategori;
+					$a['index'][$ii]['guid'] = $row->id;
+					$a['index'][$ii]['createdBy'] = $row->createdBy;
+					$a['index'][$ii]['author'] = $row->kontributor;
+					$a['index'][$ii]['sid'] = $row->sumber;
+					$a['index'][$ii]['source'] = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($row->kontributor,'fixedTitle');
+		            //$a['index'][$ii]['publishedDate'] = $dateDiff->ago(strftime('%Y-%m-%d %H:%M:%S',strtotime($row->publishedDate)));
+		            $a['index'][$ii]['publishedDate'] = date("d/m/Y",strtotime($row->publishedDate));
+		            $a['index'][$ii]['existence'] = '<div style="float:left;padding:2px;margin: 1px 10px 10px 0px;"><a href="">'.$txt_existence.'</a></div>';
+                }
+            }
+        }
+
+        echo Zend_Json::encode($a);
+    }
+    function viewerClinic80Action()
+    {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(TRUE);
+		
         $dateDiff = new Pandamp_Lib_DateDiff();
         
         $author = ($this->_getParam('folderGuid'))? $this->_getParam('folderGuid') : '';
@@ -213,11 +335,16 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
 				$value_clinic[] = $c->catalogGuid;
 			}
 			
-			$value_clinic = $tblCatalog->implode_with_keys(", ", $value_clinic, "'");
+//			$value_clinic = $tblCatalog->implode_with_keys(", ", $value_clinic, "'");
 			
-			if (isset($value_clinic)) {
-				
-				$rowset = $tblCatalog->fetchAll("guid IN($value_clinic)","publishedDate desc");
+			echo '<pre>';
+			print_r($value_clinic);
+			echo '</pre>';
+			die;
+			
+			if (isset($value_clinic)) 
+			{
+				$rowset = $tblCatalog->fetchAll("guid IN($value_clinic) AND status=99","publishedDate desc");
 				
 				foreach ($rowset as $row)
 				{
