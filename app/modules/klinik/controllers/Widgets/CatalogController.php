@@ -230,7 +230,7 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
         {
             $a['index'][0]['title']= 'XXX';
             $a['index'][0]['question']= "No Data";
-            $a['index'][0]['secat']= "";
+            $a['index'][0]['secat']= '';
             $a['index'][0]['category']= '';
             $a['index'][0]['guid']= '';
             $a['index'][0]['createdBy']= '';
