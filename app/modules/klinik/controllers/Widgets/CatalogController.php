@@ -249,9 +249,10 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
 
             for($ii=0;$ii<$numRowset;$ii++)
             {
-                $row = $solrResult->response->docs[$ii];
-                if(!empty($row))
-                {
+            	if(isset($solrResult->response->docs[$ii]))
+            	{
+                	$row = $solrResult->response->docs[$ii];
+                	
 				    $arraypictureformat = array("jpg", "jpeg", "gif");
 				    $txt_allowedformat = implode('; ', $arraypictureformat);
 				    $registry = Zend_Registry::getInstance();
