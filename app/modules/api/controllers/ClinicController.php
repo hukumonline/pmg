@@ -148,9 +148,11 @@ class Api_ClinicController extends Zend_Controller_Action
             $a['klinikkategori'][0]['title']= 'Kategori klinik kosong';
             $a['klinikkategori'][0]['pertanyaan']= "";
             $a['klinikkategori'][0]['createdBy']= "";
-            $a['klinikkategori'][0]['kategori']= '';
             $a['klinikkategori'][0]['author']= '';
-            $a['klinikkategori'][0]['sumber']= '';
+            $a['klinikkategori'][0]['sid']= '';
+            $a['klinikkategori'][0]['source']= '';
+            $a['klinikkategori'][0]['publishedDate']= '';
+            $a['klinikkategori'][0]['existence']= '';
         }
         else
         {
@@ -161,16 +163,52 @@ class Api_ClinicController extends Zend_Controller_Action
 
             for($ii=0;$ii<$numRowset;$ii++)
             {
-                $row = $hits->response->docs[$ii];
-                if(!empty($row))
+                if(isset($hits->response->docs[$ii]))
                 {
+	                $row = $hits->response->docs[$ii];
+	                
+				    $arraypictureformat = array("jpg", "jpeg", "gif");
+				    $txt_allowedformat = implode('; ', $arraypictureformat);
+				    $registry = Zend_Registry::getInstance();
+				    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+				    $cdn = $config->getOption('cdn');
+				    
+				    $sDir = $cdn['static']['dir']['photo'];
+				    $sDir2 = $cdn['static']['url']['photo'].'/';
+				    $smg = $cdn['static']['images'];
+				    
+				    $modelUser = App_Model_Show_User::show()->getUserByName($row->createdBy);
+				    
+				    $x = 0;
+				    foreach ($arraypictureformat as $key => $val) {
+				        if (is_file($sDir."/".$modelUser['kopel'].".".$val)) {
+				            $myphoto = $sDir."/".$modelUser['kopel'].".".$val;
+				            $myext = $val;
+				            $x = 1;
+				            break;
+				        }
+				    }
+				    if ($x == 1) {
+				        $myphotosize = getimagesize($myphoto);
+				        $dis = "";
+				        if (isset($myext) && is_file($sDir."/".$modelUser['kopel'].".".$myext))
+				            $txt_existence = "<img src=\"".$sDir2.$modelUser['kopel'].".".$myext."\" class=\"avatar\" width=\"38\" height=\"38\" />";
+				
+				    }
+				    else
+				    {
+				        $txt_existence = "<img src=\"".$smg."/gravatar-140.png\" width=\"38\" height=\"38\" class=\"avatar\" border=\"0\" />";
+				    }
+				    
                     $a['klinikkategori'][$ii]['guid'] = $row->id;
                     $a['klinikkategori'][$ii]['title'] = $row->title;
                     $a['klinikkategori'][$ii]['pertanyaan'] = $row->commentQuestion;
                     $a['klinikkategori'][$ii]['createdBy'] = $row->createdBy;
-                    $a['klinikkategori'][$ii]['kategori'] = $row->kategori;
-                    $a['klinikkategori'][$ii]['author'] = $vTitle->getCatalogTitle($row->kontributor,'fixedTitle');
-                    $a['klinikkategori'][$ii]['sumber'] = $vTitle->getCatalogTitle($row->sumber,'fixedTitle');
+					$a['klinikkategori'][$ii]['author'] = $row->kontributor;
+					$a['klinikkategori'][$ii]['sid'] = $row->sumber;
+					$a['klinikkategori'][$ii]['source'] = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($row->kontributor,'fixedTitle');
+                    $a['klinikkategori'][$ii]['publishedDate'] = date("d/m/Y",strtotime($row->publishedDate));
+                    $a['klinikkategori'][$ii]['existence'] = '<div style="float:left;padding:2px;margin: 1px 10px 10px 0px;"><a href="">'.$txt_existence.'</a></div>';
                 }
             }
         }

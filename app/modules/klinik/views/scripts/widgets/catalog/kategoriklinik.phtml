@@ -1,3 +1,4 @@
+<div id="judul2">KATEGORI: <?=$this->getCatalogAttribute($this->aData['catalogGuid'],'fixedTitle');?></div>
 <? if ($this->aData['totalCount'] != 0) { ?>
 <div id='catalogContent'></div><br>
 <table>
@@ -46,17 +47,21 @@ $(document).ready(function(){
 		{
 			tblRow +=
 
-				"<tr valign=top>"
-				+"<td><span class='subtitle'>[<b>"+res.klinikkategori[i].kategori+"</b>]</span>&nbsp;<a href='<?=$this->baseUrl(); ?>/klinik/detail/"+res.klinikkategori[i].guid+"' class='klinikbrowse'><b>"+res.klinikkategori[i].title+"</b></a><br/>"
-				+"<span class='subtitle'>Pertanyaan :</span>"
-				+"<p>"+res.klinikkategori[i].pertanyaan+"</p>"
-				+"<p><small>"
-                                +"Penanya: "+res.klinikkategori[i].createdBy+"<br>"
-				+"Jawaban oleh: "+res.klinikkategori[i].author+"<br>"
-				+"Sumber: "+res.klinikkategori[i].sumber+"<br>"
-				+"</small></p><div style='padding-top:5px;'></div>"
-				+"</td>"
-				+"</tr>";
+                        "<tr valign=top>"
+                        +"<td>"
+                        +"<div class='klinikterbaruisi'>"
+                        +res.klinikkategori[i].existence
+                        +"<div style='float:right;width:661px;'>"
+                        +"<div id='kcss'>"
+                        +"<a href='<?=ROOT_URL;?>/klinik/detail/"+res.klinikkategori[i].guid+"'>"+res.klinikkategori[i].title+"</a>"
+                        +"</div>"
+                        +"<small>Ditanyakan oleh "+res.klinikkategori[i].createdBy+" - Jawaban Oleh <a href='<?=ROOT_URL;?>/klinik/penjawab/"+res.klinikkategori[i].author+"/mitra/"+res.klinikkategori[i].sid+"' class='subtitle'>"+res.klinikkategori[i].source+"</a> - "+res.klinikkategori[i].publishedDate+"</small>"
+                        +"</div>"
+                        +"<div class='clean'></div>"
+                        +"</div>"
+                        +"</td>"
+                        +"</tr>";
+
 
 		}
 		tblRow += "</table>";
