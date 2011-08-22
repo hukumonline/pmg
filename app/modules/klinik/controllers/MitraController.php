@@ -62,6 +62,32 @@ class Klinik_MitraController extends Zend_Controller_Action
 		echo '</pre>';
 		*/
     }
+    function mitralainAction()
+    {
+        $catalogGuid = ($this->_getParam('guid'))? $this->_getParam('guid') : '';
+        
+		$query = "profile:klinik status:99 -sumber:$catalogGuid";    	
+		$indexingEngine = Pandamp_Search::manager();
+		$hits = $indexingEngine->find($query,0,1);
+		$content=0;
+		$data=array();
+		foreach ($hits->facet_counts->facet_fields->sumber as $facet => $count)
+		{
+			if (!$facet || $count == 0)
+			{
+				continue;
+			}
+			else 
+			{
+				$data[$content][0]=$facet;
+				$data[$content][1]=$count;
+			}
+			
+			$content++;
+		}
+		
+		$this->view->aData = $data;
+    }
     function detailAction()
     {
         $catalogGuid = ($this->_getParam('guid'))? $this->_getParam('guid') : '';

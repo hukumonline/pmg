@@ -1,4 +1,48 @@
-<div id="judul2"><?=$this->author; ?></div>
-<small><?=$this->description; ?></small>
+<?
+    $arraypictureformat = array("jpg", "jpeg", "gif");
+    $txt_allowedformat = implode('; ', $arraypictureformat);
+    $registry = Zend_Registry::getInstance();
+    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+    $cdn = $config->getOption('cdn');
+    
+    $sDir = $cdn['static']['dir']['photo'];
+    $sDir2 = $cdn['static']['url']['photo'].'/';
+    
+    $modelUser = App_Model_Show_User::show()->getUserByfullName($this->author);
+    
+    $x = 0;
+    foreach ($arraypictureformat as $key => $val) {
+        if (is_file($sDir."/".$modelUser['kopel'].".".$val)) {
+            $myphoto = $sDir."/".$modelUser['kopel'].".".$val;
+            $myext = $val;
+            $x = 1;
+            break;
+        }
+    }
+    if ($x == 1) {
+        $myphotosize = getimagesize($myphoto);
+        $dis = "";
+        if (isset($myext) && is_file($sDir."/".$modelUser['kopel'].".".$myext))
+            $txt_existence = "<img src=\"".$sDir2.$modelUser['kopel'].".".$myext."\" class=\"avatar\" width=\"38\" height=\"38\" />";
+
+    }
+    else
+    {
+        $txt_existence = "<img src=\"".$this->cdn('images')."/gravatar-140.png\" width=\"38\" height=\"38\" class=\"avatar\" border=\"0\" />";
+    }
+
+?>
+<div class="klinikterbaruisi">
+	<div style="float:left;padding:2px;margin: 1px 10px 10px 0px;">
+	<a href=""><?=$txt_existence;?></a>
+	</div>
+	<div style="float:right;width:661px;">
+		<div id="kcss">
+			<div id="judul2"><?=$this->author; ?></div>
+		</div>
+		<small><?=$this->description; ?></small>
+	</div>
+	<div class="clean"></div>
+</div>
 <div class="padding_bottom_5"></div>
 <div class="bor"></div>

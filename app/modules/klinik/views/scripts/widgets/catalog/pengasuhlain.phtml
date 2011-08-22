@@ -1,0 +1,9 @@
+<div class="td_peraturan1">
+    <div style="height:auto;">
+        <ul id="navlistnoline">
+            <? for ($i=0;$i<$this->numberOfRows;$i++) { ?>
+                <li><a href="<?=ROOT_URL;?>/klinik/penjawab/<?=$this->data[$i][2];?>/mitra/<?=$this->catalogGuid;?>" class="klinikbrowse"><?=$this->data[$i][0];?></a></li>
+            <? } ?>
+        </ul>
+    </div>
+</div>

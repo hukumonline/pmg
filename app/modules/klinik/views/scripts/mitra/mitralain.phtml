@@ -1,0 +1,9 @@
+<div class="td_peraturan1">
+    <div style="height:auto;">
+        <ul id="navlistnoline">
+            <? for($i=0; $i<count($this->aData);$i++) { ?>
+                <li><a href="<?=ROOT_URL;?>/klinik/mitra/<?=$this->aData[$i][0];?>" class="klinikbrowse"><b><?=$this->getCatalogAttribute($this->aData[$i][0],'fixedTitle');?></b></a></li>
+            <? } ?>
+        </ul>
+    </div>
+</div>

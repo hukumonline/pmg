@@ -63,6 +63,16 @@ class App_Model_Show_User extends App_Model_Db_DefaultAdapter
 
         return $result;
     }
+    public function getUserByfullName($fullName)
+    {
+        $db = parent::_dbSelect();
+        $select = $db->from('KutuUser','*','hid')
+                ->where("fullName='".$fullName."'");
+
+        $result = parent::_getDefaultAdapter()->fetchRow($select);
+
+        return $result;
+    }
     public function getUserById($id)
     {
         $db = parent::_dbSelect();

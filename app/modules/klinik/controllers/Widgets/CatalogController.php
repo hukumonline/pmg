@@ -80,7 +80,7 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
         if ($rowset)
         {
             $this->view->title          = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedTitle');
-            $this->view->content 	= App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedContent');
+            $this->view->content 		= App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedContent');
             $this->view->catalogGuid    = $catalogGuid;
         }
     }
@@ -89,7 +89,7 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $mkGuid = ($this->_getParam('guid'))? $this->_getParam('guid') : '';
 
-        $query = "profile:author sumber:$mkGuid;publishedDate desc";
+        $query = "profile:author sumber:$mkGuid;kontributor desc";
 
         $indexingEngine = Pandamp_Search::manager();
         $hits = $indexingEngine->find($query);
@@ -144,6 +144,36 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
 
         $this->view->author = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedTitle');
         $this->view->description = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($rowset['guid'],'fixedSubTitle');
+    }
+    function pengasuhlainAction()
+    {
+        $mkGuid = ($this->_getParam('mitra'))? $this->_getParam('mitra') : '';
+        $auth = ($this->_getParam('guid'))? $this->_getParam('guid') : '';
+
+        $query = "profile:author -id:$auth sumber:$mkGuid;kontributor desc";
+
+        $indexingEngine = Pandamp_Search::manager();
+        $hits = $indexingEngine->find($query);
+
+        $solrNumFound = count($hits->response->docs);
+
+        $content = 0;
+        $data = array();
+
+        for($ii=0;$ii<$solrNumFound;$ii++) {
+            $row = $hits->response->docs[$ii];
+            $data[$content][0] = $row->title;
+            $data[$content][1] = $row->subTitle;
+            $data[$content][2] = $row->id;
+            
+            $content++;
+        }
+
+        $num_rows = $solrNumFound;
+
+        $this->view->numberOfRows = $num_rows;
+        $this->view->data = $data;
+        $this->view->catalogGuid = $mkGuid;
     }
     function _viewerClinicAction()
     {
@@ -289,7 +319,7 @@ class Klinik_Widgets_CatalogController extends Zend_Controller_Action
 					$a['index'][$ii]['title'] = $row->title;
 					$a['index'][$ii]['question'] = $row->commentQuestion;
 					$a['index'][$ii]['secat'] = $row->kategoriklinik;
-					$a['index'][$ii]['category'] = $row->kategori;
+					$a['index'][$ii]['category'] = (isset($row->kategori))? $row->kategori : '';
 					$a['index'][$ii]['guid'] = $row->id;
 					$a['index'][$ii]['createdBy'] = $row->createdBy;
 					$a['index'][$ii]['author'] = $row->kontributor;

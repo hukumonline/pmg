@@ -2,8 +2,53 @@
 <span style="font:12px verdana,arial,helvetica,sans-serif;">Tidak ada penjawab</span>
 <? } ?>
 <div class="klinikterbaruisi">
-<? for ($i=0;$i<$this->numberOfRows;$i++) { ?>
-<a href="<?=ROOT_URL ?>/klinik/penjawab/<?=$this->data[$i][2];?>/mitra/<?=$this->catalogGuid ?>" class="klinikbrowse"><?=$this->data[$i][0];?></a>
-<div class="author"><?=$this->data[$i][1];?></div>
+<? 
+for ($i=0;$i<$this->numberOfRows;$i++) { 
+
+    $arraypictureformat = array("jpg", "jpeg", "gif");
+    $txt_allowedformat = implode('; ', $arraypictureformat);
+    $registry = Zend_Registry::getInstance();
+    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+    $cdn = $config->getOption('cdn');
+    
+    $sDir = $cdn['static']['dir']['photo'];
+    $sDir2 = $cdn['static']['url']['photo'].'/';
+    
+    $modelUser = App_Model_Show_User::show()->getUserByfullName($this->data[$i][0]);
+    
+    $x = 0;
+    foreach ($arraypictureformat as $key => $val) {
+        if (is_file($sDir."/".$modelUser['kopel'].".".$val)) {
+            $myphoto = $sDir."/".$modelUser['kopel'].".".$val;
+            $myext = $val;
+            $x = 1;
+            break;
+        }
+    }
+    if ($x == 1) {
+        $myphotosize = getimagesize($myphoto);
+        $dis = "";
+        if (isset($myext) && is_file($sDir."/".$modelUser['kopel'].".".$myext))
+            $txt_existence = "<img src=\"".$sDir2.$modelUser['kopel'].".".$myext."\" class=\"avatar\" width=\"38\" height=\"38\" />";
+
+    }
+    else
+    {
+        $txt_existence = "<img src=\"".$this->cdn('images')."/gravatar-140.png\" width=\"38\" height=\"38\" class=\"avatar\" border=\"0\" />";
+    }
+	
+?>
+
+	<div style="float:left;padding:2px;margin: 1px 10px 10px 0px;">
+	<a href=""><?=$txt_existence;?></a>
+	</div>
+	<div style="float:right;width:661px;">
+		<div id="kcss">
+			<a href="<?=ROOT_URL ?>/klinik/penjawab/<?=$this->data[$i][2];?>/mitra/<?=$this->catalogGuid ?>" class="klinikbrowse"><?=$this->data[$i][0];?></a>
+		</div>
+		<small><?=$this->data[$i][1];?></small>
+	</div>
+	<div class="clean"></div>
+
 <? } ?>
 </div>
