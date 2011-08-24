@@ -312,14 +312,17 @@ class Api_CatalogController extends Zend_Controller_Action
         $ii=0;
         if($solrNumFound==0)
         {
-            $a['catalogs'][0]['guid']= 'XXX';
             $a['catalogs'][0]['title']= "No Data";
-            $a['catalogs'][0]['subTitle']= "";
-            $a['catalogs'][0]['createdBy']= "";
+            $a['catalogs'][0]['guid']= 'XXX';
+            $a['catalogs'][0]['question']= "";
+            $a['catalogs'][0]['kategoriklinik']= "";
             $a['catalogs'][0]['kategori']= "";
-            $a['catalogs'][0]['kategoriklinik']= '';
-            $a['catalogs'][0]['createdDate']= '';
-            $a['catalogs'][0]['modifiedDate']= '';
+            $a['catalogs'][0]['createdBy']= '';
+            $a['catalogs'][0]['author']= '';
+            $a['catalogs'][0]['sid']= '';
+            $a['catalogs'][0]['source']= '';
+            $a['catalogs'][0]['publishedDate']= '';
+            $a['catalogs'][0]['existence']= '';
         }
         else
         {
@@ -330,22 +333,60 @@ class Api_CatalogController extends Zend_Controller_Action
 
             for($ii=0;$ii<$numRowset;$ii++)
             {
-                $row = $hits->response->docs[$ii];
-                if(!empty($row))
-                {
+            	if(isset($hits->response->docs[$ii]))
+            	{
+	                $row = $hits->response->docs[$ii];
+	                
+				    $arraypictureformat = array("jpg", "jpeg", "gif");
+				    $txt_allowedformat = implode('; ', $arraypictureformat);
+				    $registry = Zend_Registry::getInstance();
+				    $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+				    $cdn = $config->getOption('cdn');
+				    
+				    $sDir = $cdn['static']['dir']['photo'];
+				    $sDir2 = $cdn['static']['url']['photo'].'/';
+				    $smg = $cdn['static']['images'];
+				    
+				    $modelUser = App_Model_Show_User::show()->getUserByName($row->createdBy);
+				    
+				    $x = 0;
+				    foreach ($arraypictureformat as $key => $val) {
+				        if (is_file($sDir."/".$modelUser['kopel'].".".$val)) {
+				            $myphoto = $sDir."/".$modelUser['kopel'].".".$val;
+				            $myext = $val;
+				            $x = 1;
+				            break;
+				        }
+				    }
+				    if ($x == 1) {
+				        $myphotosize = getimagesize($myphoto);
+				        $dis = "";
+				        if (isset($myext) && is_file($sDir."/".$modelUser['kopel'].".".$myext))
+				            $txt_existence = "<img src=\"".$sDir2.$modelUser['kopel'].".".$myext."\" class=\"avatar\" width=\"38\" height=\"38\" />";
+				
+				    }
+				    else
+				    {
+				        $txt_existence = "<img src=\"".$smg."/gravatar-140.png\" width=\"38\" height=\"38\" class=\"avatar\" border=\"0\" />";
+				    }
+				    
+                	
                     $a['catalogs'][$ii]['title']= $row->title;
                     $a['catalogs'][$ii]['guid']= $row->id;
 
                     if(!isset($row->commentQuestion))
-                    $a['catalogs'][$ii]['commentQuestion'] = '';
+                    $a['catalogs'][$ii]['question'] = '';
                 else
-                    $a['catalogs'][$ii]['commentQuestion']= $row->commentQuestion;
+                    $a['catalogs'][$ii]['question']= $row->commentQuestion;
 
-                    $a['catalogs'][$ii]['createdBy'] = 'Pertanyaan oleh:'.$row->createdBy;
-                    $a['catalogs'][$ii]['kategori'] = $row->kategori;
-                    $a['catalogs'][$ii]['kategoriklinik'] = $row->kategoriklinik;
-                    $a['catalogs'][$ii]['createdDate']= $row->createdDate;
-                    $a['catalogs'][$ii]['modifiedDate']= $row->modifiedDate;
+					$a['catalogs'][$ii]['secat'] = $row->kategoriklinik;
+					$a['catalogs'][$ii]['category'] = (isset($row->kategori))? $row->kategori : '';
+					$a['catalogs'][$ii]['createdBy'] = $row->createdBy;
+					$a['catalogs'][$ii]['author'] = $row->kontributor;
+					$a['catalogs'][$ii]['sid'] = $row->sumber;
+					$a['catalogs'][$ii]['source'] = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($row->kontributor,'fixedTitle');
+		            $a['catalogs'][$ii]['publishedDate'] = date("d/m/Y",strtotime($row->publishedDate));
+		            $a['catalogs'][$ii]['existence'] = '<div style="float:left;padding:2px;margin: 1px 10px 10px 0px;"><a href="">'.$txt_existence.'</a></div>';
                 }
             }
         }

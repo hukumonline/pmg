@@ -40,11 +40,17 @@ class Klinik_Widgets_SearchController extends Zend_Controller_Action
 
         if($a['totalCount']==0)
         {
-            $a['catalogs'][0]['guid']= 'XXX';
             $a['catalogs'][0]['title']= "No Data";
-            $a['catalogs'][0]['subTitle']= "";
-            $a['catalogs'][0]['createdDate']= '';
-            $a['catalogs'][$ii]['modifiedDate']= '';
+            $a['catalogs'][0]['guid']= 'XXX';
+            $a['catalogs'][0]['question']= "";
+            $a['catalogs'][0]['kategoriklinik']= "";
+            $a['catalogs'][0]['kategori']= "";
+            $a['catalogs'][0]['createdBy']= '';
+            $a['catalogs'][0]['author']= '';
+            $a['catalogs'][0]['sid']= '';
+            $a['catalogs'][0]['source']= '';
+            $a['catalogs'][0]['publishedDate']= '';
+            $a['catalogs'][0]['existence']= '';
         }
 
 
