@@ -1,3 +1,23 @@
+<!-- S:TOP BAR -->
+<div id="topholid" align="center"> 
+    <div id="topcontent"> 
+    <?=$this->action('miniprofile','index','hol-site');?>		
+	<div class="search_hol"> 
+    	<form action="<?=$this->getRemoteSearchUrl();?>/id/dms/search/result" method="get"  class="search-holsearch"> 
+	        <input class="input" name="keyword" id="keyword" onblur="blur_text('masukkan kata kunci','keyword');" onfocus="focus_text('masukkan kata kunci','keyword');" value="masukkan kata kunci" type="text">
+			<input type="submit" class="btun" value="" /> 
+ 	    </form> 
+	</div> 
+	<div class="social_icon">
+		<span>Ikuti kami:</span> 
+		<a href="http://rss.hukumonline.com" target="_blank"><img src="<?=$this->cdn('images');?>/feed.png" alt="feed rss" /></a>
+		<a href="http://www.facebook.com/pages/Hukumonlinecom/101301323243289" target="_blank"><img src="<?=$this->cdn('images');?>/facebook.png" alt="facebook" /></a>
+		<a href="http://twitter.com/#!/hukumonline" target="_blank"><img src="<?=$this->cdn('images');?>/twitterhol.png" alt="twitter" /></a>
+	</div>
+    </div> 
+</div> 
+<!-- E:TOP BANNER -->
+<!-- S:Header -->
 <header id="up">
     <div class="wrapper">
         <section class="column width8 first">
@@ -5,12 +25,12 @@
                 <div class="kolom widthcontent1 first">
                     <div id="judul"><a href="<?=ROOT_URL;?>"><img src="<?=$this->cdn('images');?>/logo_hukumonline.jpg" alt="hukumonline" /></a></div>
                 </div>
-                <div class="kolom widthcontent2 pembatas1" style="width:234px;">
-                    <div class="ta-right" style="padding-right:22px;padding-top: 5px;">[ <a href="" class="bb">index</a> ]</div>
+                <div class="kolom widthcontent_custom_3 pembatas1">
+                    <div class="padding_right_22 padding_top_5 ta-right">[ <a href="" class="bb">index</a> ]</div>
                     <?=$this->action('aktual','widgets_content','hol-site');?>
                 </div>
-                <div class="kolom widthcontent3" style="border-left: 1px solid #cecece;">
-                    <div class="st1" style="width: 503px;">
+                <div class="kolom widthcontent3 bl_grey">
+                    <div class="topup">
                             <ul id="topnav">
                                 <li><a href="http://en1.hukumonline.com" target="_blank">en.hukumonline.com</a></li>
                                 <li>|</li>
@@ -19,7 +39,7 @@
                                 <li><a href="http://direktori.hukumonline.com" target="_blank">direktori.hukumonline.com</a></li>
                             </ul>
                     </div>
-                    <div class="st2" style="width: 503px;">
+                    <div class="topdown">
 			<nav id="menu">
 				<ul class="sf-menu">
                                     <li><a href="<?=ROOT_URL;?>">Awal</a></li>
@@ -54,3 +74,4 @@
     </div>
     <div class="clear">&nbsp;</div>
 </header>
+<!-- E:Header -->

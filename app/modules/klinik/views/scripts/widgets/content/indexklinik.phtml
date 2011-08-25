@@ -4,7 +4,9 @@
     <td style="color: #003366;"><h5>Jumlah data yang ditemukan dalam klinik : <?=$this->aData['totalCountRows'];?> (<?=$this->time; ?>)</h5></td>
 </tr>
 </table>
-<br><div id='catalogContent'></div><br>
+<br>
+<div id='klinik_box'></div>
+<div id='catalogContent'></div><br>
 <table>
     <tr>
         <td>&nbsp;</td>
@@ -27,19 +29,20 @@ $(document).ready(function(){
 
         function handlePaginationClick(new_page_index, pagination_container)
         {
-                myPageIndex = new_page_index;
-                myStart = (<?=$this->aData['limit'];?> * myPageIndex);
+            myPageIndex = new_page_index;
+            myStart = (<?=$this->aData['limit'];?> * myPageIndex);
 
-                if(true)
+            if(true)
+            {
+                if($('#tblCatalogPager-'+myPageIndex).length==0)
                 {
-                        if($('#tblCatalogPager-'+myPageIndex).length==0)
-                        {
-                                $.getJSON('<?=$this->baseUrl();?>/klinik/indexklinik/<?=$this->aData['folderGuid'];?>/'+myStart+'/<?=$this->aData['limit'];?>', '', catalogResult);
-                        }
-                        else
-                                showCatalogContent();
+                	$('#klinik_box').fadeOut('slow').append('<p id="loading">&nbsp;</p>');
+                	$.getJSON('<?=$this->baseUrl();?>/klinik/indexklinik/<?=$this->aData['folderGuid'];?>/'+myStart+'/<?=$this->aData['limit'];?>', '', catalogResult);
                 }
-                return false;
+                else
+                        showCatalogContent();
+            }
+            return false;
         }
 
         function catalogResult(res)
@@ -69,13 +72,16 @@ $(document).ready(function(){
                 tblRow += "</table>";
                 $(tblRow).appendTo("#catalogContent");
                 showCatalogContent();
+                $('#klinik_box').fadeOut("slow");
         }
         function showCatalogContent()
         {
                 $('.tblCatalogPager').hide();
                 $('#tblCatalogPager-'+myPageIndex).show();
+                
                 if(!isFirstTime)
                         Scroller.scroll();
+                        
                 isFirstTime = 0;
         }
 

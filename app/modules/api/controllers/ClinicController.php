@@ -234,6 +234,8 @@ class Api_ClinicController extends Zend_Controller_Action
             echo '<b>Error</b>: <br />'.implode('<br />', $error);
 
         } else {
+        	
+        	$aData = $request->getParams();
 
             $auth = Zend_Auth::getInstance();
             $username = $auth->getIdentity()->username;
@@ -250,7 +252,7 @@ class Api_ClinicController extends Zend_Controller_Action
                 $hol = new Pandamp_Core_Hol_Catalog();
                 $hol->save($aData);
 
-                echo "Catalog is successfully saved";
+                echo "Terima kasih atas minat anda terhadap klinik kami";
             }
             catch (Exception $e)
             {

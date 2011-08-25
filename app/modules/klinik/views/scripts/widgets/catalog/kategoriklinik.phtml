@@ -1,5 +1,6 @@
 <div id="judul2">KATEGORI: <?=$this->getCatalogAttribute($this->aData['catalogGuid'],'fixedTitle');?></div>
 <? if ($this->aData['totalCount'] != 0) { ?>
+<div id='klinik_box'></div>
 <div id='catalogContent'></div><br>
 <table>
 	<tr>
@@ -30,7 +31,7 @@ $(document).ready(function(){
 		{
 			if($('#tblCatalogPager-'+myPageIndex).length==0)
 			{
-				$('#message_box').show();
+				$('#klinik_box').fadeOut('slow').append('<p id="loading">&nbsp;</p>');
 				$.getJSON('<?=$this->baseUrl();?>/klinik/kategoriklinik/<?=$this->aData['catalogGuid'];?>/'+myStart+'/<?=$this->aData['limit'];?>', '', klinikResult);
 			}
 			else
@@ -67,14 +68,16 @@ $(document).ready(function(){
 		tblRow += "</table>";
 		$(tblRow).appendTo("#catalogContent");
 		showCatalogContent();
-		$('#message_box').fadeOut();
+		$('#klinik_box').fadeOut('slow');
 	}
 	function showCatalogContent()
 	{
 		$('.tblCatalogPager').hide();
 		$('#tblCatalogPager-'+myPageIndex).show();
+		
 		if(!isFirstTime)
 			Scroller.scroll();
+			
 		isFirstTime = 0;
 	}
 

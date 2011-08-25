@@ -4,7 +4,9 @@
     <td style="color: #003366;"><h5>Jumlah data yang ditemukan dalam klinik : <?=$this->aData['totalCountRows'];?> (<?=$this->time; ?>)</h5></td>
 </tr>
 </table>
-<br><div id='catalogContent'></div><br>
+<br>
+<div id='klinik_box'></div>
+<div id='catalogContent'></div><br>
 <table>
     <tr>
         <td>&nbsp;</td>
@@ -17,67 +19,71 @@
 
 $(document).ready(function(){
 
-        var isFirstTime = 1;
+    var isFirstTime = 1;
 
-        var myPageIndex = 0;
+    var myPageIndex = 0;
 
-        $("#catalogPagination").pagination(<?=$this->aData['totalCount'];?>,
-        {items_per_page:<?=$this->aData['limit'];?>, callback:handlePaginationClick, next_text:'Berikutnya',prev_text:'Sebelumnya'}
-        );
+    $("#catalogPagination").pagination(<?=$this->aData['totalCount'];?>,
+    {items_per_page:<?=$this->aData['limit'];?>, callback:handlePaginationClick, next_text:'Berikutnya',prev_text:'Sebelumnya'}
+    );
 
-        function handlePaginationClick(new_page_index, pagination_container)
+    function handlePaginationClick(new_page_index, pagination_container)
+    {
+        myPageIndex = new_page_index;
+        myStart = (<?=$this->aData['limit'];?> * myPageIndex);
+
+        if(true)
         {
-                myPageIndex = new_page_index;
-                myStart = (<?=$this->aData['limit'];?> * myPageIndex);
-
-                if(true)
-                {
-                        if($('#tblCatalogPager-'+myPageIndex).length==0)
-                        {
-                                $.getJSON('<?=$this->baseUrl();?>/klinik/mviewerklinikauthor/<?=$this->aData['folderGuid'];?>/'+myStart+'/<?=$this->aData['limit'];?>', '', catalogResult);
-                        }
-                        else
-                                showCatalogContent();
-                }
-                return false;
+            if($('#tblCatalogPager-'+myPageIndex).length==0)
+            {
+            	$('#klinik_box').fadeOut('slow').append('<p id="loading">&nbsp;</p>');
+            	$.getJSON('<?=$this->baseUrl();?>/klinik/mviewerklinikauthor/<?=$this->aData['folderGuid'];?>/'+myStart+'/<?=$this->aData['limit'];?>', '', catalogResult);
+            }
+            else
+            	showCatalogContent();
         }
+        return false;
+    }
 
-        function catalogResult(res)
+    function catalogResult(res)
+    {
+        size = res.index.length;
+        var tblRow = "<a name='a-"+myPageIndex+"' ></a>"+'<table class="tblCatalogPager" id="tblCatalogPager-'+myPageIndex+'">';
+        for(i=0;i<size;i++)
         {
-                size = res.index.length;
-                var tblRow = "<a name='a-"+myPageIndex+"' ></a>"+'<table class="tblCatalogPager" id="tblCatalogPager-'+myPageIndex+'">';
-                for(i=0;i<size;i++)
-                {
-                        tblRow +=
+            tblRow +=
 
-                                "<tr valign=top>"
-                                +"<td>"
-                                +"<div class='klinikterbaruisi'>"
-                                +res.index[i].existence
-                                +"<div style='float:right;width:661px;'>"
-                                +"<div id='kcss'>"
-                                +"<a href='<?=ROOT_URL;?>/klinik/detail/"+res.index[i].guid+"'>"+res.index[i].title+"</a>"
-                                +"</div>"
-                                +"<small>Di <a href='<?=ROOT_URL;?>/klinik/kategori/"+res.index[i].secat+"' class='subtitle'>"+res.index[i].category+"</a> - Ditanyakan oleh "+res.index[i].createdBy+" - "+res.index[i].publishedDate+"</small>"
-                                +"</div>"
-                                +"<div class='clean'></div>"
-                                +"</div>"
-                                +"</td>"
-                                +"</tr>";
+                "<tr valign=top>"
+                +"<td>"
+                +"<div class='klinikterbaruisi'>"
+                +res.index[i].existence
+                +"<div style='float:right;width:661px;'>"
+                +"<div id='kcss'>"
+                +"<a href='<?=ROOT_URL;?>/klinik/detail/"+res.index[i].guid+"'>"+res.index[i].title+"</a>"
+                +"</div>"
+                +"<small>Di <a href='<?=ROOT_URL;?>/klinik/kategori/"+res.index[i].secat+"' class='subtitle'>"+res.index[i].category+"</a> - Ditanyakan oleh "+res.index[i].createdBy+" - "+res.index[i].publishedDate+"</small>"
+                +"</div>"
+                +"<div class='clean'></div>"
+                +"</div>"
+                +"</td>"
+                +"</tr>";
 
-                }
-                tblRow += "</table>";
-                $(tblRow).appendTo("#catalogContent");
-                showCatalogContent();
         }
-        function showCatalogContent()
-        {
-                $('.tblCatalogPager').hide();
-                $('#tblCatalogPager-'+myPageIndex).show();
-                if(!isFirstTime)
-                        Scroller.scroll();
-                isFirstTime = 0;
-        }
+        tblRow += "</table>";
+        $(tblRow).appendTo("#catalogContent");
+        showCatalogContent();
+        $('#klinik_box').fadeOut('slow');
+    }
+    function showCatalogContent()
+    {
+        $('.tblCatalogPager').hide();
+        $('#tblCatalogPager-'+myPageIndex).show();
+        
+        if(!isFirstTime)
+                Scroller.scroll();
+                
+        isFirstTime = 0;
+    }
 
 
 });

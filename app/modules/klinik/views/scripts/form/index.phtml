@@ -4,22 +4,20 @@
         <section class="column first">
             <div class="colgroup">
                 <div class="kolom widthcontent1 first">
-                    <?=$this->action('miniprofile','index','hol-site');?>
                     <?=$this->action('kategori','widgets_content','klinik'); ?>
                 </div>
-                <div class="kolom" style="width: 723px;border-left: 1px solid #cecece; padding-left:10px;">
-					<div style="padding-top:15px"></div>
+                <div class="kolom widthcontent6 bl_grey padding_left_10">
                     <? $auth = Zend_Auth::getInstance();
                     if (!$auth->hasIdentity()) {
                     ?>
-                    <br/>Harap login terlebih dahulu
+                    <br/><div id="judul2">Harap login terlebih dahulu</div>
                     <? } else { ?>
                     <?=$this->action('add-clinic','form','klinik'); ?>
                     <? } ?>
                     
-                    <div style="padding-top:15px;"></div>
+                    <div class="padding_top_15"></div>
                     <?=$this->action('disclaimer','index','klinik'); ?>
-                    <div style="padding-top:15px;"></div>
+                    <div class="padding_top_15"></div>
                     <?=$this->action('mitra-klinik','mitra','klinik'); ?>
 
                 </div>

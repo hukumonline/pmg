@@ -44,7 +44,7 @@ class Pandamp_Search_Adapter_Solr extends Pandamp_Search_Adapter_Abstract
 	{
 		$solr = &$this->_solr;
 		
-		$tbl = new Pandamp_Modules_Dms_Catalog_Model_Catalog();
+		$tbl = new App_Model_Db_Table_Catalog();
 		
 		$rowset = $tbl->find($guid);
 		if(count($rowset))
@@ -150,7 +150,7 @@ class Pandamp_Search_Adapter_Solr extends Pandamp_Search_Adapter_Abstract
 		echo'<br><br><span style="font:11px verdana,arial,helvetica,sans-serif;color:#00FF00">WAKTU EKSEKUSI: '. $time.'<br>indexing catalog '.$iCount.' dari '.$rowCount.'</span>';
 		
 		// log to assetSetting
-		$tblAssetSetting = new Pandamp_Modules_Dms_Catalog_Model_AssetSetting();
+		$tblAssetSetting = new App_Model_Db_Table_AssetSetting();
 		$rowAsset = $tblAssetSetting->fetchRow("application='INDEX CATALOG'");
 		if ($rowAsset)
 		{
@@ -674,7 +674,7 @@ class Pandamp_Search_Adapter_Solr extends Pandamp_Search_Adapter_Abstract
 		
 		$solr = &$this->_solr;
 		
-		$tbl = new Pandamp_Modules_Dms_Catalog_Model_Catalog();
+		$tbl = new App_Model_Db_Table_Catalog();
 		$rowset = $tbl->fetchAll(); //("profileGuid='kutu_peraturan'");
 		  
 		$documents = array();
@@ -1193,8 +1193,8 @@ class Pandamp_Search_Adapter_Solr extends Pandamp_Search_Adapter_Abstract
 			if(!empty($systemName))
 				$fileName = $systemName;
 			
-			$sDir1 = KUTU_ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$fileName;
-			$sDir2 = KUTU_ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$parentCatalogGuid.DIRECTORY_SEPARATOR.$fileName;
+			$sDir1 = ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$fileName;
+			$sDir2 = ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$parentCatalogGuid.DIRECTORY_SEPARATOR.$fileName;
 			
 			$sDir = '';
 			if(file_exists($sDir1))
@@ -1280,7 +1280,7 @@ class Pandamp_Search_Adapter_Solr extends Pandamp_Search_Adapter_Abstract
 	{
 	    //$c = $this->_registry->get('config');
 	    
-		$tblRelatedItem = new Pandamp_Core_Orm_Table_RelatedItem();
+		$tblRelatedItem = new App_Model_Db_Table_RelatedItem();
 		$rowset = $tblRelatedItem->fetchAll("itemGuid='$guid' AND relateAs='RELATED_FILE'");
 		if(count($rowset))
 		{
@@ -1290,8 +1290,8 @@ class Pandamp_Search_Adapter_Solr extends Pandamp_Search_Adapter_Abstract
 			if(!empty($systemName))
 				$fileName = $systemName;
 			
-			$sDir1 = KUTU_ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$fileName;
-			$sDir2 = KUTU_ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$parentCatalogGuid.DIRECTORY_SEPARATOR.$fileName;
+			$sDir1 = ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$fileName;
+			$sDir2 = ROOT_DIR.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$parentCatalogGuid.DIRECTORY_SEPARATOR.$fileName;
 			
 			$sDir = '';
 			if(file_exists($sDir1))
