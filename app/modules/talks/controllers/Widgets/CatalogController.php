@@ -44,9 +44,20 @@ class Talks_Widgets_CatalogController extends Zend_Controller_Action
 			    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($row['guid'],'RELATED_IMAGE');
 			    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
 			
-			    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".jpg")) 	{ $thumb = $sDir ."/". $itemGuid . ".jpg"; 	}
-			    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".gif")) 	{ $thumb = $sDir ."/". $itemGuid . ".gif"; 	}
-			    if (Pandamp_Lib_Formater::thumb_exists($sDir ."/". $itemGuid . ".png")) 	{ $thumb = $sDir ."/". $itemGuid . ".png"; 	}
+				$chkDir = $sDir."/".$row['guid']."/".$itemGuid;
+				if (@getimagesize($chkDir))
+				{
+					$pict = $sDir ."/". $row['guid'] ."/". $itemGuid;
+				}
+				else 
+				{
+					$pict = $sDir ."/". $itemGuid;
+				}
+				
+			
+				if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) 	{ $thumb = $pict . ".jpg"; 	}
+				if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) 	{ $thumb = $pict . ".gif"; 	}
+				if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) 	{ $thumb = $pict . ".png"; 	}
 			
 			    if ($thumb == "") { $thumb = $smg."/slider/image1.jpg"; }
 			
