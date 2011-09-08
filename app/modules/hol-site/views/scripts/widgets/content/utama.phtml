@@ -4,7 +4,8 @@
 <div class="align-right">&raquo;&nbsp;<a href="" class="bb">index</a></div>
 <div class="clear">&nbsp;</div>
 <div class="bt_blue padding_top_5"></div>
-<div id="gallery">
+<div id="featured">
+<ul class="ui-tabs-nav">
 <?php
 $registry = Zend_Registry::getInstance();
 $config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
@@ -17,48 +18,95 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 
     $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
     $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
-//$chkDir = $sDir."/".$guid;
-$chkDir = $sDir."/".$guid."/".$itemGuid;
-if (@getimagesize($chkDir))
-{
-$pict = $sDir ."/". $guid ."/". $itemGuid;
-}
-else
-{
-$pict = $sDir ."/". $itemGuid;
-}
-
-
-if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) { $thumb = $pict . ".jpg"; }
-if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) { $thumb = $pict . ".gif"; }
-if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) { $thumb = $pict . ".png"; }
+    
+	$chkDir = $sDir."/".$guid."/".$itemGuid;
+	
+	if (@getimagesize($chkDir))
+	{
+	$pict = $sDir ."/". $guid ."/". $itemGuid;
+	}
+	else
+	{
+	$pict = $sDir ."/". $itemGuid;
+	}
+	
+	
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) { $thumb = $pict . ".jpg"; }
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) { $thumb = $pict . ".gif"; }
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) { $thumb = $pict . ".png"; }
 
     if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
 
-    $rel = "<div id='judul1'>".$this->data[$i][0]."</div>".$this->data[$i][5];
+    $small_screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"80\" height=\"50\" />";
 
-    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"488\" height=\"265\" title=\"\" rel=\"".$rel."\" style=\"padding:1px;border: 1px solid #000;\" />";
+	$j = $i+1; 
 
-    if ($i==0) {
 ?>
 
-    <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$guid; ?>/<?=$this->data[$i][3];?>" class="show">
-    <?=$screenshot; ?>
-    </a>
+
+	<? if ($j==1) { ?>
+	<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-<?=$j;?>"><a href="#fragment-<?=$j;?>"><?=$small_screenshot; ?></a></li>
+	<? } else { ?>
+	<li class="ui-tabs-nav-item" id="nav-fragment-<?=$j;?>"><a href="#fragment-<?=$j;?>"><?=$small_screenshot; ?></a></li>
+	<? } ?>
+
+
+<? } ?>
+</ul>
+
+<?php
+for($i=0; $i<$this->numberOfRows;$i++) {
+
+    $thumb = "";
+    $guid = $this->data[$i][2];
+
+    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
+    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
     
-    <?
-    }
-    else
-    {
-        ?>
+	$chkDir = $sDir."/".$guid."/".$itemGuid;
+	
+	if (@getimagesize($chkDir))
+	{
+	$pict = $sDir ."/". $guid ."/". $itemGuid;
+	}
+	else
+	{
+	$pict = $sDir ."/". $itemGuid;
+	}
+	
+	
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) { $thumb = $pict . ".jpg"; }
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) { $thumb = $pict . ".gif"; }
+	if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) { $thumb = $pict . ".png"; }
 
-        <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$guid; ?>/<?=$this->data[$i][3];?>">
-        <?=$screenshot; ?>
-        </a>
-        
-<?php }} ?>
+    if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
 
-    <div class="caption"><div class="content"></div></div>
+    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"400\" height=\"250\" />";
 
+	$j = $i+1; 
+
+?>
+
+
+		<? if ($j==1) { ?>
+	    <div id="fragment-<?=$j;?>" class="ui-tabs-panel" style="">
+			<?=$screenshot;?>		
+			<div class="info">
+				<h2><a href="<?=ROOT_URL;?>/berita/baca/<?=$guid;?>/<?=$this->data[$i][3];?>"><?=$this->data[$i][0];?></a></h2>
+				<p><?=$this->data[$i][5];?>....<a href="#" >read more</a></p>
+			</div>
+	    </div>
+	    <? } else { ?>
+	    <div id="fragment-<?=$j;?>" class="ui-tabs-panel ui-tabs-hide" style="">
+			<?=$screenshot;?>		
+			<div class="info">
+				<h2><a href="<?=ROOT_URL;?>/berita/baca/<?=$guid;?>/<?=$this->data[$i][3];?>"><?=$this->data[$i][0];?></a></h2>
+				<p><?=$this->data[$i][5];?>....<a href="#" >read more</a></p>
+			</div>
+	    </div>
+	    <? } ?>
+
+
+<? } ?>
 </div>
-<div class="clean"></div>
+

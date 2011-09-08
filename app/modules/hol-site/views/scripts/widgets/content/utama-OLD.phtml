@@ -1,0 +1,65 @@
+<div class="align-left">
+    <div id="judul2">Utama</div>
+</div>
+<div class="align-right">&raquo;&nbsp;<a href="" class="bb">index</a></div>
+<div class="clear">&nbsp;</div>
+<div class="bt_blue padding_top_5"></div>
+<div id="gallery">
+<?php
+$registry = Zend_Registry::getInstance();
+$config = $registry->get(Pandamp_Keys::REGISTRY_APP_OBJECT);
+$cdn = $config->getOption('cdn');
+$sDir = $cdn['static']['url']['images'];
+for($i=0; $i<$this->numberOfRows;$i++) {
+
+    $thumb = "";
+    $guid = $this->data[$i][2];
+
+    $rowsetRelatedItem = App_Model_Show_RelatedItem::show()->getDocumentById($guid,'RELATED_IMAGE');
+    $itemGuid = (isset($rowsetRelatedItem['itemGuid']))? $rowsetRelatedItem['itemGuid'] : '';
+//$chkDir = $sDir."/".$guid;
+$chkDir = $sDir."/".$guid."/".$itemGuid;
+if (@getimagesize($chkDir))
+{
+$pict = $sDir ."/". $guid ."/". $itemGuid;
+}
+else
+{
+$pict = $sDir ."/". $itemGuid;
+}
+
+
+if (Pandamp_Lib_Formater::thumb_exists($pict . ".jpg")) { $thumb = $pict . ".jpg"; }
+if (Pandamp_Lib_Formater::thumb_exists($pict . ".gif")) { $thumb = $pict . ".gif"; }
+if (Pandamp_Lib_Formater::thumb_exists($pict . ".png")) { $thumb = $pict . ".png"; }
+
+    if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
+
+    $rel = "<div id='judul1'>".$this->data[$i][0]."</div>".$this->data[$i][5];
+
+    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"488\" height=\"265\" title=\"\" rel=\"".$rel."\" style=\"padding:1px;border: 1px solid #000;\" />";
+
+    if ($i==0) {
+?>
+
+    <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$guid; ?>/<?=$this->data[$i][3];?>" class="show">
+    <?=$screenshot; ?>
+    </a>
+    
+    <?
+    }
+    else
+    {
+        ?>
+
+        <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$guid; ?>/<?=$this->data[$i][3];?>">
+        <?=$screenshot; ?>
+        </a>
+        
+<?php }} ?>
+
+    <div class="caption"><div class="content"></div></div>
+
+</div>
+
+<div class="clean"></div>

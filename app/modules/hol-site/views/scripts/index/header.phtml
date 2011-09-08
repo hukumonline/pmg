@@ -20,76 +20,89 @@
 <!-- S:Header -->
 <header id="up">
     <div class="wrapper">
-        <section class="column width8 first">
-            <div class="colgroup leading">
-                <div class="kolom widthcontent1 first">
+        <section class="column first">
+            <div class="colgroup">
+                <div class="column width3 first">
                     <div id="judul"><a href="<?=ROOT_URL;?>"><img src="<?=$this->cdn('images');?>/logo_hukumonline.jpg" alt="hukumonline" /></a></div>
                 </div>
-                <div class="kolom widthcontent_custom_3 pembatas1">
-                    <div class="padding_right_22 padding_top_5 ta-right">[ <a href="" class="bb">index</a> ]</div>
-                    <?=$this->action('aktual','widgets_content','hol-site');?>
-                </div>
-                <div class="kolom widthcontent3 bl_grey">
+                <div class="column width5">
                     <div class="topup">
-                            <ul id="topnav">
-                                <li><a href="http://en1.hukumonline.com" target="_blank">en.hukumonline.com</a></li>
-                                <li>|</li>
-                                <li><a href="http://hukumpedia.com" target="_blank">hukumpedia.com</a></li>
-                                <li>|</li>
-                                <li><a href="http://direktori.hukumonline.com" target="_blank">direktori.hukumonline.com</a></li>
-                            </ul>
+                        <ul id="topnav">
+                            <li><a href="http://en1.hukumonline.com" target="_blank">en.hukumonline.com</a></li>
+                            <li>|</li>
+                            <li><a href="http://hukumpedia.com" target="_blank">hukumpedia.com</a></li>
+                            <li>|</li>
+                            <li><a href="http://direktori.hukumonline.com" target="_blank">direktori.hukumonline.com</a></li>
+                        </ul>
                     </div>
                     <div class="topdown">
-                        <ul id="headerMenu_b">
-                            <li><a href="<?=ROOT_URL;?>">Awal</a></li>
-                            <li><a href="<?=$this->baseUrl();?>/warta">Berita</a></li>
-                            <li><a href="<?=$this->baseUrl();?>/pusatdata">Pusat Data</a></li>
-                            <li><a href="<?=$this->baseUrl();?>/klinik">Klinik</a></li>
-                            <li><a href="<?=$this->baseUrl();?>/talks">Talks</a></li>
-                            <li><a href="<?=$this->baseUrl();?>/faqs">Karir</a></li>
-                            <li><a href="<?=$this->baseUrl();?>/faqs">FAQs</a></li>
+                        <ul id="topnavi">
+                            <li><a href="<?=$this->baseUrl();?>/faqs">Tentang Kami</a></li>
+                            <li><a href="<?=$this->baseUrl();?>/faqs">Produk dan Jasa</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div style="clear:both"></div>
-            <div id="menu">
-			    <ul class="sf-menu">
-			        <li><a href="http://www.detiknews.com">detikNews</a></li>
-			        <li><a href="http://finance.detik.com">detikFinance</a>
-					<ul>
-						<li><a href="">test4</a></li>
-						<li><a href="">test5</a></li>
-						<li><a href="">test6</a>
-						<ul>
-							<li><a href="">Sub Test6</a></li>
-						</ul>
-						</li>
-					</ul>
-					</li>
-			        <li><a href="http://hot.detik.com">detikHot</a></li>
-			        <li><a href="http://www.detikinet.com">detiki-Net</a></li>
-			        <li><a href="http://www.detiksport.com">detikSport</a></li>                                                            
-			        <li><a href="http://oto.detik.com">detikOto</a></li>
-			        <li class="current"><a href="http://www.detikfood.com">detikFood</a>
-					<ul>
-						<li><a href="">test1</a></li>
-						<li><a href="">test2</a></li>
-						<li><a href="">test3</a></li>
-					</ul>
-					</li>
-			
-			        <li><a href="http://www.detikhealth.com">detikHealth</a></li>
-			        <li><a href="http://foto.detik.com">detikFoto</a></li>
-			        <li><a href="http://tv.detik.com">detikTV</a></li>
-			        <li><a href="http://www.detiknews.com/indeks">Indeks</a></li>
-			    </ul>
-            </div>
         </section>
-        
+        <div class="clean"></div>
+        <div class="padding_top_10"></div>
+        <nav style="width:100%;background:#00008B;">
+        	<div class="align-left">
+            	<?php 
+            	$date = date('Y-m-d');
+				$array_hari = array(1=>"Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu");
+				$lang = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember");
+				$hari = $array_hari[date("N",strtotime(date('Y-m-d H:i:s')))];
+				$yy = substr($date, 0, 4);
+				$mm = substr($date, 5, 2);
+				$dd = substr($date, 8, 10);
+				$today = $hari . ', '.$dd." ".$lang[$mm-1]." ".$yy;
+				$time = date("H:i");
+				?>
+				<div style="vertical-align:middle;padding:8px;color:#fff;font:bold;">
+					<?=$today;?> &raquo; <?=$time;?> WIB
+				</div>
+        	</div>
+        	<div class="align-right">
+	            <div id="menu">
+				    <ul class="sf-menu">
+				        <li class="current"><a href="<?=ROOT_URL;?>">Awal</a></li>
+				        <li><a href="<?=ROOT_URL;?>/warta">Berita</a>
+				        <? if ($this->menuFolder) : ?>
+						<ul>
+						
+						    <?
+						    for ($i=0;$i<count($this->menuFolder);$i++)
+						    {
+						    $json = new Zend_Json();
+						    $aData = $json->decode($this->menuFolder[$i]['cmsParams']);
+						    ?>
+						    <li>
+						    <a href="<?=ROOT_URL;?>/page/<?=$aData['st']?>"><?=$this->menuFolder[$i]['title']?></a>
+						    <?=$this->action('getmenuchild','widgets_content','hol-site',array('node'=>$this->menuFolder[$i]['guid']))?>
+						    </li>
+						    <? } ?>
+						
+						</ul>
+						<? endif; ?>
+						</li>
+				        <li><a href="<?=ROOT_URL;?>/pusatdata">Pusat Data</a></li>
+				        <li><a href="<?=ROOT_URL;?>/klinik">Klinik</a>
+				        <ul>
+				            <? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+				                <li><a href="<?=ROOT_URL;?>/klinik/kategori/<?=$this->data[$i][1]; ?>" title="<?=$this->data[$i][0]; ?>"><?=$this->data[$i][0]; ?></a></li>
+				            <? } ?>
+				        </ul>
+				        </li>
+				        <li><a href="<?=ROOT_URL;?>/talks">Talks</a></li>                                                            
+				        <li><a href="<?=ROOT_URL;?>/karir">Karir</a></li>
+				        <li><a href="<?=ROOT_URL;?>/FAQ">FAQ</a></li>
+				    </ul>
+	            </div>
+        	</div>
+        </nav>
     </div>
-    <div class="clear">&nbsp;</div>
 </header>
 <!-- E:Header -->
-<div style="clear:both"></div>
-<div style="padding-top:80px;"></div>
+<div class="clean"></div>
+<div class="margin_top_50"></div>

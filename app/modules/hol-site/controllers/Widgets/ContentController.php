@@ -211,11 +211,13 @@ class HolSite_Widgets_ContentController extends Zend_Controller_Action
         $this->view->numberOfRows = $num_rows;
         $this->view->data = $data;
 
+        /*
         $r = $this->getRequest();
         $node = ($r->getParam('node'))? $r->getParam('node') : 'root';
 
         $menuFolder = App_Model_Show_Folder::show()->getMenu($node);
         $this->view->menuFolder = $menuFolder;
+        */
     }
     function getmenuchildAction()
     {
