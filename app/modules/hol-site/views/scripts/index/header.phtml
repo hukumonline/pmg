@@ -39,7 +39,61 @@
         </section>
         <div class="clean"></div>
         <div class="padding_top_10"></div>
-
+        <nav style="width:100%;background:#00008B;">
+        	<div class="align-left">
+            	<?php 
+            	$date = date('Y-m-d');
+				$array_hari = array(1=>"Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu");
+				$lang = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember");
+				$hari = $array_hari[date("N",strtotime(date('Y-m-d H:i:s')))];
+				$yy = substr($date, 0, 4);
+				$mm = substr($date, 5, 2);
+				$dd = substr($date, 8, 10);
+				$today = $hari . ', '.$dd." ".$lang[$mm-1]." ".$yy;
+				$time = date("H:i");
+				?>
+				<div style="vertical-align:middle;padding:8px;color:#fff;font:bold;">
+					<?=$today;?> &raquo; <?=$time;?> WIB
+				</div>
+        	</div>
+        	<div class="align-right">
+	            <div id="menu">
+				    <ul class="sf-menu">
+				        <li class="current"><a href="<?=ROOT_URL;?>">Awal</a></li>
+				        <li><a href="<?=ROOT_URL;?>/warta">Berita</a>
+				        <? if ($this->menuFolder) : ?>
+						<ul>
+						
+						    <?
+						    for ($i=0;$i<count($this->menuFolder);$i++)
+						    {
+						    $json = new Zend_Json();
+						    $aData = $json->decode($this->menuFolder[$i]['cmsParams']);
+						    ?>
+						    <li>
+						    <a href="<?=ROOT_URL;?>/page/<?=$aData['st']?>"><?=$this->menuFolder[$i]['title']?></a>
+						    <?=$this->action('getmenuchild','widgets_content','hol-site',array('node'=>$this->menuFolder[$i]['guid']))?>
+						    </li>
+						    <? } ?>
+						
+						</ul>
+						<? endif; ?>
+						</li>
+				        <li><a href="<?=ROOT_URL;?>/pusatdata">Pusat Data</a></li>
+				        <li><a href="<?=ROOT_URL;?>/klinik">Klinik</a>
+				        <ul>
+				            <? for($i=0; $i<$this->numberOfRows;$i++) { ?>
+				                <li><a href="<?=ROOT_URL;?>/klinik/kategori/<?=$this->data[$i][1]; ?>" title="<?=$this->data[$i][0]; ?>"><?=$this->data[$i][0]; ?></a></li>
+				            <? } ?>
+				        </ul>
+				        </li>
+				        <li><a href="<?=ROOT_URL;?>/talks">Talks</a></li>                                                            
+				        <li><a href="<?=ROOT_URL;?>/karir">Karir</a></li>
+				        <li><a href="<?=ROOT_URL;?>/FAQ">FAQ</a></li>
+				    </ul>
+	            </div>
+        	</div>
+        </nav>
     </div>
 </header>
 <!-- E:Header -->
