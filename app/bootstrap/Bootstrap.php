@@ -241,13 +241,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headLink()
             ->appendStylesheet($cdn['static']['css'].'/typography-1.css')
             ->appendStylesheet($cdn['static']['css'].'/jcarousel.css')
-            ->appendStylesheet($cdn['static']['css'].'/jquery-ui-1.8.5.custom.css')
             ->appendStylesheet($cdn['static']['css'].'/calender.css')
             ->appendStylesheet($cdn['static']['css'].'/style.css');
 
         // Add JavaScript's
         $view->headScript()
-            ->appendFile($cdn['static']['scripts'].'/index.php?c=auto&f=,hol/jquery/jquery-1.6.2.js,hol/jquery/jCarousel/jquery.jcarousel.min.js,hol/jquery/ui/jquery-ui.min.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/newsticker/jquery.newsticker.pack.js,hol/global.js');
+            ->appendFile($cdn['static']['scripts'].'/index.php?c=auto&f=,hol/jquery/jquery-1.6.2.js,hol/jquery/ui/jquery-ui.min.js,hol/jquery/jCarousel/jquery.jcarousel.min.js,hol/jquery/tooltip/jquery.tipTip.min.js,hol/jquery/newsticker/jquery.newsticker.pack.js,hol/global.js');
             
     }
 

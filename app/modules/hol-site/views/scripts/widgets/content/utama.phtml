@@ -81,7 +81,7 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 
     if ($thumb == "") { $thumb = $this->cdn('images')."/nothumb.jpg"; }
 
-    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"400\" height=\"250\" />";
+    $screenshot = "<img src=\"".$thumb."\" alt=\"".$this->data[$i][0]."\" width=\"370\" height=\"250\" />";
 
 	$j = $i+1; 
 
@@ -93,7 +93,7 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 			<?=$screenshot;?>		
 			<div class="info">
 				<h2><a href="<?=ROOT_URL;?>/berita/baca/<?=$guid;?>/<?=$this->data[$i][3];?>"><?=$this->data[$i][0];?></a></h2>
-				<p><?=$this->data[$i][5];?>....<a href="#" >read more</a></p>
+				<p><?=$this->data[$i][5];?></p>
 			</div>
 	    </div>
 	    <? } else { ?>
@@ -101,7 +101,7 @@ for($i=0; $i<$this->numberOfRows;$i++) {
 			<?=$screenshot;?>		
 			<div class="info">
 				<h2><a href="<?=ROOT_URL;?>/berita/baca/<?=$guid;?>/<?=$this->data[$i][3];?>"><?=$this->data[$i][0];?></a></h2>
-				<p><?=$this->data[$i][5];?>....<a href="#" >read more</a></p>
+				<p><?=$this->data[$i][5];?></p>
 			</div>
 	    </div>
 	    <? } ?>

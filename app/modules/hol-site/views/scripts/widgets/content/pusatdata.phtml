@@ -6,20 +6,22 @@
 <div class="clear">&nbsp;</div>
 <div style="width: 235px;">
 <div class="bt_blue"></div>
-<div id="tabs">
-    <ul>
+<div id="pusatdata" class="padding_top_5">
+    <ul class="tabs">
         <li><a href="#tabs-1">Baru</a></li>
         <li><a href="#tabs-2">Peraturan</a></li>
         <li><a href="#tabs-3">Pilihan</a></li>
     </ul>
-    <div id="tabs-1">
-    	<div class="box box-error closeable" id="msg" style="display:none;"></div>
-        <?=$this->ajaxActionRenderer(ROOT_URL.'/peraturan');?>
-    </div>
-    <div id="tabs-2">
-        <?=$this->action('peraturanpilihan','widgets_content','hol-site'); ?>
-    </div>
-    <div id="tabs-3">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>
+    <div class="tab_container">
+	    <div id="tabs-1" class="tab_content">
+	    	<div class="box box-error closeable" id="msg" style="display:none;"></div>
+	        <?=$this->ajaxActionRenderer(ROOT_URL.'/peraturan');?>
+	    </div>
+	    <div id="tabs-2" class="tab_content">
+	        <?=$this->action('peraturanpilihan','widgets_content','hol-site'); ?>
+	    </div>
+	    <div id="tabs-3" class="tab_content">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>
+    </div> 
 </div>
 </div>
 <div class="clean"></div>
