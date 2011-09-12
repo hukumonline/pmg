@@ -6,7 +6,7 @@
     <? for($i=0; $i<$this->numberOfRows;$i++) { ?>
     <li id="panellistnoline">
         <div id="index_jam"><span class="jam">[<?=$this->data[$i][1]; ?>]</span></div>
-        <div id="index_berita">
+        <div id="index_berita" style="overflow:auto;">
             <a href="<?=$this->baseUrl(); ?>/berita/baca/<?=$this->data[$i][2]; ?>/<?=$this->data[$i][3]; ?>"><?=$this->data[$i][0]; ?></a>
             <span style="font:11px verdana,arial,helvetica,sans-serif;color:#009933;"><?=$this->data[$i][4]; ?></span>
         </div>
