@@ -17,7 +17,31 @@ class Talks_IndexController extends Zend_Controller_Action
     {
         $this->_helper->layout->setLayout('layout-talks');
     }
-    function headerAction(){}
+    function headerAction()
+    {
+        $r = $this->getRequest();
+        $node = ($r->getParam('node'))? $r->getParam('node') : 'root';
+
+        $menuFolder = App_Model_Show_Folder::show()->getMenu($node);
+        $this->view->menuFolder = $menuFolder;
+        
+        $rowset = App_Model_Show_Catalog::show()->getCatalogByProfile("kategoriklinik");
+
+        $content = 0;
+        $data = array();
+
+        foreach ($rowset as $row)
+        {
+            $data[$content][0] = App_Model_Show_CatalogAttribute::show()->getCatalogAttributeValue($row['guid'],'fixedTitle');
+            $data[$content][1] = $row['guid'];
+            $content++;
+        }
+
+        $num_rows = count($rowset);
+
+        $this->view->numberOfRows = $num_rows;
+        $this->view->data = $data;
+    }
     function viewcartAction() {}
     function viewAction() {}
     function galleryAction()
