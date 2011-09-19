@@ -64,7 +64,7 @@
         	<div class="align-right">
 	            <div id="menu">
 				    <ul class="sf-menu">
-				        <li class="current"><a href="<?=ROOT_URL;?>">Awal</a></li>
+				        <li><a href="<?=ROOT_URL;?>">Awal</a></li>
 				        <li><a href="<?=ROOT_URL;?>/warta">Berita</a>
 				        <? if ($this->menuFolder) : ?>
 						<ul>
@@ -92,7 +92,11 @@
 				            <? } ?>
 				        </ul>
 				        </li>
-				        <li><a href="<?=ROOT_URL;?>/talks">Talks</a></li>                                                            
+				        <li class="current"><a href="<?=ROOT_URL;?>/talks">Talks</a>
+				        <ul>
+				        	<li><a href="<?=ROOT_URL;?>/talks/events">Upcoming events</a></li>
+				        </ul>
+				        </li>                                                            
 				        <li><a href="<?=ROOT_URL;?>/karir">Karir</a></li>
 				        <li><a href="<?=ROOT_URL;?>/FAQ">FAQ</a></li>
 				    </ul>
